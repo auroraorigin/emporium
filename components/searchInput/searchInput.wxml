@@ -1,0 +1,6 @@
+<view class="searchInput">
+    <navigator url="../../pages/search/search" hover-class="none">
+      <image src="../../icons/homePage/search.png" mode="widthFix"></image>
+      <text>搜索</text>
+    </navigator>
+</view>

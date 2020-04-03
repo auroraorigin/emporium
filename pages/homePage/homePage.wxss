@@ -1,0 +1,450 @@
+page,view,text,swiper,swiper-item,image,navigator{
+  padding:0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+
+page{
+  /*主题颜色*/
+  --themeColor:#2b4c7f;
+  --themeColorLight:#eaf1f7;
+  /*字体大小*/
+  font-size: 28rpx;
+}
+
+image{
+  width: 100%;
+  height: auto
+}
+
+.container {
+    padding: 0rpx 16rpx;
+    position: relative;
+    z-index: 1;
+}
+
+/* 轮播图 */
+.homePageSwiper {
+    width: 100%;
+    height: 390rpx;
+}
+
+.homePageSwiper image {
+    width: 100%;
+    height:auto;
+    border-radius: 16rpx;
+}
+
+/* 公告 */
+.notice {
+    width: 100%;
+    height: 55rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 5rpx;
+}
+
+.notice image {
+    width: 6%;
+    height: auto
+}
+
+.notice swiper {
+    width: 100%;
+    height: 45rpx;
+}
+
+.notice swiper text {
+    margin-left: 6rpx;
+}
+
+/* 分类导航 */
+.category {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-style: solid;
+    border-color: #ededed;
+    border-radius: 16rpx;
+    border-width: 4rpx;
+    box-shadow: 0px 0px 7px #ededed;
+    margin-bottom: 10rpx;
+}
+
+.category navigator {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10rpx;
+    margin-bottom: 5rpx;
+}
+
+.category navigator image {
+    width: 65%;
+    height: 100rpx;
+    border-radius: 12rpx;
+}
+
+.category navigator text {
+    font-size: 28rpx;
+    margin-top: 6rpx;
+}
+
+/* 楼层样式 */
+.floor {
+    display: flex;
+    flex-direction: column;
+}
+
+.floor .floorGroup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.floor .floorGroup .title {
+    width: 100%;
+    border-radius: 16rpx;
+    margin-bottom: 10rpx;
+}
+
+.floor .floorGroup .productGroup {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+
+.floor .floorGroup .productGroup .product {
+    width: 48%;
+    height: 350rpx;
+    display: flex;
+    flex-direction: column;
+    border-style: solid;
+    border-color: #ededed;
+    border-radius: 16rpx;
+    box-shadow: 0px 0px 7px #ededed;
+    border-width: 4rpx;
+    margin-bottom: 10rpx;
+}
+
+.floor .floorGroup .productGroup .product .productPicture {
+    width: 100%;
+    border-top-left-radius: 12rpx;
+    border-top-right-radius: 12rpx;
+}
+
+.floor .floorGroup .productGroup .product .info {
+    width: 100%;
+    border-bottom-left-radius: 16rpx;
+    border-bottom-right-radius: 16rpx;
+}
+
+.floor .floorGroup .productGroup .product .info .name {
+    height: 83rpx;
+    margin-left: 5rpx;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
+
+.floor .floorGroup .productGroup .product .info .trade {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 7rpx;
+}
+
+.floor .floorGroup .productGroup .product .info .trade .left {
+    display: flex;
+    flex-direction: row;
+    width: 85%;
+    align-content: center;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+}
+
+.floor .floorGroup .productGroup .product .info .trade .left .price {
+    margin-left: 5rpx;
+    font-size: 28rpx;
+    color: #db7012;
+    margin-right: 5rpx;
+}
+
+.floor .floorGroup .productGroup .product .info .trade .right {
+    width: 15%;
+    margin-right: -2rpx;
+}
+
+.floor .floorGroup .productGroup .product .info .trade .right image {
+    width: 100%;
+    height: auto
+}
+
+.specifiation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+  }
+  
+  .specifiation .shadow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 3;
+  }
+  
+  .specifiation .content {
+    position: fixed;
+    padding: 16rpx 16rpx;
+    border-top-right-radius: 16rpx;
+    border-top-left-radius: 16rpx;
+    left: 0;
+    bottom: -350px;
+    width: 100%;
+    background-color: white;
+    z-index: 4;
+  }
+  
+  .specifiation .content .top {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20rpx;
+    margin-top: 10rpx;
+  }
+  
+  .specifiation .content .goods {
+    flex: 3;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .specifiation .content .goods image {
+    width: 30%;
+    height: auto;
+    border-radius: 6rpx;
+  }
+  
+  .specifiation .content .goods .info {
+    height: 100%;
+    flex: 6;
+    display: flex;
+    flex-direction: column;
+    margin-left: 15rpx;
+    justify-content: space-between;
+  
+  }
+  
+  .specifiation .content .goods .info .name {
+    font-weight: bold;
+    height: 75rpx;
+    font-size: 28rpx;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+  
+  
+  .specifiation .content .goods .info .price {
+    margin-top: 3rpx;
+    margin-bottom: 3rpx;
+    font-weight: bold;
+    margin-right: 5rpx;
+    font-size: 32rpx;
+    color: #db7012;
+  }
+  
+  .specifiation .content .goods .info .stock {
+    font-weight: bold;
+    font-size: 26rpx;
+    color: #666;
+  }
+  
+  .specifiation .content .close {
+    height: 100%;
+    flex: 0.2;
+  }
+  
+  .specifiation .content .close image {
+    width: 100%;
+    height: auto
+  }
+  
+  .content .mid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  
+  .content .mid .size {
+    width: 100%;
+    font-size: 30rpx;
+    margin-top: 20rpx;
+    margin-bottom: 20rpx;
+  }
+  
+  .content .mid .lableWrpa {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-right: 40rpx;
+  }
+  
+  .content .mid .lableWrpa .lable {
+    font-size: 28rpx;
+    padding: 10rpx 20rpx;
+    border-radius: 10rpx;
+    margin: 0 20rpx 20rpx 0;
+    background-color: #f8f8f8;
+    border: 1px solid #f8f8f8;
+  }
+  
+  .content .mid .lableWrpa .active {
+    color: #db7012;
+    border: 1px solid #db7012;
+  }
+  
+  
+  .content .under {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20rpx;
+    margin-bottom: 20rpx;
+    width: 100%;
+  }
+  
+  .content .under .left {
+    font-size: 30rpx;
+  }
+  
+  .content .under .right {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .content .under .addNumber {
+    width: 80rpx;
+    height: 64rpx;
+    line-height: 62rpx;
+    text-align: center;
+    background-color: #f8f8f8;
+    color: #666;
+    font-size: 50rpx;
+  }
+  
+  .content .under .input {
+    width: 80rpx;
+    height: 64rpx;
+    line-height: 62rpx;
+    text-align: center;
+    background-color: #f8f8f8;
+    margin-left: 3rpx;
+    margin-right: 3rpx;
+  }
+  
+  .content .under .reduceNumber {
+    width: 80rpx;
+    height: 64rpx;
+    line-height: 62rpx;
+    text-align: center;
+    background-color: #f8f8f8;
+    color: #666;
+    font-size: 50rpx;
+  }
+  
+  .content .under .input {
+    font-size: 28rpx;
+  }
+  
+  .content .under .input input {
+    height: 100%;
+  }
+  
+  .content .under .gray {
+    color: #ededed;
+  }
+  
+  .content .bot {
+    margin-top: 20rpx;
+    width: 100%;
+    display: flex;
+  }
+  
+  .content .bot .addCart {
+    width: 100%;
+    height: 89rpx;
+    text-align: center;
+    line-height: 89rpx;
+    font-size: 34rpx;
+    color: white;
+    background-color: #2b4c7f;
+    border-radius: 16rpx;
+  }
+  
+  .content .bot .buy {
+    width: 100%;
+    height: 89rpx;
+    text-align: center;
+    line-height: 89rpx;
+    font-size: 34rpx;
+    color: white;
+    background-color: #db7012;
+    border-radius: 16rpx;
+  }
+  
+  .content .bot .selectAddCart {
+    width: 50%;
+    height: 89rpx;
+    text-align: center;
+    line-height: 89rpx;
+    font-size: 34rpx;
+    color: white;
+    background-color: #2b4c7f;
+    border-bottom-left-radius: 16rpx;
+    border-top-left-radius: 16rpx;
+  }
+  
+  .content .bot .selectBuy {
+    width: 50%;
+    height: 89rpx;
+    text-align: center;
+    line-height: 89rpx;
+    font-size: 34rpx;
+    color: white;
+    background-color: #db7012;
+    border-bottom-right-radius: 16rpx;
+    border-top-right-radius: 16rpx;
+  }
+
+  .divLine1 {
+    background: #f8f8f8;
+    width: 100%;
+    height: 3rpx;
+  }

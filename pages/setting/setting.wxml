@@ -1,0 +1,17 @@
+<view class="allBoder">
+  <view class="Border1">
+    <view class="list">
+      <navigator class="list-item arrow">
+        <text>关于我们</text>
+      </navigator>
+      <navigator class="list-item arrow">
+        <text>版本更新</text>
+      </navigator>
+    </view>
+  </view>
+  <view wx:if="{{token}}">
+    <view class="Border2">
+      <button bindtap="outLogin">退出登录</button>
+    </view>
+  </view>
+</view>

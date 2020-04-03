@@ -1,0 +1,237 @@
+<view class="all_container">
+  <Tabs tabs="{{tabs}}" bindtabsItemChange="handleTabsItemChange"></Tabs>
+  <scroll-view scroll-y="true" class="list">
+
+    <!--全部订单-->
+    <view wx:if="{{tabs[0].isActive}}">
+      <view wx:if="{{!all_Order[0]}}" class="NoOrders">
+        <image src="/images/personal_center/noOrder.png" mode="widthFix"></image>
+        <text>暂无订单</text>
+      </view>
+      <view class="item" wx:for="{{all_Order}}" wx:if="{{all_Order}}" wx:key="index" wx:for-item="item" data-id='{{item._id}}' data-state='{{item.state}}' bindtap="overOrder">
+        <text class="text2">{{item.state}}</text>
+        <view wx:for="{{all_Order[index].goods}}" wx:key="index">
+          <view class="list_item">
+            <view class="top">
+              <text class="text1">海鲜商城</text>
+            </view>
+            <view class="bottom">
+              <image src="{{item.src}}" class="product_image"></image>
+              <view class="detail">
+                <view class="product_name">
+                  <text>{{item.name}}</text>
+                </view>
+                <view class="standard">
+                  <text>规格：{{item.specifiation}}</text>
+                </view>
+                <view class="money_Return">
+                  <text>{{item.message}}</text>
+                </view>
+              </view>
+              <view class="product_price">
+                <view class="price">¥ {{item.unitPrice}}</view>
+                <view class="buyNumber">×{{item.buyNumber}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="second_bottom">
+          <view class="total">
+            <text>共{{item.goods.length}}件商品  合计:¥ {{item.totalPrice}}</text>
+            <view class="button_type" wx:if="{{item.state=='已完成'}}" data-id="{{item._id}}" catchtap="deleteOrder">
+              <text>删除订单</text>
+            </view>
+            <view class="button_type" wx:if="{{item.state=='待付款'}}">
+              <text>确认付款</text>
+            </view>
+            <view class="button_type" wx:if="{{item.state=='待发货'}}">
+              <text>提醒发货</text>
+            </view>
+            <view class="button_type" wx:if="{{item.state=='待收货'}}">
+              <text>确认收货</text>
+            </view>
+            <view class="button_type" wx:if="{{item.state=='退款'}}">
+              <text>查看详情</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!--待付款订单-->
+    <view wx:if="{{tabs[1].isActive}}">
+      <view wx:if="{{!wait_Paid[0]}}" class="NoOrders">
+        <image src="/images/personal_center/noOrder.png" mode="widthFix"></image>
+        <text>暂无订单</text>
+      </view>
+      <view class="item" wx:for="{{wait_Paid}}" wx:if="{{wait_Paid}}" wx:key="index" wx:for-item="item" data-id='{{item._id}}' bindtap="waitPaid">
+        <text class="text2">{{item.state}}</text>
+        <view wx:for="{{wait_Paid[index].goods}}" wx:key="index">
+          <view class="list_item">
+            <view class="top">
+              <text class="text1">海鲜商城</text>
+            </view>
+            <view class="bottom">
+              <image src="{{item.src}}" class="product_image"></image>
+              <view class="detail">
+                <view class="product_name">
+                  <text>{{item.name}}</text>
+                </view>
+                <view class="standard">
+                  <text>重量：{{item.specifiation}}</text>
+                </view>
+                <view class="money_Return">
+                  <text>{{item.message}}</text>
+                </view>
+              </view>
+              <view class="product_price">
+                <view class="price">¥ {{item.unitPrice}}</view>
+                <view class="buyNumber">×{{item.buyNumber}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="second_bottom">
+          <view class="total">
+            <text>共{{item.goods.length}}件商品  合计:¥ {{item.totalPrice}}</text>
+            <view class="button_type">
+              <text>确认付款</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!--待发货订单-->
+    <view wx:if="{{tabs[2].isActive}}">
+      <view wx:if="{{!wait_Sent[0]}}" class="NoOrders">
+        <image src="/images/personal_center/noOrder.png" mode="widthFix"></image>
+        <text>暂无订单</text>
+      </view>
+      <view class="item" wx:for="{{wait_Sent}}" wx:if="{{wait_Sent}}" wx:key="index" wx:for-item="item" data-id='{{item._id}}' bindtap="waitSent">
+        <text class="text2">{{item.state}}</text>
+        <view wx:for="{{wait_Sent[index].goods}}" wx:key="index">
+          <view class="list_item">
+            <view class="top">
+              <text class="text1">海鲜商城</text>
+            </view>
+            <view class="bottom">
+              <image src="{{item.src}}" class="product_image"></image>
+              <view class="detail">
+                <view class="product_name">
+                  <text>{{item.name}}</text>
+                </view>
+                <view class="standard">
+                  <text>重量：{{item.specifiation}}</text>
+                </view>
+                <view class="money_Return">
+                  <text>{{item.message}}</text>
+                </view>
+              </view>
+              <view class="product_price">
+                <view class="price">¥ {{item.unitPrice}}</view>
+                <view class="buyNumber">×{{item.buyNumber}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="second_bottom">
+          <view class="total">
+            <text>共{{item.goods.length}}件商品  合计:¥ {{item.totalPrice}}</text>
+            <view class="button_type">
+              <text>提醒发货</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!--待收货订单-->
+    <view wx:if="{{tabs[3].isActive}}">
+      <view wx:if="{{!wait_Received[0]}}" class="NoOrders">
+        <image src="/images/personal_center/noOrder.png" mode="widthFix"></image>
+        <text>暂无订单</text>
+      </view>
+      <view class="item" wx:for="{{wait_Received}}" wx:if="{{wait_Received}}" wx:key="index" wx:for-item="item" data-id='{{item._id}}' bindtap="waitReceived">
+        <text class="text2">{{item.state}}</text>
+        <view wx:for="{{wait_Received[index].goods}}" wx:key="index">
+          <view class="list_item">
+            <view class="top">
+              <text class="text1">海鲜商城</text>
+            </view>
+            <view class="bottom">
+              <image src="{{item.src}}" class="product_image"></image>
+              <view class="detail">
+                <view class="product_name">
+                  <text>{{item.name}}</text>
+                </view>
+                <view class="standard">
+                  <text>重量：{{item.specifiation}}</text>
+                </view>
+                <view class="money_Return">
+                  <text>{{item.message}}</text>
+                </view>
+              </view>
+              <view class="product_price">
+                <view class="price">¥ {{item.unitPrice}}</view>
+                <view class="buyNumber">×{{item.buyNumber}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="second_bottom">
+          <view class="total">
+            <text>共{{item.goods.length}}件商品  合计:¥ {{item.totalPrice}}</text>
+            <view class="button_type">
+              <text>确认收货</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!--退款订单-->
+    <view wx:if="{{tabs[4].isActive}}">
+      <view wx:if="{{!haved_Return[0]}}" class="NoOrders">
+        <image src="/images/personal_center/noOrder.png" mode="widthFix"></image>
+        <text>暂无订单</text>
+      </view>
+      <view class="item" wx:for="{{haved_Return}}" wx:if="{{haved_Return}}" wx:key="index" wx:for-item="item" data-id='{{item._id}}' bindtap="havedReturn">
+        <text class="text2">{{item.state}}</text>
+        <view wx:for="{{haved_Return[index].goods}}" wx:key="index">
+          <view class="list_item">
+            <view class="top">
+              <text class="text1">海鲜商城</text>
+            </view>
+            <view class="bottom">
+              <image src="{{item.src}}" class="product_image"></image>
+              <view class="detail">
+                <view class="product_name">
+                  <text>{{item.name}}</text>
+                </view>
+                <view class="standard">
+                  <text>重量：{{item.specifiation}}</text>
+                </view>
+                <view class="money_Return">
+                  <text>{{item.message}}</text>
+                </view>
+              </view>
+              <view class="product_price">
+                <view class="price">¥ {{item.unitPrice}}</view>
+                <view class="buyNumber">×{{item.buyNumber}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="second_bottom">
+          <view class="total">
+            <text>共{{item.goods.length}}件商品  合计:¥ {{item.totalPrice}}</text>
+            <view class="button_type">
+              <text>查看详情</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

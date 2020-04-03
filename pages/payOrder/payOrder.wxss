@@ -1,0 +1,298 @@
+page {
+  background-color: #f8f8f8;
+}
+
+.content {
+}
+
+.SV {
+  height: calc(100vh - 100rpx);
+}
+
+.address_border1 {
+  border: 1rpx solid white;
+  border-radius: 20rpx;
+  background-color: white;
+  margin: 20rpx 30rpx 0 30rpx;
+  height: 180rpx;
+}
+
+.address_border2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.left_side {
+}
+
+.address_icon {
+  width: 45rpx;
+  height: 45rpx;
+  position: relative;
+  top: 50rpx;
+  left: 30rpx;
+}
+
+.center_side {
+}
+
+.top {
+  font-weight: bold;
+  font-size: 30rpx;
+  position: relative;
+  left: -30rpx;
+  top: 20rpx;
+}
+
+.center {
+  font-size: 25rpx;
+  position: relative;
+  left: -30rpx;
+  top: 30rpx;
+  color: #9a9a9a;
+  width: 460rpx;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  align-content: center;
+}
+
+.right_side {
+}
+
+.right_arrow {
+  width: 45rpx;
+  height: 45rpx;
+  position: relative;
+  top: 50rpx;
+}
+
+.bottom {
+  font-size: 23rpx;
+  position: relative;
+  left: 85rpx;
+  top: 40rpx;
+  color: #2b4c7f;
+}
+
+.buttontype {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #7ca7d1;
+  margin: 50rpx 100rpx 0 150rpx;
+  border-radius: 10rpx;
+  width: 400rpx;
+  height: 80rpx;
+  color: white;
+}
+
+.button_content {
+}
+
+.item {
+  border: 1rpx solid white;
+  background-color: white;
+  margin: 20rpx 0 0 0;
+}
+
+.list_item {
+  height: 250rpx;
+}
+
+.product_top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 25rpx;
+  border-bottom: 1rpx solid #f1f1f1;
+  height: 25%;
+}
+
+.text1 {
+  text-indent: 20rpx;
+  color: #c3b353;
+}
+
+.text2 {
+  color: gray;
+  position: absolute;
+  right: 30rpx;
+}
+
+.product_bottom {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 75%;
+}
+
+.product_image {
+  width: 30%;
+  height: 150rpx;
+  position: absolute;
+  left: 20rpx;
+}
+
+.detail {
+  position: relative;
+  top: 50rpx;
+  height: 100rpx;
+}
+
+.product_name {
+  width: 35%;
+  line-height: 38rpx;
+  font-size: 30rpx;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  margin-left: 270rpx;
+  margin-top: -65rpx;
+}
+
+.standard {
+  width: 35%;
+  font-size: 20rpx;
+  color: #ccc;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  margin: 0 0 0 270rpx;
+  line-height: 35rpx;
+  margin-top: 5rpx;
+}
+
+.money_Return {
+  width: 35%;
+  color: red;
+  font-size: 20rpx;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  margin: 0 0 0 270rpx;
+  line-height: 35rpx;
+}
+
+.product_price {
+  width: 25%;
+  margin-top: -30rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.right {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.price {
+  font-size: 30rpx;
+  direction: rtl;
+  position: relative;
+  left: 130rpx;
+}
+
+.buyNumber {
+  font-size: 20rpx;
+  color: #ccc;
+  direction: rtl;
+  position: relative;
+  left: 130rpx;
+}
+
+.second_bottom {
+  border: 1rpx solid white;
+  background-color: white;
+  height: 100rpx;
+}
+
+.total {
+  position: relative;
+  top: 0rpx;
+  font-size: 30rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.text_content {
+  direction: rtl;
+  position: relative;
+  top: -40rpx;
+  left: -20rpx;
+}
+
+.bottom_border {
+  border: 1rpx solid #fff;
+  height: auto;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.border_content {
+  background-color: white;
+  height: 100rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.border_left {
+  width: 70%;
+  position: relative;
+  left: 200rpx;
+}
+
+.C {
+  color: black;
+  font-size: 30rpx;
+}
+
+.L {
+  color: #ccc;
+  font-size: 25rpx;
+}
+
+.R {
+  color: red;
+  font-size: 40rpx;
+}
+
+.border_right {
+  width: 30%;
+}
+
+.outside {
+  background-color: #7ca7d1;
+  height: 70rpx;
+  width: 180rpx;
+  border-radius: 50rpx;
+  position: relative;
+  left: 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inside {
+  color: white;
+  font-size: 35rpx;
+}

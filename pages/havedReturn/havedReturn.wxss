@@ -1,0 +1,234 @@
+page {
+  background-color: #f8f8f8;
+} 
+
+.content {
+}
+
+.SV {
+  height: 100vh;
+}
+
+.order_state {
+  background-color: white;
+  height: 150rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.state_left {
+  flex: 20%;
+  position: relative;
+  left: 30rpx;
+}
+
+.state_left image {
+  width: 65%;
+  height: auto
+}
+
+.state_right {
+  flex: 80%;
+  font-size: 35rpx;
+}
+
+.state_right1 {
+  font-size: 30rpx;
+  color: #ccc;
+}
+
+.returnTitle {
+  margin-top: 20rpx;
+  background-color: white;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+}
+
+.titleContent {
+  font-size: 30rpx;
+  margin-left: 25rpx;
+}
+
+.item {
+  border: 1rpx solid white;
+  background-color: white;
+  margin: 20rpx 0 0 0;
+}
+
+.list_item {
+  height: 250rpx;
+}
+
+.product_top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 25rpx;
+  border-bottom: 1rpx solid #f1f1f1;
+  height: 25%;
+}
+
+.text1 {
+  text-indent: 20rpx;
+  color: #c3b353;
+}
+
+.text2 {
+  color: gray;
+  position: absolute;
+  right: 30rpx;
+}
+
+.product_bottom {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 75%;
+}
+
+.product_image {
+  width: 30%;
+  height: 150rpx;
+  position: absolute;
+  left: 20rpx;
+}
+
+.detail {
+  position: relative;
+  top: 50rpx;
+  height: 100rpx;
+}
+
+.product_name {
+  width: 35%;
+  line-height: 38rpx;
+  font-size: 30rpx;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  margin-left: 270rpx;
+  margin-top: -65rpx;
+}
+
+.standard {
+  width: 35%;
+  font-size: 20rpx;
+  color: #ccc;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  margin: 0 0 0 270rpx;
+  line-height: 35rpx;
+  margin-top: 5rpx;
+}
+
+.money_Return {
+  width: 35%;
+  color: red;
+  font-size: 20rpx;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  margin: 0 0 0 270rpx;
+  line-height: 35rpx;
+}
+
+.product_price {
+  width: 25%;
+  margin-top: -30rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.right {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.price {
+  font-size: 30rpx;
+  direction: rtl;
+  position: relative;
+  left:130rpx;
+}
+
+.buyNumber {
+  font-size: 20rpx;
+  color: #ccc;
+  direction: rtl;
+  position: relative;
+  left:130rpx;
+}
+
+.second_bottom {
+  border: 1rpx solid white;
+  background-color: white;
+  height: 100rpx;
+}
+
+.total {
+  position: relative;
+  top: 0rpx;
+  font-size: 30rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.text_content {
+  direction: rtl;
+  position: relative;
+  top: -40rpx;
+  left: -20rpx;
+}
+
+.returnReason {
+  margin-top: 20rpx;
+  background-color: white;
+  height: 60rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #aaa;
+}
+
+.reasonTitle {
+  margin-left: 25rpx;
+  font-size: 30rpx;
+}
+
+.reasonContent {
+  font-size: 30rpx;
+}
+
+.returnMoney {
+  background-color: white;
+  height: 60rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #aaa;
+}
+
+.returnTime {
+  background-color: white;
+  height: 60rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #aaa;
+}

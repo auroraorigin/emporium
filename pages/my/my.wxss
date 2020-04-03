@@ -1,0 +1,126 @@
+/*登录页面*/
+
+.myPage {
+  height: 250rpx;
+  background-color: #eaf1f7;
+  display: flex;
+}
+
+.myPage image {
+  height: 100rpx;
+  width: 100rpx;
+  position: absolute;
+  left: 30rpx;
+  top: 30rpx;
+  border-radius: 50%;
+}
+
+.click-login {
+  position: relative;
+  padding: 65rpx 150rpx;
+  font-size: 30rpx;
+  font-weight:550
+}
+
+.user_info {
+  position: relative;
+  left: -10rpx;
+  top: -5rpx;
+}
+
+.user_name {
+  position: relative;
+  padding: 65rpx 150rpx;
+}
+
+.myPage1 {
+  border: 1rpx solid #ccc;
+  height: 200rpx;
+  border-radius: 10rpx;
+  box-shadow: 0rpx 0rpx 7rpx #ccc;
+  margin: -100rpx 20rpx;
+  background-color: #fff;
+}
+
+.order {
+  font-size: 25rpx;
+}
+
+.order-item {
+  border-bottom: 1rpx solid #ddd;
+  padding: 15rpx 30rpx;
+}
+
+.all_order {
+  color: rgb(156, 154, 154);
+  text-indent: 330rpx;
+  font-size: 20rpx;
+}
+
+.distribute {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  position: relative;
+  top: 20rpx;
+}
+.distributecolumn {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.wait_item {
+  width: 50%;
+  height: auto;
+}
+
+.myPage2 {
+  border: 1rpx solid #ccc;
+  height: auto;
+  border-radius: 10rpx;
+  box-shadow: 0rpx 0rpx 7rpx #ccc;
+  margin: 120rpx 20rpx;
+}
+
+.list {
+  font-size: 25rpx;
+}
+
+.list-item {
+  border-bottom: 1rpx solid #ddd;
+  padding: 17rpx 30rpx;
+  height: 39rpx;
+}
+
+.myPage3 {
+  border: 1rpx solid #ccc;
+  height: auto;
+  border-radius: 10rpx;
+  box-shadow: 0rpx 0rpx 7rpx #ccc;
+  margin: -100rpx 20rpx;
+}
+
+.list-item1 {
+  border-bottom: 1rpx solid #ddd;
+  padding: 28rpx 30rpx;
+  height: 33rpx;
+}
+
+.function_image {
+  width: 40rpx;
+  height: auto;
+}
+
+.function_image1 {
+  width: 50rpx;
+  height: auto;
+  margin-left: -3rpx;
+}
+
+
+.function_text {
+  text-indent: -275rpx;
+}

@@ -1,0 +1,30 @@
+page {
+  background-color: #f8f8f8;
+}
+
+.allBorder {
+}
+
+.Border1 {
+  margin-top: 20rpx;
+}
+
+.list {
+  font-size: 30rpx;
+}
+
+.list-item {
+  border: 1rpx solid #f8f8f8;
+  background-color: white;
+  padding: 15rpx 30rpx;
+  height: 50rpx;
+}
+
+.Border2{
+margin-top: 50rpx;
+}
+
+.Border2 button{
+  width:70%;
+  background-color: white
+}

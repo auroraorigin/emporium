@@ -1,0 +1,114 @@
+<!-- 搜索框 -->
+<searchInput></searchInput> 
+<view class="container">
+  <!-- 轮播图 -->
+  <swiper class="homePageSwiper" indicator-dots autoplay circular indicator-color="#eaf1f7" indicator-active-color="#2b4c7f">
+    <swiper-item wx:for="{{swiperList}}" wx:key="{{index}}">
+      <navigator hover-class="none">
+        <image src="{{item.src}}" mode="widthFix"></image>
+      </navigator>
+    </swiper-item>
+  </swiper>
+  <!-- 公告 -->
+  <view class="notice">
+    <image src="../../icons/homePage/horn.png" mode="widthFix"></image>
+    <swiper autoplay="true" interval="3000" vertical="true" circular="true">
+      <swiper-item wx:for="{{noticeList}}" wx:key="{{index}}">
+        <text>{{item}}</text>
+      </swiper-item>
+    </swiper>
+  </view>
+  <!-- 分类导航 -->
+  <view class="category">
+    <navigator wx:for="{{cateList}}" wx:key="{{index}}" hover-class="none" url="/pages/categories/categories" open-type="switchTab" bindtap="categoriesIndex" data-index="{{index}}">
+      <image src="{{item.src}}"></image>
+      <text>{{item.title}}</text>
+    </navigator>
+  </view>
+  <!-- 楼层 -->
+  <view class="floor">
+    <view class="floorGroup" wx:for="{{floorList}}" wx:for-item="item1" wx:for-index="index1" wx:key="index1">
+      <!-- 标题 -->
+      <image class="title" src="{{item1.titleSrc}}" mode="widthFix"></image>
+      <!-- 内容 -->
+      <view class="productGroup">
+        <navigator class="product" hover-class="none" wx:for="{{item1.productList}}" wx:for-item="item2" wx:for-index="index2" wx:key="{{index2}}" url="/pages/detail/detail?id={{item2.id}}">
+          <image class="productPicture" src="{{item2.src}}" mode="widthFix"></image>
+          <view class="info">
+            <text class="name">{{item2.name}}</text>
+            <view class="trade">
+              <view class="left">
+                <text class="price" wx:if="{{item2.specifiation.length === 1}}">
+                  ¥{{item2.maxPrice}}
+                </text>
+                <text class="price" wx:else>¥{{item2.minPrice}}-{{item2.maxPrice}}</text>
+              </view>
+              <view class="right" catchtap="cart" data-index2="{{index2}}" data-index1="{{index1}}">
+                <image src="../../icons/homePage/cart.png" mode="widthFix"></image>
+              </view>
+            </view>
+          </view>
+        </navigator>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<!-- 商品规格 -->
+<view class="specifiation" hidden="{{hideSpecifiation}}" catchtouchmove='prevent'>
+  <view class="shadow" bindtap="closeSpecifiation" animation="{{animationDataShadow}}"></view>
+  <view class="content" animation="{{animationData}}">
+    <view class="top">
+      <view class="goods">
+        <image mode="widthFix" src="{{floorList[index1].productList[index2].src}}"></image>
+        <view class="info">
+          <view class="name">{{floorList[index1].productList[index2].name}}</view>
+          <text class="price" wx:if="{{floorList[index1].productList[index2].specifiation.length === 1}}">
+            ¥{{detail.goods.maxPrice}}
+          </text>
+          <text class="price" wx:elif="{{floorList[index1].productList[index2].lableCurrentIndex===-1}}">¥{{floorList[index1].productList[index2].minPrice}} - {{floorList[index1].productList[index2].maxPrice}}</text>
+          <text class="price" wx:else>¥{{floorList[index1].productList[index2].specifiation[floorList[index1].productList[index2].lableCurrentIndex].price}}</text>
+          <view class="stock" wx:if="{{floorList[index1].productList[index2].specifiation.length === 1 || floorList[index1].productList[index2].lableCurrentIndex===-1}}">
+            库存 {{floorList[index1].productList[index2].stock}}
+          </view>
+          <view class="stock" wx:else>
+            库存 {{floorList[index1].productList[index2].specifiation[floorList[index1].productList[index2].lableCurrentIndex].stock}}
+          </view>
+        </view>
+      </view>
+      <view class="close" bindtap="closePopupTap">
+        <image mode="widthFix" src="../../icons/homePage/close.png"></image>
+    </view>
+    </view>
+    <view class="divLine1"></view>
+    <view class="mid">
+      <text class="size">规格</text>
+      <view class="lableWrpa" wx:for="{{floorList[index1].productList[index2].specifiation}}" wx:item="{{item}}" wx:key="{{index}}">
+        <view class="lable {{index===floorList[index1].productList[index2].lableCurrentIndex ? 'active' : '' }}" bindtap="labelTap" data-index="{{index}}">
+          {{item.name}}
+        </view>
+      </view>
+    </view>
+    <view class="divLine1"></view>
+    <view class="under">
+      <view class="left">购买数量</view>
+      <view class="right">
+        <view class="reduceNumber {{floorList[index1].productList[index2].buyNumber <= 1 ? 'gray': ''}}" bindtap="reduceNumber">
+          -
+        </view>
+        <view class="input">
+          <input type="number" value="{{floorList[index1].productList[index2].buyNumber}}" disabled="{{ture}}" bindinput="inputNumber" bindblur="inputNumberOut" />
+        </view>
+        <view class="addNumber {{floorList[index1].productList[index2].buyNumber === floorList[index1].productList[index2].buyMaxNumber ? 'gray': ''}}" bindtap="addNumber">
+          +
+        </view>
+      </view>
+    </view>
+    <view class="divLine1"></view>
+    <view class="bot">
+      <view class="selectAddCart" bindtap="addCart">加入购物车</view>
+      <view class="selectBuy">立即购买</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,64 @@
+<view class="content"> 
+  <scroll-view scroll-y="true" class="SV">
+    <!-- 订单状态 --> 
+    <view class="order_state">
+      <view class="state_left">
+        <image src="/images/personal_center/havedReturn.png" mode="widthFix"></image>
+      </view>
+      <view class="state_right">已退款
+        <view class="state_right1">2020年1月1日 16:40</view>
+      </view>
+    </view>
+    <!-- 退款信息 -->
+    <view class="returnTitle">
+      <view class="titleContent">退款信息</view>
+    </view>
+    <view class="item" wx:for="{{all_Order}}" wx:key="index">
+      <view class="list_item">
+        <view class="product_top">
+          <text class="text1">海鲜商城</text>
+          <text class="text2">已完成</text>
+        </view>
+        <view class="product_bottom">
+          <image src="{{item.src}}" class="product_image"></image>
+          <view class="detail">
+            <view class="product_name">
+              <text>{{item.name}}</text>
+            </view>
+            <view class="standard">
+              <text>规格：{{item.specifiation}}</text>
+            </view>
+            <view class="money_Return">
+              <text>{{item.message}}</text>
+            </view>
+          </view>
+          <view class="product_price">
+            <view class="right">
+              <text class="price">¥ {{item.unitPrice}}</text>
+            </view>
+            <view class="right">
+              <text class="buyNumber">×{{item.buyNumber}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="second_bottom">
+        <view class="total">
+          <text class="text_content">共{{item.buyNumber}}条  合计:¥ {{item.goodPrice}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="returnReason">
+      <view class="reasonTitle">退款原因：</view>
+      <view class="reasonContent">未按约定时间发货</view>
+    </view>
+    <view class="returnMoney">
+      <view class="reasonTitle">退款金额：</view>
+      <view class="reasonContent">¥{{total_money+freight}}</view>
+    </view>
+    <view class="returnTime">
+      <view class="reasonTitle">申请时间：</view>
+      <view class="reasonContent">2020-01-01 10:00</view>
+    </view>
+  </scroll-view>
+</view>

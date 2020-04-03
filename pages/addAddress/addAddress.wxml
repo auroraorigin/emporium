@@ -1,0 +1,54 @@
+<form bindsubmit="saveAddress">
+  <view class="address_page">
+    <view>
+      <button bindtap="getLocation" class="bn_type">
+        <image class="get_ads" src="/images/personal_center/location.png"></image>
+        <text class="get_ads_text">获取详细地址</text>
+      </button>
+    </view>
+    <view class="address_list">
+      <view class="address_list_item"> 
+        <view class="property">
+          姓名
+        </view>
+        <view class="add_property">
+          <input class="cin_property" name="consignee" placeholder="收货人姓名" value="{{consignee_name}}"></input>
+        </view>
+      </view>
+      <view class="address_list_item">
+        <view class="property">
+          电话
+        </view>
+        <view class="add_property">
+          <input class="cin_property" name="mobile" placeholder="收货人手机号" value="{{mobile_number}}"></input>
+        </view>
+      </view>
+      <picker class="address_list_item" mode="region" bindchange="bindRegionChange" name="region_name">
+        <view class="property">
+          地区
+        </view>
+        <view class="add_property">
+          <text wx:if="{{region_all}}" class="region_text">{{region_all}}</text>
+          <text wx:else class="placeholder">选择省/市/区</text>
+        </view>
+      </picker>
+      <view class="address_list_item">
+        <view class="property">
+          详细地址
+        </view>
+        <view wx:if="{{address!=''}}" class="cin_detail_address">
+          <input class="add_detail_address" name="detail_address" value="{{detail_address}}" placeholder="街道门牌、楼层房间号等信息"></input>
+        </view>
+        <view wx:else class="cin_detail_address">
+          <input class="add_detail_address" name="detail_address" placeholder="街道门牌、楼层房间号等信息"></input>
+        </view>
+      </view>
+    </view>
+    <button class="save_button_type" form-type="submit" data-index='1'>
+      保存并使用
+    </button>
+    <button class="default_button_type" form-type="submit" data-index='2'>
+      设置为默认地址
+    </button>
+  </view>
+</form>

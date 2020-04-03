@@ -1,0 +1,104 @@
+page {
+  background-color: #f8f8f8;
+}
+
+.address_page {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.bn_type {
+  background-color: #fdfdfd;
+  color: black;
+  height: 80rpx;
+  font-size: 25rpx; 
+}
+
+.bn_type::after {
+  border: none;
+}
+
+.get_ads {
+  width: 45rpx;
+  height: 45rpx;
+  position: relative;
+  top: 20rpx;
+  left: -250rpx;
+}
+
+.get_ads_text {
+  position: relative;
+  top: 5rpx;
+  left: -230rpx;
+  font-size: 30rpx;
+}
+
+.address_list {
+  background-color: white;
+  height: auto;
+  position: relative;
+  top: 50rpx;
+}
+
+.address_list_item {
+  border-bottom: 1rpx solid #ededed;
+  height: 50rpx;
+  padding: 17rpx 30rpx;
+}
+
+.property {
+  font-size: 30rpx;
+  position: relative;
+  top: 5rpx;
+}
+
+.add_property {
+  position: relative;
+  top: -38rpx;
+  left: 170rpx;
+}
+
+.cin_property {
+  font-size: 30rpx;
+  width: 75%;
+  height: 30rpx; 
+}
+
+.region_text {
+  font-size: 30rpx;
+}
+
+.placeholder {
+  color: #808080;
+  font-size: 30rpx;
+  position: relative;
+  top:-3rpx
+}
+
+.detail_address {
+  font-size: 30rpx;
+  position: relative;
+  top: 8rpx;
+}
+
+.add_detail_address {
+  font-size: 30rpx;
+  position: relative;
+  top: -38rpx;
+  left: 170rpx;
+  width: 75%;
+  height: 30rpx;
+}
+
+.save_button_type {
+  margin-top: 100rpx;
+  width: 95%;
+  background-color:#2b4c7f;
+  color:white
+}
+
+.default_button_type{
+  margin-top: 30rpx;
+  width: 95%;
+  background-color: white
+}

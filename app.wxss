@@ -1,0 +1,14 @@
+/**功能封装1：箭头**/
+.arrow{
+    display:flex;
+    justify-content: space-between;
+    align-items: center
+  }
+  .arrow::after{
+    content: "";
+    width:15rpx;
+    height:15rpx;
+    border-top:3rpx solid #ccc;
+    border-right:3rpx solid #ccc;
+    transform: rotate(45deg)
+}

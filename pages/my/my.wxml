@@ -1,0 +1,78 @@
+<!--登录页面-->
+<view>
+<!--登录获取头像和昵称-->
+  <view class="myPage">
+    <view wx:if="{{!userinfo.avatarUrl}}" class="user_info">
+      <image src="/images/personal_center/default_avatar.jpg"></image>
+      <navigator url="/pages/login/login" class="click-login" hover-class="none">点击登录账户 >></navigator>
+    </view>
+    <view wx:else>
+      <image src="{{userinfo.avatarUrl}}"></image>
+      <view class="user_name">{{userinfo.nickName}}</view> 
+    </view>
+  </view>
+<!--订单框-->
+  <view class="myPage1">
+    <view class="order">
+      <navigator class="order-item arrow" url="/pages/orderList/orderList?type=1" open-type="navigate">
+        <text>我的订单</text>
+        <text class="all_order">查看全部订单</text>
+      </navigator>
+      <view class="distribute">
+        <navigator class="distributecolumn" url="/pages/orderList/orderList?type=2" hover-class="none">
+          <image class="wait_item" mode="widthFix" src="/images/personal_center/To_be_paid.jpg"></image>
+          <text>待付款</text>
+        </navigator>
+        <navigator class="distributecolumn" url="/pages/orderList/orderList?type=3" hover-class="none">
+          <image class="wait_item" mode="widthFix" src="/images/personal_center/To_be_shipped.jpg"></image>
+          <text>待发货</text>
+        </navigator>
+        <navigator class="distributecolumn" url="/pages/orderList/orderList?type=4" hover-class="none">
+          <image class="wait_item" mode="widthFix" src="/images/personal_center/To_be_received.jpg"></image>
+          <text>待收货</text>
+        </navigator>
+        <navigator class="distributecolumn" url="/pages/orderList/orderList?type=5" hover-class="none">
+          <image class="wait_item" mode="widthFix" src="/images/personal_center/customer_service.jpg"></image>
+          <text>退款</text>
+        </navigator>
+      </view>
+    </view>
+  </view>
+<!--拼团框-->
+  <view class="myPage2">
+    <view class="list">
+      <navigator class="list-item arrow">
+        <text>我的拼团</text>
+      </navigator>
+      <navigator class="list-item arrow">
+        <text>拼团收益</text>
+      </navigator>
+    </view>
+  </view>
+<!--个人信息、收货地址、优惠卷框-->
+  <view class="myPage3">
+    <view class="list">
+      <navigator class="list-item1 arrow" url="/pages/personalMessage/personalMessage">
+        <image class="function_image" src="/images/personal_center/personalMessage.png" mode="widthFix"></image>
+        <text class="function_text">个人信息</text>
+      </navigator>
+      <navigator class="list-item1 arrow" url='/pages/addressList/addressList'>
+        <image class="function_image" src="/images/personal_center/address.png" mode="widthFix"></image>
+        <text class="function_text">收货地址</text>
+      </navigator>
+      <navigator class="list-item1 arrow" url='/pages/coupon/coupon'>
+        <image class="function_image1" src="/images/personal_center/coupon.png" mode="widthFix"></image>
+        <text class="function_text">优惠卷</text>
+      </navigator>
+      <navigator class="list-item1 arrow" url='/pages/couponCenter/couponCenter'>
+        <image class="function_image" src="/images/personal_center/getCoupon.png" mode="widthFix"></image>
+        <text class="function_text">领卷中心</text>
+      </navigator>
+      <navigator class="list-item1 arrow" url='/pages/setting/setting'>
+        <image class="function_image" src="/images/personal_center/setting.png" mode="widthFix"></image>
+        <text class="function_text">设置</text>
+      </navigator>
+    </view>
+  </view>
+
+</view>

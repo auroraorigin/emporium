@@ -1,0 +1,162 @@
+page {
+  background-color: #f8f8f8;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.coupon-tab {
+  width: 100%;
+  height: 98rpx;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #e2e2e2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  align-items: center;
+  background-color: #fff;
+}
+
+.coupon-tab>view {
+  flex: 1;
+  height: 78rpx;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.coupon-tab>view:first-child {
+  border-right: 1px solid #e2e2e2;
+}
+
+.coupon-tab>view>view {
+  font-size: 32rpx;
+  height: 78rpx;
+  line-height: 74rpx;
+  padding-bottom: 6rpx;
+}
+
+.coupon-tab>view .active {
+  border-bottom: 4rpx solid #2b4c7f;
+  color: #2b4c7f;
+}
+
+.list {
+  height: calc(100vh - 100rpx);
+  position: absolute;
+  top: 130rpx;
+}
+
+.item {
+  border: 1rpx solid white;
+  border-radius: 20rpx;
+  background-color: white;
+  margin: 20rpx 30rpx 0 30rpx;
+  height: 200rpx;
+}
+
+.noCoupon{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 60%;
+  margin-top: 150rpx;
+}
+
+.noCoupon image{
+  width: 350rpx;
+  height: auto;
+}
+
+.noCoupon text{
+  font-size: 35rpx;
+  color: #8a8a8a
+}
+
+.list_item {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 70%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list_item .top {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 45rpx;
+  font-weight: 400;
+  margin: 0 0 0 20rpx;
+}
+
+.top_bottom {
+  font-size: 25rpx;
+  color: #ccc;
+}
+
+.state {
+  width: 100rpx;
+  height: 100rpx;
+  position: relative;
+  right: 50rpx;
+}
+
+.bottom {
+  width: 100%;
+  height: 30%;
+  margin-bottom: 0;
+  border-top: 1rpx solid #2b4c7f;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.volume_name {
+  color: #c3b353;
+  font-size: 20rpx;
+  margin-left: 20rpx;
+}
+
+.button_type {
+  background-color: #7ca7d1;
+  width: 18%;
+  height: 48rpx;
+  border-radius: 30rpx;
+  position: absolute;
+  right: 50rpx
+}
+
+.button_type text {
+  font-size: 25rpx;
+  color: white;
+  position: absolute;
+  right: 25rpx;
+  top:8rpx
+}
+
+.button_type1 {
+  background-color: #c1c1c1;
+  width: 18%;
+  height: 48rpx;
+  border-radius: 30rpx;
+  position: absolute;
+  right: 50rpx
+}
+
+.button_type1 text {
+  font-size: 25rpx;
+  color: white;
+  position: absolute;
+  right: 25rpx;
+  top:8rpx
+}

@@ -1,0 +1,45 @@
+<view class="content">
+  <scroll-view scroll-y="true" class="SV">
+
+    <!--获取微信地址-->
+    <view class="list-item arrow" bindtap="getAddress">
+      <image class="wechat" src="/images/personal_center/wechat.jpg"></image>
+      <text class="get_wechat_address">获取微信地址</text>
+    </view>
+
+    <!--显示地址列表-->
+    <view wx:if="{{!addressList[0].consignee}}" class="noAddress">
+      <image src="/images/personal_center/noAddress.png" mode="widthFix"></image>
+      <text>哎呀，您还没有收获地址哦</text>
+    </view>
+    <view wx:else>
+      <view wx:for="{{addressList}}" wx:key="index" class="address_list" data-index="index">
+        <view wx:if="{{!item.consignee}}"></view>
+        <view wx:else>
+          <slider-left binddelete='delItem' data-index="{{index}}">
+            <view class="address1">
+              <view class="columndisplay">
+                <view class="default_row">
+                  <view class="user_message">{{item.consignee}}, {{item.mobile}}
+                    <view wx:if="{{item.isActive}}">
+                      <image src='/images/personal_center/default.png' class="default_image"></image>
+                    </view>
+                  </view>
+                </view>
+                <text class="ad">收货地址: {{item.region_name}}{{item.detail_address}}</text>
+              </view>
+              <view class="Edit" bindtap="ref" data-index="{{index}}">
+                <image src="/images/personal_center/edit.jpg" mode="widthFix"></image>
+              </view>
+            </view>
+          </slider-left>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!--新增地址-->
+  <view class="border1" bindtap='addAddress'>
+    <button class="button-type">新增收货地址</button>
+  </view>
+</view>
