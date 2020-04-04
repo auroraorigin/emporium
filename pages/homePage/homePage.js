@@ -6,354 +6,79 @@ import {
 Page({
   data: {
     // 轮播图数据
-    swiperList: [{
-        src: "../../images/homePage/swiper.jpg"
-      },
-      {
-        src: "../../images/homePage/swiper.jpg"
-      },
-      {
-        src: "../../images/homePage/swiper.jpg"
-      }
-    ],
+    swiperList: [],
     // 公告数据
-    noticeList: [
-      "公告示例1",
-      "公告示例2",
-      "公告示例3"
-    ],
+    noticeList: [],
     //分类导航数据
-    cateList: [{
-        title: "分 类 1",
-        src: "../../images/homePage/navigator.png"
-      },
-      {
-        title: "分 类 2",
-        src: "../../images/homePage/navigator.png"
-      },
-      {
-        title: "分 类 3",
-        src: "../../images/homePage/navigator.png"
-      },
-      {
-        title: "分 类 4",
-        src: "../../images/homePage/navigator.png"
-      },
-      {
-        title: "分 类 5",
-        src: "../../images/homePage/navigator.png"
-      },
-      {
-        title: "分 类 6",
-        src: "../../images/homePage/navigator.png"
-      },
-      {
-        title: "分 类 7",
-        src: "../../images/homePage/navigator.png"
-      },
-      {
-        title: "分 类 8",
-        src: "../../images/homePage/navigator.png"
-      }
-    ],
+    cateList: [],
     //楼层数据
-    floorList: [{
-        titleSrc: "../../images/homePage/floorTitle.jpg",
-        productList: [{
-            id: 1,
-            name: "商品名称",
-            src: "../../images/homePage/floor.jpg",
-            maxPrice: "200.00",
-            minPrice: "100.00",
-            maxFreight: "20.00",
-            minFreight: "10.00",
-            stock: 25,
-            specifiation: [{
-              name: "一斤",
-              price: "100.00",
-              stock: 8,
-              freight: "10.00"
-            }, {
-              name: "两斤",
-              price: "150.00",
-              stock: 5,
-              freight: "15.00"
-            }, {
-              name: "三斤",
-              price: "200.00",
-              stock: 12,
-              freight: "20.00"
-            }],
-            buyMaxNumber:25,
-            lableCurrentIndex: -1,
-            buyNumber: 1,
-            specifiationIndex: -1,
-            checked : 1
-          },
-          {
-            id: 2,
-            name: "商品名称",
-            src: "../../images/homePage/floor.jpg",
-            maxPrice: "200.00",
-            minPrice: "100.00",
-            maxFreight: "20.00",
-            minFreight: "10.00",
-            stock: 25,
-            specifiation: [{
-              name: "一斤",
-              price: "100.00",
-              stock: 8,
-              freight: "10.00"
-            }, {
-              name: "两斤",
-              price: "150.00",
-              stock: 5,
-              freight: "15.00"
-            }, {
-              name: "三斤",
-              price: "200.00",
-              stock: 12,
-              freight: "20.00"
-            }],
-            buyMaxNumber:25,
-            lableCurrentIndex: -1,
-            buyNumber: 1,
-            specifiationIndex: -1,
-            checked : 1
-          },
-          {
-            id: 3,
-            name: "商品名称",
-            src: "../../images/homePage/floor.jpg",
-            maxPrice: "200.00",
-            minPrice: "100.00",
-            maxFreight: "20.00",
-            minFreight: "10.00",
-            stock: 25,
-            specifiation: [{
-              name: "一斤",
-              price: "100.00",
-              stock: 8,
-              freight: "10.00"
-            }, {
-              name: "两斤",
-              price: "150.00",
-              stock: 5,
-              freight: "15.00"
-            }, {
-              name: "三斤",
-              price: "200.00",
-              stock: 12,
-              freight: "20.00"
-            }],
-            buyMaxNumber:25,
-            lableCurrentIndex: -1,
-            buyNumber: 1,
-            specifiationIndex: -1,
-            checked : 1
-          },
-          {
-            id: 4,
-            name: "商品名称",
-            src: "../../images/homePage/floor.jpg",
-            maxPrice: "200.00",
-            minPrice: "100.00",
-            maxFreight: "20.00",
-            minFreight: "10.00",
-            stock: 25,
-            specifiation: [{
-              name: "一斤",
-              price: "100.00",
-              stock: 8,
-              freight: "10.00"
-            }, {
-              name: "两斤",
-              price: "150.00",
-              stock: 5,
-              freight: "15.00"
-            }, {
-              name: "三斤",
-              price: "200.00",
-              stock: 12,
-              freight: "20.00"
-            }],
-            buyMaxNumber:25,
-            lableCurrentIndex: -1,
-            buyNumber: 1,
-            specifiationIndex: -1,
-            checked : 1
-          },
-        ]
-      },
-      {
-        titleSrc: "../../images/homePage/floorTitle.jpg",
-        productList: [{
-            id: 5,
-            name: "商品名称",
-            src: "../../images/homePage/floor.jpg",
-            maxPrice: "200.00",
-            minPrice: "100.00",
-            maxFreight: "20.00",
-            minFreight: "10.00",
-            stock: 25,
-            specifiation: [{
-              name: "一斤",
-              price: "100.00",
-              stock: 8,
-              freight: "10.00"
-            }, {
-              name: "两斤",
-              price: "150.00",
-              stock: 5,
-              freight: "15.00"
-            }, {
-              name: "三斤",
-              price: "200.00",
-              stock: 12,
-              freight: "20.00"
-            }],
-            buyMaxNumber:25,
-            lableCurrentIndex: -1,
-            buyNumber: 1,
-            specifiationIndex: -1,
-            checked : 1
-          },
-          {
-            id: 6,
-            name: "商品名称",
-            src: "../../images/homePage/floor.jpg",
-            maxPrice: "200.00",
-            minPrice: "100.00",
-            maxFreight: "20.00",
-            minFreight: "10.00",
-            stock: 25,
-            specifiation: [{
-              name: "一斤",
-              price: "100.00",
-              stock: 8,
-              freight: "10.00"
-            }, {
-              name: "两斤",
-              price: "150.00",
-              stock: 5,
-              freight: "15.00"
-            }, {
-              name: "三斤",
-              price: "200.00",
-              stock: 12,
-              freight: "20.00"
-            }],
-            buyMaxNumber:25,
-            lableCurrentIndex: -1,
-            buyNumber: 1,
-            specifiationIndex: -1,
-            checked : 1
-          },
-          {
-            id: 7,
-            name: "商品名称",
-            src: "../../images/homePage/floor.jpg",
-            maxPrice: "200.00",
-            minPrice: "100.00",
-            maxFreight: "20.00",
-            minFreight: "10.00",
-            stock: 25,
-            specifiation: [{
-              name: "一斤",
-              price: "100.00",
-              stock: 8,
-              freight: "10.00"
-            }, {
-              name: "两斤",
-              price: "150.00",
-              stock: 5,
-              freight: "15.00"
-            }, {
-              name: "三斤",
-              price: "200.00",
-              stock: 12,
-              freight: "20.00"
-            }],
-            buyMaxNumber:25,
-            lableCurrentIndex: -1,
-            buyNumber: 1,
-            specifiationIndex: -1,
-            checked : 1
-          },
-          {
-            id: 8,
-            name: "商品名称",
-            src: "../../images/homePage/floor.jpg",
-            maxPrice: "200.00",
-            minPrice: "100.00",
-            maxFreight: "20.00",
-            minFreight: "10.00",
-            stock: 25,
-            specifiation: [{
-              name: "一斤",
-              price: "100.00",
-              stock: 8,
-              freight: "10.00"
-            }, {
-              name: "两斤",
-              price: "150.00",
-              stock: 5,
-              freight: "15.00"
-            }, {
-              name: "三斤",
-              price: "200.00",
-              stock: 12,
-              freight: "20.00"
-            }],
-            buyMaxNumber:25,
-            lableCurrentIndex: -1,
-            buyNumber: 1,
-            specifiationIndex: -1,
-            checked : 1
-          }
-        ]
-      }
-    ],
+    floorList: [],
     index1:0,
     index2:0,
-    hideSpecifiation:1,
+    hideSpecification:1,
     animationDataShadow:{},
     animationData:{},
   },
   //options(Object)
   onLoad: function (options) {
-    // this.getSwiperList();
-    // this.getCateList();
-    // this.getFloorList();
+    this.getHomePage();
   },
 
-  //获取轮播图数据
-  // getSwiperList(){
-  //   request({ url:"/home/swiperdata" })
-  //   .then(result=>{
-  //     this.setData({
-  //       swiperList:result.data.message
-  //     })
-  //   })
-  // },
-  //获取分类导航数据
-  // getCateList(){
-  //   request({ url:"/home/catitems" })
-  //   .then(result=>{
-  //     this.setData({
-  //       cateList:result.data.message
-  //     })
-  //   })
-  // },
-  //获取楼层数据
-  // getFloorList(){
-  //   request({ url:"/home/floordata" })
-  //   .then(result=>{
-  //     this.setData({
-  //       floorList:result.data.message
-  //     })
-  //   })
-  // },
+  //获取首页数据
+  getHomePage(){
+    var that = this;
+    wx.request({
+      url: 'http://localhost:8888/wx/homePage',
+      method: 'GET',
+      success(res) {
+        let temp = res.data.data.floorList
+        // console.log(temp)
+        // 添加商品属性方便管理
+        for (let i = 0; i < temp.length; i++) {
+          for (let j = 0; j < temp[i].goods.length; j++) {
+            let maxPrice = temp[i].goods[j].specification[0].price
+            let minPrice = temp[i].goods[j].specification[0].price
+            let maxFreight = temp[i].goods[j].specification[0].freight
+            let minFreight = temp[i].goods[j].specification[0].freight
+            let stock = temp[i].goods[j].specification[0].stock
+            
+
+            for (let k = 1; k < temp[i].goods[j].specification.length; k++) {
+              if(Number(maxPrice)<Number(temp[i].goods[j].specification[k].price))
+                maxPrice=temp[i].goods[j].specification[k].price
+              if(Number(minPrice)>Number(temp[i].goods[j].specification[k].price))
+                minPrice=temp[i].goods[j].specification[k].price
+              if(Number(maxFreight)<Number(temp[i].goods[j].specification[k].freight))
+                maxFreight=temp[i].goods[j].specification[k].freight
+              if(Number(minFreight)>Number(temp[i].goods[j].specification[k].freight))
+                minFreight=temp[i].goods[j].specification[k].freight
+              stock+=temp[i].goods[j].specification[k].stock
+            }
+            
+            temp[i].goods[j].maxPrice=maxPrice
+            temp[i].goods[j].minPrice=minPrice
+            temp[i].goods[j].maxFreight=maxFreight
+            temp[i].goods[j].minFreight=minFreight
+            temp[i].goods[j].stock=stock
+            temp[i].goods[j].buyMaxNumber = stock
+            temp[i].goods[j].lableCurrentIndex=-1
+            temp[i].goods[j].buyNumber=1
+            temp[i].goods[j].specificationIndex=-1
+            temp[i].goods[j].checked =1
+          }
+
+        }
+        that.setData({
+          swiperList:res.data.data.swiperList,
+          noticeList:res.data.data.noticeList,
+          cateList:res.data.data.cateList,
+          floorList:res.data.data.floorList
+        })
+      },
+      fail() {}
+    })
+  },
+  // 保存分类ID
   categoriesIndex(e){
     let categoriesIndex=e.currentTarget.dataset.index;
     wx.setStorageSync("categoriesIndex", categoriesIndex)
@@ -368,11 +93,11 @@ Page({
     let index2=this.data.index2;
     index1 = e.currentTarget.dataset.index1;
     index2 = e.currentTarget.dataset.index2
-
+    
     this.setData({
       index1,
       index2,
-      hideSpecifiation: 0,
+      hideSpecification: 0,
     })
     this.guigeselect();
   },
@@ -415,11 +140,11 @@ Page({
     })
   },
   //点击阴影部分
-  closeSpecifiation() {
+  closeSpecification() {
     this.guigeno();
     setTimeout(() => {
       this.setData({
-        hideSpecifiation: 1
+        hideSpecification: 1
       })
     }, 300)
   },
@@ -428,35 +153,38 @@ Page({
     this.guigeno();
     setTimeout(() => {
       this.setData({
-        hideSpecifiation: 1
+        hideSpecification: 1
       })
     }, 300)
   },
   //点击标签
   labelTap(e) {
+    
     let index1=this.data.index1;
-    let index2=this.data.index2;
-    let lableCurrentIndex = this.data.floorList[index1].productList[index2].lableCurrentIndex;
-    let buyNumber = this.data.floorList[index1].productList[index2].buyNumber;
-    let buyMaxNumber = this.data.floorList[index1].productList[index2].buyMaxNumber;
-    let stock = this.data.floorList[index1].productList[index2].stock;
+    let index2=this.data.index2;  
+    let lableCurrentIndex = this.data.floorList[index1].goods[index2].lableCurrentIndex;
+    let buyNumber = this.data.floorList[index1].goods[index2].buyNumber;
+    let buyMaxNumber = this.data.floorList[index1].goods[index2].buyMaxNumber;
+    let stock = this.data.floorList[index1].goods[index2].stock; 
     let index = e.currentTarget.dataset.index;
+    
+    
 
     if (lableCurrentIndex == index) {
       buyMaxNumber = stock;
       this.setData({
-        ['floorList['+index1+'].productList['+index2+'].lableCurrentIndex']: -1,
-        ['floorList['+index1+'].productList['+index2+'].buyMaxNumber']:buyMaxNumber
+        ['floorList['+index1+'].goods['+index2+'].lableCurrentIndex']: -1,
+        ['floorList['+index1+'].goods['+index2+'].buyMaxNumber']:buyMaxNumber
       })
       return;
     } else {
-      buyMaxNumber = this.data.floorList[index1].productList[index2].specifiation[index].stock;
+      buyMaxNumber = this.data.floorList[index1].goods[index2].specification[index].stock;
       if (buyNumber > buyMaxNumber)
         buyNumber = buyMaxNumber;
       this.setData({
-        ['floorList['+index1+'].productList['+index2+'].lableCurrentIndex']: index,
-        ['floorList['+index1+'].productList['+index2+'].buyNumber']:buyNumber,
-        ['floorList['+index1+'].productList['+index2+'].buyMaxNumber']:buyMaxNumber
+        ['floorList['+index1+'].goods['+index2+'].lableCurrentIndex']: index,
+        ['floorList['+index1+'].goods['+index2+'].buyNumber']:buyNumber,
+        ['floorList['+index1+'].goods['+index2+'].buyMaxNumber']:buyMaxNumber
       })
       return;
     }
@@ -465,13 +193,13 @@ Page({
   reduceNumber() {
     let index1=this.data.index1;
     let index2=this.data.index2;
-    let buyNumber = this.data.floorList[index1].productList[index2].buyNumber;
+    let buyNumber = this.data.floorList[index1].goods[index2].buyNumber;
     if (buyNumber == 1)
       return;
     else {
       buyNumber--;
       this.setData({
-        ['floorList['+index1+'].productList['+index2+'].buyNumber']:buyNumber
+        ['floorList['+index1+'].goods['+index2+'].buyNumber']:buyNumber
       })
     }
   },
@@ -479,14 +207,14 @@ Page({
   addNumber() {
     let index1=this.data.index1;
     let index2=this.data.index2;
-    let buyNumber = this.data.floorList[index1].productList[index2].buyNumber;
-    let buyMaxNumber = this.data.floorList[index1].productList[index2].buyMaxNumber;
+    let buyNumber = this.data.floorList[index1].goods[index2].buyNumber;
+    let buyMaxNumber = this.data.floorList[index1].goods[index2].buyMaxNumber;
     if (buyNumber == buyMaxNumber)
       return;
     else {
       buyNumber++;
       this.setData({
-        ['floorList['+index1+'].productList['+index2+'].buyNumber']:buyNumber
+        ['floorList['+index1+'].goods['+index2+'].buyNumber']:buyNumber
       })
     }
   },
@@ -494,16 +222,16 @@ Page({
   inputNumber(e) {
     let index1=this.data.index1;
     let index2=this.data.index2;
-    let buyMaxNumber = this.data.floorList[index1].productList[index2].buyMaxNumber;
-    let buyNumber = this.data.floorList[index1].productList[index2].buyNumber;
+    let buyMaxNumber = this.data.floorList[index1].goods[index2].buyMaxNumber;
+    let buyNumber = this.data.floorList[index1].goods[index2].buyNumber;
     if (e.detail.value > buyMaxNumber) {
       buyNumber = buyMaxNumber;
       this.setData({
-        ['floorList['+index1+'].productList['+index2+'].buyNumber']:buyNumber
+        ['floorList['+index1+'].goods['+index2+'].buyNumber']:buyNumber
       })
     } else {
       this.setData({
-        ['floorList['+index1+'].productList['+index2+'].buyNumber']: e.detail.value
+        ['floorList['+index1+'].goods['+index2+'].buyNumber']: e.detail.value
       })
     }
   },
@@ -511,11 +239,11 @@ Page({
   inputNumberOut(e) {
     let index1=this.data.index1;
     let index2=this.data.index2;
-    let buyNumber = this.data.floorList[index1].productList[index2].buyNumber;
+    let buyNumber = this.data.floorList[index1].goods[index2].buyNumber;
     if (e.detail.value < 1) {
       buyNumber = 1;
       this.setData({
-        ['floorList['+index1+'].productList['+index2+'].buyNumber']:buyNumber
+        ['floorList['+index1+'].goods['+index2+'].buyNumber']:buyNumber
       })
     }
   },
@@ -533,8 +261,8 @@ Page({
   addCart() {
     let index1=this.data.index1;
     let index2=this.data.index2;
-    let lableCurrentIndex = this.data.floorList[index1].productList[index2].lableCurrentIndex;
-    let buyNumber = this.data.floorList[index1].productList[index2].buyNumber;
+    let lableCurrentIndex = this.data.floorList[index1].goods[index2].lableCurrentIndex;
+    let buyNumber = this.data.floorList[index1].goods[index2].buyNumber;
 
     if (lableCurrentIndex === -1) {
       wx.showToast({
@@ -547,15 +275,15 @@ Page({
 
     let cart = wx.getStorageSync("cart") || [];
 
-    let index = cart.findIndex(v => v.id === this.data.floorList[index1].productList[index2].id && v.specifiationIndex === lableCurrentIndex);
+    let index = cart.findIndex(v => v.id === this.data.floorList[index1].goods[index2].id && v.specificationIndex === lableCurrentIndex);
 
     if (index === -1) {
-      this.data.floorList[index1].productList[index2].specifiationIndex = lableCurrentIndex;
-      cart.push(this.data.floorList[index1].productList[index2])
+      this.data.floorList[index1].goods[index2].specificationIndex = lableCurrentIndex;
+      cart.push(this.data.floorList[index1].goods[index2])
     } else {
       cart[index].buyNumber += buyNumber;
-      if (cart[index].buyNumber > this.data.floorList[index1].productList[index2].specifiation[lableCurrentIndex].stock) {
-        cart[index].buyNumber = this.data.floorList[index1].productList[index2].specifiation[lableCurrentIndex].stock;
+      if (cart[index].buyNumber > this.data.floorList[index1].goods[index2].specification[lableCurrentIndex].stock) {
+        cart[index].buyNumber = this.data.floorList[index1].goods[index2].specification[lableCurrentIndex].stock;
         wx.setStorageSync("cart", cart);
         wx.showToast({
           title: '加入购物车数量已达最大值',
@@ -580,9 +308,9 @@ Page({
 
   },
   onHide: function () {
-    let hideSpecifiation = this.data.hideSpecifiation;
-    if(hideSpecifiation==0)
-      this.closeSpecifiation()
+    let hideSpecification = this.data.hideSpecification;
+    if(hideSpecification==0)
+      this.closeSpecification()
   },
   onUnload: function () {
 

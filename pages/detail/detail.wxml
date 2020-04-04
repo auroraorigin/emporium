@@ -1,7 +1,7 @@
 <scroll-view scroll-y>
   <!-- 商品轮播图 -->
   <swiper indicator-dots circular indicator-color="#eaf1f7" indicator-active-color="#2b4c7f">
-    <swiper-item wx:for="{{detail.goods.swiperUrl}}" wx:key="{{index}}" bindtap="handlePrevewImage" data-url="{{item}}">
+    <swiper-item wx:for="{{detail.goods.swiperUrl}}" wx:key="index" bindtap="handlePrevewImage" data-url="{{item}}">
       <image mode="widthFix" src="{{item}}"></image> 
     </swiper-item>
   </swiper>

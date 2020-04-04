@@ -4,7 +4,7 @@
       <view class="left">
         <image src="../../icons/search/search.png" mode="widthFix"></image>
       </view>
-      <input class="input" bindinput="inputNumber" focus="true" confirm-type="search" maxlength="23" placeholder="请输入您要搜索的商品" value="{{value}}" bindconfirm="complete"></input>
+      <input class="input" bindinput="inputValue" focus="true" confirm-type="search" maxlength="23" placeholder="请输入您要搜索的商品" value="{{value}}" bindconfirm="complete"></input>
       <view class="right" bindtap="clear">
         <image wx:if="{{value!=''}}" src="../../icons/search/close.png" mode="widthFix"></image>
       </view>
@@ -21,15 +21,15 @@
     </view>
   </view>
   <scroll-view scroll-y class="productGroup" wx:if="{{searchList!=0}}">
-    <navigator class="product" hover-class="none" wx:for="{{searchList}}" wx:key="{{index}}" url="/pages/detail/detail?id={{item.id}}">
+    <navigator class="product" hover-class="none" wx:for="{{searchList}}" wx:key="index" url="/pages/detail/detail?_id={{item._id}}">
       <view class="productImage">
-        <image src="{{item.src}}" mode="widthFix"></image>
+        <image src="{{item.url}}" mode="widthFix"></image>
       </view>
       <view class="info">
         <text class="name">{{item.name}}</text>
         <view class="trade">
           <view class="left">
-            <text class="price" wx:if="{{item.specifiation.length === 1}}">¥{{item.maxPrice}}</text>
+            <text class="price" wx:if="{{item.specification.length === 1}}">¥{{item.maxPrice}}</text>
             <text class="price" wx:else>¥{{item.minPrice}}-{{item.maxPrice}}</text>
           </view>
           <view class="right" catchtap="cart" data-index="{{index}}">
@@ -46,29 +46,19 @@
   </view>
 </view>
 <!-- 商品规格 -->
-<view class="specifiation" hidden="{{hideSpecifiation}}" catchtouchmove='prevent'>
+<view class="specification" hidden="{{hideSpecifiation}}" catchtouchmove='prevent'>
   <view class="shadow" bindtap="closeSpecifiation" animation="{{animationDataShadow}}"></view>
   <view class="content" animation="{{animationData}}">
     <view class="top">
       <view class="goods">
-        <image mode="widthFix" src="../../images/search/3.jpg"></image>
+        <image mode="widthFix" src="{{searchList[index].url}}"></image>
         <view class="info">
           <view class="name">{{searchList[index].name}}</view>
-          <text class="price" wx:if="{{searchList[index].specifiation.length === 1}}">
-            ¥{{detail.goods.maxPrice}}
-          </text>
-          <text class="price" wx:elif="{{searchList[index].lableCurrentIndex===-1}}">
-            ¥{{searchList[index].minPrice}} - {{searchList[index].maxPrice}}
-          </text>
-          <text class="price" wx:else>
-            ¥{{searchList[index].specifiation[searchList[index].lableCurrentIndex].price}}
-          </text>
-          <view class="stock" wx:if="{{searchList[index].specifiation.length === 1 || searchList[index].lableCurrentIndex===-1}}">
-            库存 {{searchList[index].stock}}
-          </view>
-          <view class="stock" wx:else>
-            库存 {{searchList[index].specifiation[searchList[index].lableCurrentIndex].stock}}
-          </view>
+          <text class="price" wx:if="{{searchList[index].specification.length === 1}}">¥{{searchList[index].maxPrice}}</text>
+          <text class="price" wx:elif="{{searchList[index].lableCurrentIndex===-1}}">¥{{searchList[index].minPrice}} - {{searchList[index].maxPrice}}</text>
+          <text class="price" wx:else>¥{{searchList[index].specification[searchList[index].lableCurrentIndex].price}}</text>
+          <view class="stock" wx:if="{{searchList[index].specification.length === 1 || searchList[index].lableCurrentIndex===-1}}">库存 {{searchList[index].stock}}</view>
+          <view class="stock" wx:else>库存 {{searchList[index].specification[searchList[index].lableCurrentIndex].stock}}</view>
         </view>
       </view>
       <view class="close" bindtap="closePopupTap">
@@ -78,7 +68,7 @@
     <view class="divLine1"></view>
     <view class="mid">
       <text class="size">规格</text>
-      <view class="lableWrpa" wx:for="{{searchList[index].specifiation}}" wx:for-item="item1" wx:for-index="index1" wx:key="{{index1}}">
+      <view class="lableWrpa" wx:for="{{searchList[index].specification}}" wx:for-item="item1" wx:for-index="index1" wx:key="index1">
         <view class="lable {{index1==searchList[index].lableCurrentIndex ? 'active' : '' }}" bindtap="labelTap" data-index1="{{index1}}">
           {{item1.name}}
         </view>

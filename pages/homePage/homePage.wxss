@@ -194,7 +194,7 @@ image{
     height: auto
 }
 
-.specifiation {
+.specification {
     position: fixed;
     top: 0;
     left: 0;
@@ -203,7 +203,7 @@ image{
     z-index: 2;
   }
   
-  .specifiation .shadow {
+  .specification .shadow {
     position: fixed;
     top: 0;
     left: 0;
@@ -213,7 +213,7 @@ image{
     z-index: 3;
   }
   
-  .specifiation .content {
+  .specification .content {
     position: fixed;
     padding: 16rpx 16rpx;
     border-top-right-radius: 16rpx;
@@ -225,7 +225,7 @@ image{
     z-index: 4;
   }
   
-  .specifiation .content .top {
+  .specification .content .top {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -234,7 +234,7 @@ image{
     margin-top: 10rpx;
   }
   
-  .specifiation .content .goods {
+  .specification .content .goods {
     flex: 3;
     display: flex;
     flex-direction: row;
@@ -242,13 +242,13 @@ image{
     align-items: center;
   }
   
-  .specifiation .content .goods image {
+  .specification .content .goods image {
     width: 30%;
     height: auto;
     border-radius: 6rpx;
   }
   
-  .specifiation .content .goods .info {
+  .specification .content .goods .info {
     height: 100%;
     flex: 6;
     display: flex;
@@ -258,7 +258,7 @@ image{
   
   }
   
-  .specifiation .content .goods .info .name {
+  .specification .content .goods .info .name {
     font-weight: bold;
     height: 75rpx;
     font-size: 28rpx;
@@ -269,7 +269,7 @@ image{
   }
   
   
-  .specifiation .content .goods .info .price {
+  .specification .content .goods .info .price {
     margin-top: 3rpx;
     margin-bottom: 3rpx;
     font-weight: bold;
@@ -278,18 +278,18 @@ image{
     color: #db7012;
   }
   
-  .specifiation .content .goods .info .stock {
+  .specification .content .goods .info .stock {
     font-weight: bold;
     font-size: 26rpx;
     color: #666;
   }
   
-  .specifiation .content .close {
+  .specification .content .close {
     height: 100%;
     flex: 0.2;
   }
   
-  .specifiation .content .close image {
+  .specification .content .close image {
     width: 100%;
     height: auto
   }

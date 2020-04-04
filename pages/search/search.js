@@ -5,256 +5,8 @@ import regeneratorRuntime from "../../lib/runtime/runtime"
 //Page Object
 Page({
   data: {
-    searchList: [{
-        id: 4,
-        name: "商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称",
-        src: "../../images/homePage/floor.jpg",
-        maxPrice: "200.00",
-        minPrice: "100.00",
-        maxFreight: "20.00",
-        minFreight: "10.00",
-        stock: 25,
-        specifiation: [{
-          name: "一斤",
-          price: "100.00",
-          stock: 8,
-          freight: "10.00"
-        }, {
-          name: "两斤",
-          price: "150.00",
-          stock: 5,
-          freight: "15.00"
-        }, {
-          name: "三斤",
-          price: "200.00",
-          stock: 12,
-          freight: "20.00"
-        }],
-        buyMaxNumber: 25,
-        lableCurrentIndex: -1,
-        buyNumber: 1,
-        specifiationIndex: -1,
-        checked: 1
-      },
-      {
-        id: 5,
-        name: "商品名称",
-        src: "../../images/homePage/floor.jpg",
-        maxPrice: "200.00",
-        minPrice: "20.00",
-        maxFreight: "20.00",
-        minFreight: "10.00",
-        stock: 25,
-        specifiation: [{
-          name: "一斤",
-          price: "20.00",
-          stock: 8,
-          freight: "10.00"
-        }, {
-          name: "两斤",
-          price: "150.00",
-          stock: 5,
-          freight: "15.00"
-        }, {
-          name: "三斤",
-          price: "200.00",
-          stock: 12,
-          freight: "20.00"
-        }],
-        buyMaxNumber: 25,
-        lableCurrentIndex: -1,
-        buyNumber: 1,
-        specifiationIndex: -1,
-        checked: 1
-      },
-      {
-        id: 6,
-        name: "商品名称",
-        src: "../../images/homePage/floor.jpg",
-        maxPrice: "200.00",
-        minPrice: "120.00",
-        maxFreight: "20.00",
-        minFreight: "10.00",
-        stock: 25,
-        specifiation: [{
-          name: "一斤",
-          price: "120.00",
-          stock: 8,
-          freight: "10.00"
-        }, {
-          name: "两斤",
-          price: "150.00",
-          stock: 5,
-          freight: "15.00"
-        }, {
-          name: "三斤",
-          price: "200.00",
-          stock: 12,
-          freight: "20.00"
-        }],
-        buyMaxNumber: 25,
-        lableCurrentIndex: -1,
-        buyNumber: 1,
-        specifiationIndex: -1,
-        checked: 1
-      },
-      {
-        id: 7,
-        name: "商品名称",
-        src: "../../images/homePage/floor.jpg",
-        maxPrice: "200.00",
-        minPrice: "130.00",
-        maxFreight: "20.00",
-        minFreight: "10.00",
-        stock: 25,
-        specifiation: [{
-          name: "一斤",
-          price: "130.00",
-          stock: 8,
-          freight: "10.00"
-        }, {
-          name: "两斤",
-          price: "150.00",
-          stock: 5,
-          freight: "15.00"
-        }, {
-          name: "三斤",
-          price: "200.00",
-          stock: 12,
-          freight: "20.00"
-        }],
-        buyMaxNumber: 25,
-        lableCurrentIndex: -1,
-        buyNumber: 1,
-        specifiationIndex: -1,
-        checked: 1
-      }
-    ],
-    tempList: [{
-        id: 4,
-        name: "商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称",
-        src: "../../images/homePage/floor.jpg",
-        maxPrice: "200.00",
-        minPrice: "100.00",
-        maxFreight: "20.00",
-        minFreight: "10.00",
-        stock: 25,
-        specifiation: [{
-          name: "一斤",
-          price: "100.00",
-          stock: 8,
-          freight: "10.00"
-        }, {
-          name: "两斤",
-          price: "150.00",
-          stock: 5,
-          freight: "15.00"
-        }, {
-          name: "三斤",
-          price: "200.00",
-          stock: 12,
-          freight: "20.00"
-        }],
-        buyMaxNumber: 25,
-        lableCurrentIndex: -1,
-        buyNumber: 1,
-        specifiationIndex: -1,
-        checked: 1
-      },
-      {
-        id: 5,
-        name: "商品名称",
-        src: "../../images/homePage/floor.jpg",
-        maxPrice: "200.00",
-        minPrice: "20.00",
-        maxFreight: "20.00",
-        minFreight: "10.00",
-        stock: 25,
-        specifiation: [{
-          name: "一斤",
-          price: "20.00",
-          stock: 8,
-          freight: "10.00"
-        }, {
-          name: "两斤",
-          price: "150.00",
-          stock: 5,
-          freight: "15.00"
-        }, {
-          name: "三斤",
-          price: "200.00",
-          stock: 12,
-          freight: "20.00"
-        }],
-        buyMaxNumber: 25,
-        lableCurrentIndex: -1,
-        buyNumber: 1,
-        specifiationIndex: -1,
-        checked: 1
-      },
-      {
-        id: 6,
-        name: "商品名称",
-        src: "../../images/homePage/floor.jpg",
-        maxPrice: "200.00",
-        minPrice: "120.00",
-        maxFreight: "20.00",
-        minFreight: "10.00",
-        stock: 25,
-        specifiation: [{
-          name: "一斤",
-          price: "120.00",
-          stock: 8,
-          freight: "10.00"
-        }, {
-          name: "两斤",
-          price: "150.00",
-          stock: 5,
-          freight: "15.00"
-        }, {
-          name: "三斤",
-          price: "200.00",
-          stock: 12,
-          freight: "20.00"
-        }],
-        buyMaxNumber: 25,
-        lableCurrentIndex: -1,
-        buyNumber: 1,
-        specifiationIndex: -1,
-        checked: 1
-      },
-      {
-        id: 7,
-        name: "商品名称",
-        src: "../../images/homePage/floor.jpg",
-        maxPrice: "200.00",
-        minPrice: "130.00",
-        maxFreight: "20.00",
-        minFreight: "10.00",
-        stock: 25,
-        specifiation: [{
-          name: "一斤",
-          price: "130.00",
-          stock: 8,
-          freight: "10.00"
-        }, {
-          name: "两斤",
-          price: "150.00",
-          stock: 5,
-          freight: "15.00"
-        }, {
-          name: "三斤",
-          price: "200.00",
-          stock: 12,
-          freight: "20.00"
-        }],
-        buyMaxNumber: 25,
-        lableCurrentIndex: -1,
-        buyNumber: 1,
-        specifiationIndex: -1,
-        checked: 1
-      }
-    ],
+    searchList: [],
+    tempList: [],
     value: '',
     type: 1,
     hideSpecifiation: 1,
@@ -264,7 +16,7 @@ Page({
     first:1
   },
   //options(Object)
-  inputNumber(e) {
+  inputValue(e) {
     let value = e.detail.value;
     this.setData({
       value
@@ -281,26 +33,63 @@ Page({
     const value = e.detail.value;
     if (!value.trim())
       return;
-    //this.search(value);
+    this.search(value);
   },
   //将搜索框数据发送至服务器并接受服务器返回数据
-  async search(query) {
+  search(query) {
+    var that = this;
     let first=this.data.first;
-    const res = await request({
-      url: "/goods/qsearch",
+    wx.request({
+      url: 'http://localhost:8888/wx/search',
+      method: 'GET',
       data: {
         query
-      }
+      },
+      success(res) {
+        let temp = res.data.data
+
+        for (let i = 0; i < temp.length; i++) {
+        
+        let maxPrice = temp[i].specification[0].price
+        let minPrice = temp[i].specification[0].price
+        let maxFreight = temp[i].specification[0].freight
+        let minFreight = temp[i].specification[0].freight
+        let stock = temp[i].specification[0].stock
+
+          for (let j = 1; j < temp[i].specification.length; j++) {
+            if(Number(maxPrice)<Number(temp[i].specification[j].price))
+                maxPrice=temp[i].specification[j].price
+              if(Number(minPrice)>Number(temp[i].specification[j].price))
+                minPrice=temp[i].specification[j].price
+              if(Number(maxFreight)<Number(temp[i].specification[j].freight))
+                maxFreight=temp[i].specification[j].freight
+              if(Number(minFreight)>Number(temp[i].specification[j].freight))
+                minFreight=temp[i].specification[j].freight
+              stock+=temp[i].specification[j].stock
+          }
+          
+            temp[i].maxPrice=maxPrice
+            temp[i].minPrice=minPrice
+            temp[i].maxFreight=maxFreight
+            temp[i].minFreight=minFreight
+            temp[i].stock=stock
+            temp[i].buyMaxNumber = stock
+            temp[i].lableCurrentIndex=-1
+            temp[i].buyNumber=1
+            temp[i].specificationIndex=-1
+            temp[i].checked =1
+        }
+
+        let searchList = temp;
+        let tempList = temp;
+        that.setData({
+          searchList,
+          tempList,
+          first:0
+        })
+      },
+      fail() {}
     });
-    console.log(res);
-    let searchList = res;
-    let tempList = res;
-    this.setData({
-      searchList,
-      tempList,
-      first:0
-    })
-    
   },
   //点击左边排序
   left() {
@@ -445,7 +234,7 @@ Page({
       })
       return;
     } else {
-      buyMaxNumber = this.data.searchList[index].specifiation[labIndex].stock;
+      buyMaxNumber = this.data.searchList[index].specification[labIndex].stock;
       if (buyNumber > buyMaxNumber)
         buyNumber = buyMaxNumber;
       this.setData({
@@ -537,15 +326,15 @@ Page({
 
     let cart = wx.getStorageSync("cart") || [];
 
-    let index1 = cart.findIndex(v => v.id === this.data.searchList[index].id && v.specifiationIndex === lableCurrentIndex);
+    let index1 = cart.findIndex(v => v.id === this.data.searchList[index].id && v.specificationIndex === lableCurrentIndex);
 
     if (index1 === -1) {
-      this.data.searchList[index].specifiationIndex = lableCurrentIndex;
+      this.data.searchList[index].specificationIndex = lableCurrentIndex;
       cart.push(this.data.searchList[index])
     } else {
       cart[index].buyNumber += buyNumber;
-      if (cart[index].buyNumber > this.data.searchList[index].specifiation[lableCurrentIndex].stock) {
-        cart[index].buyNumber = this.data.searchList[index].specifiation[lableCurrentIndex].stock;
+      if (cart[index].buyNumber > this.data.searchList[index].specification[lableCurrentIndex].stock) {
+        cart[index].buyNumber = this.data.searchList[index].specification[lableCurrentIndex].stock;
         wx.setStorageSync("cart", cart);
         wx.showToast({
           title: '加入购物车数量已达最大值',
