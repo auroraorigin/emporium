@@ -81,7 +81,7 @@ Page({
         }
 
         let searchList = temp;
-        let tempList = temp;
+        let tempList = temp.slice(0);
         that.setData({
           searchList,
           tempList,
@@ -326,7 +326,7 @@ Page({
 
     let cart = wx.getStorageSync("cart") || [];
 
-    let index1 = cart.findIndex(v => v.id === this.data.searchList[index].id && v.specificationIndex === lableCurrentIndex);
+    let index1 = cart.findIndex(v => v._id === this.data.searchList[index]._id && v.specificationIndex === lableCurrentIndex);
 
     if (index1 === -1) {
       this.data.searchList[index].specificationIndex = lableCurrentIndex;

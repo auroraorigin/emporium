@@ -14,7 +14,7 @@
 <!-- 商品列表 -->
 <block wx:if="{{cart.length!=0}}">
     <scroll-view class="wrap" scroll-y>
-        <view class="product" wx:for="{{cart}}" wx:key="{{index}}">
+        <view class="product" wx:for="{{cart}}" wx:key="index">
             <slider-left binddelete="delProduct" data-index="{{index}}">
                 <view class="left">
                     <checkbox-group data-index="{{index}}" bindchange="select">
@@ -22,17 +22,17 @@
                     </checkbox-group>
                 </view>
                 <view class="mid">
-                    <view class="images"><image src="{{item.src}}" mode="widthFix"></image></view>
+                    <view class="images"><image src="{{item.url}}" mode="widthFix"></image></view>
                     <view class="info">
                         <view class="name">{{item.name}}</view>
                         <view class="size" bindtap="getIndex" data-index="{{index}}">
                             <view class="name">
-                                {{item.specifiation[item.specifiationIndex].name}}
+                                {{item.specification[item.specificationIndex].name}}
                             </view>
                             <image src="../../icons/shoppingCart/arrow.png" mode="widthFix"></image>
                         </view>
                         <view class="price">
-                            ¥{{item.specifiation[item.specifiationIndex].price}}
+                            ¥{{item.specification[item.specificationIndex].price}}
                         </view>
                     </view>
                 </view>
@@ -81,17 +81,17 @@
     </view>
 </view>
 <!-- 商品规格 -->
-<view class="specifiation" hidden="{{hideSpecifiation}}" catchtouchmove='prevent'>
+<view class="specification" hidden="{{hideSpecifiation}}" catchtouchmove='prevent'>
     <view class="shadow" bindtap="closeSpecifiation" animation="{{animationDataShadow}}"></view>
     <view class="content" animation="{{animationData}}">
         <view class="spTop">
             <view class="goods">
-                <image mode="widthFix" wx:if="{{currentIndex < cart.length}}" src="{{cart[currentIndex].src}}"></image>
+                <image mode="widthFix" wx:if="{{currentIndex < cart.length}}" src="{{cart[currentIndex].url}}"></image>
                 <view class="info">
                     <view class="name">{{cart[currentIndex].name}}</view>
-                    <text class="price">¥{{cart[currentIndex].specifiation[cart[currentIndex].tempIndex].price}}</text>
+                    <text class="price">¥{{cart[currentIndex].specification[cart[currentIndex].tempIndex].price}}</text>
                     <view class="stock">
-                        库存 {{cart[currentIndex].specifiation[cart[currentIndex].tempIndex].stock}}
+                        库存 {{cart[currentIndex].specification[cart[currentIndex].tempIndex].stock}}
                     </view>
                 </view>
             </view>
@@ -102,7 +102,7 @@
         <view class="divLine1"></view>
         <view class="mid">
             <text class="size">规格</text>
-            <view class="lableWrpa" wx:for="{{cart[currentIndex].specifiation}}" wx:item="{{item}}" wx:key="{{index}}">
+            <view class="lableWrpa" wx:for="{{cart[currentIndex].specification}}" wx:item="{{item}}" wx:key="index">
                 <view class="lable {{index==cart[currentIndex].tempIndex ? 'active' : '' }}" bindtap="labelTap" data-index="{{index}}">
                     {{item.name}}
                 </view>

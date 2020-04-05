@@ -5,36 +5,6 @@ import regeneratorRuntime from "../../lib/runtime/runtime"
 Page({
   data: {
     detail: {
-      goods: {
-        id: 1,
-        name: "商品名称",
-        src: "../../images/detail/3.jpg",
-        maxPrice: "200.00",
-        minPrice: "100.00",
-        maxFreight: "20.00",
-        minFreight: "10.00",
-        stock: 25,
-        specifiation: [{
-          name: "一斤",
-          price: "100.00",
-          stock: 8,
-          freight: "10.00"
-        }, {
-          name: "两斤",
-          price: "150.00",
-          stock: 5,
-          freight: "15.00"
-        }, {
-          name: "三斤",
-          price: "200.00",
-          stock: 12,
-          freight: "20.00"
-        }],
-        swiperUrl: ["../../images/detail/1.jpg", "../../images/detail/1.jpg", "../../images/detail/1.jpg"],
-        urls: ["../../images/detail/1.jpg", "../../images/detail/1.jpg", "../../images/detail/1.jpg"]
-      },
-      discount: ["部分地区满100包邮"],
-      delivery: ["快递", "送货上门 (仅限博贺镇内)"]
     },
     hideSpecifiation: 1,
     hideSelect: 1,
@@ -42,19 +12,51 @@ Page({
     discountCurrentIndex: 0,
     deliveryCurrentIndex: 0,
     buyNumber: 1,
-    buyMaxNumber: 25,
+    buyMaxNumber: 0,
     buyType: 0,
     selectType: 0,
     animationData: {}, //动画
     animationDataShadow: {} //背景阴影渐变动画
   },
   // 服务器获取数据
-  // async getGoodsDetail(id){
-  //   const detail = await request({url:"/goods/detail",data:{id}});
-  //   this.setData({
-  //     detail,
-  //   })
-  // },
+  getGoodsDetail(id){
+    let that = this
+    wx.request({url:"http://localhost:8888/wx/detail",data:{id}, method: 'GET', success(res) {
+      let goods = res.data.data
+      console.log(goods)
+      let maxPrice = goods.specification[0].price
+      let minPrice = goods.specification[0].price
+      let maxFreight = goods.specification[0].freight
+      let minFreight = goods.specification[0].freight
+      let stock = goods.specification[0].stock
+      for (let i = 1; i < goods.specification.length; i++) {
+        if(Number(maxPrice)<Number(goods.specification[i].price))
+          maxPrice=goods.specification[i].price
+        if(Number(minPrice)>Number(goods.specification[i].price))
+          minPrice=goods.specification[i].price
+        if(Number(maxFreight)<Number(goods.specification[i].freight))
+          maxFreight=goods.specification[i].freight
+        if(Number(minFreight)>Number(goods.specification[i].freight))
+          minFreight=goods.specification[i].freight
+          stock+=goods.specification[i].stock
+      }
+      goods.maxPrice=maxPrice
+      goods.minPrice=minPrice
+      goods.maxFreight=maxFreight
+      goods.minFreight=minFreight
+      goods.stock=stock
+      
+      let detail={
+        goods,
+        discount: ["部分地区满100包邮"],
+        delivery: ["快递", "送货上门 (仅限博贺镇内)"]
+      }
+      that.setData({
+        detail,
+        buyMaxNumber:stock
+      })
+    },fail() {}})
+  },
   //点击轮播图，放大预览图片
   handlePrevewImage(e) {
     const urls = this.data.detail.goods.swiperUrl;
@@ -217,7 +219,7 @@ Page({
       })
       return;
     } else {
-      buyMaxNumber = this.data.detail.goods.specifiation[index].stock;
+      buyMaxNumber = this.data.detail.goods.specification[index].stock;
       if (buyNumber > buyMaxNumber)
         buyNumber = buyMaxNumber;
       this.setData({
@@ -304,18 +306,18 @@ Page({
 
     let cart = wx.getStorageSync("cart") || [];
 
-    let index = cart.findIndex(v => v.id === this.data.detail.goods.id && v.specifiationIndex === lableCurrentIndex);
+    let index = cart.findIndex(v => v._id === this.data.detail.goods._id && v.specificationIndex === lableCurrentIndex);
 
     if (index === -1) {
       this.data.detail.goods.checked = 1;
       this.data.detail.goods.buyNumber = buyNumber;
-      this.data.detail.goods.specifiationIndex = lableCurrentIndex;
+      this.data.detail.goods.specificationIndex = lableCurrentIndex;
       this.data.detail.goods.buyMaxNumber = this.data.buyMaxNumber;
       cart.push(this.data.detail.goods);
     } else {
       cart[index].buyNumber += buyNumber;
-      if (cart[index].buyNumber > this.data.detail.goods.specifiation[lableCurrentIndex].stock) {
-        cart[index].buyNumber = this.data.detail.goods.specifiation[lableCurrentIndex].stock;
+      if (cart[index].buyNumber > this.data.detail.goods.specification[lableCurrentIndex].stock) {
+        cart[index].buyNumber = this.data.detail.goods.specification[lableCurrentIndex].stock;
         wx.setStorageSync("cart", cart);
         wx.showToast({
           title: '加入购物车数量已达最大值',
@@ -333,9 +335,8 @@ Page({
       mask: true,
     });
   },
-  onLoad: function (options) {
-    // const {id} = options;
-    // this.getGoodsDetail(id);
+  onLoad: function (_id) {
+    this.getGoodsDetail(_id);
   },
   onReady: function () {
     this.initialization()

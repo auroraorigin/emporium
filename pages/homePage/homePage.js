@@ -275,7 +275,7 @@ Page({
 
     let cart = wx.getStorageSync("cart") || [];
 
-    let index = cart.findIndex(v => v.id === this.data.floorList[index1].goods[index2].id && v.specificationIndex === lableCurrentIndex);
+    let index = cart.findIndex(v => v._id === this.data.floorList[index1].goods[index2]._id && v.specificationIndex === lableCurrentIndex);
 
     if (index === -1) {
       this.data.floorList[index1].goods[index2].specificationIndex = lableCurrentIndex;

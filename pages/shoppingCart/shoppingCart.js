@@ -25,7 +25,7 @@ Page({
 
     cart.forEach(v => {
       if (v.checked) {
-        sum += v.specifiation[v.specifiationIndex].price * v.buyNumber;
+        sum += v.specification[v.specificationIndex].price * v.buyNumber;
         select += v.buyNumber;
         count++;
       } else
@@ -179,7 +179,7 @@ Page({
   getIndex(e) {
     let currentIndex = e.currentTarget.dataset.index;
     let cart = this.data.cart;
-    cart[currentIndex].tempIndex = cart[currentIndex].specifiationIndex;
+    cart[currentIndex].tempIndex = cart[currentIndex].specificationIndex;
     this.setData({
       currentIndex,
       hideSpecifiation: 0
@@ -263,15 +263,15 @@ Page({
     this.closeSpecifiation();
     let cart = this.data.cart;
     const currentIndex = this.data.currentIndex;
-    if (cart[currentIndex].tempIndex != cart[currentIndex].specifiationIndex) {
-      cart[currentIndex].specifiationIndex = cart[currentIndex].tempIndex;
-      cart[currentIndex].buyMaxNumber = cart[currentIndex].specifiation[cart[currentIndex].specifiationIndex].stock;
+    if (cart[currentIndex].tempIndex != cart[currentIndex].specificationIndex) {
+      cart[currentIndex].specificationIndex = cart[currentIndex].tempIndex;
+      cart[currentIndex].buyMaxNumber = cart[currentIndex].specification[cart[currentIndex].specificationIndex].stock;
       //更新购买数量
       if (cart[currentIndex].buyNumber > cart[currentIndex].buyMaxNumber)
         cart[currentIndex].buyNumber = cart[currentIndex].buyMaxNumber
       //合并相同商品
       for (let i = 0; i < cart.length; i++) {
-        if (cart[i].id == cart[currentIndex].id && cart[i].specifiationIndex == cart[currentIndex].specifiationIndex && currentIndex != i) {
+        if (cart[i]._id == cart[currentIndex]._id && cart[i].specificationIndex == cart[currentIndex].specificationIndex && currentIndex != i) {
           //合并至最前面商品中
           let less = i > currentIndex ? currentIndex : i;
           let more = i > currentIndex ? i : currentIndex;

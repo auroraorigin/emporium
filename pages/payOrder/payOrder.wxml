@@ -1,83 +1,118 @@
-<view class="content"> 
-  <scroll-view scroll-y="true" class="SV">
+<view class="content">
+	<scroll-view scroll-y="true" class="SV">
 
-  <!-- 地址信息 -->
-    <view class="address_border1">
-      <view wx:if="{{addressList.consignee}}">
-        <view class="address_border2" bindtap="change_address">
-          <view class="left_side">
-            <image class="address_icon" src="/images/personal_center/location.png"></image>
-          </view>
-          <view class="center_side" wx:if="{{!select_address.consignee}}">
-            <view class="top">{{addressList.consignee}}, {{addressList.mobile}}</view>
-            <view class="center">{{addressList.region_name}}{{addressList.detail_address}}</view>
-          </view>
-          <view class="center_side" wx:else>
-            <view class="top">{{select_address.consignee}}, {{select_address.mobile}}</view>
-            <view class="center">{{select_address.region_name}}{{select_address.detail_address}}</view>
-          </view>
-          <view class="right_side">
-            <image class="right_arrow" src="/images/pay_order/right_arrow.png"></image>
-          </view>
-        </view>
-        <view class="bottom">请确认个人信息，如需修改，请点击个人信息进行修改</view>
-      </view>
-      <view wx:else class="buttontype">
-        <view class="button_content" bindtap="add_address">请前往添加地址信息</view>
-      </view>
-    </view>
+		<!-- 地址信息 -->
+		<view class="address_border1">
+			<view wx:if="{{addressList.consignee}}">
+				<view class="address_border2" bindtap="change_address">
+					<view class="left_side">
+						<image class="address_icon" src="/images/personal_center/location.png"></image>
+					</view>
+					<view class="center_side" wx:if="{{!select_address.consignee}}">
+						<view class="top">{{addressList.consignee}}, {{addressList.mobile}}</view>
+						<view class="center">{{addressList.region_name}}{{addressList.detail_address}}</view>
+					</view>
+					<view class="center_side" wx:else>
+						<view class="top">{{select_address.consignee}}, {{select_address.mobile}}</view>
+						<view class="center">{{select_address.region_name}}{{select_address.detail_address}}</view>
+					</view>
+					<view class="right_side">
+						<image class="right_arrow" src="/images/pay_order/right_arrow.png"></image>
+					</view>
+				</view>
+				<view class="bottom">请确认个人信息，如需修改，请点击个人信息进行修改</view>
+			</view>
+			<view wx:else class="buttontype">
+				<view class="button_content" bindtap="add_address">请前往添加地址信息</view>
+			</view>
+		</view>
 
-    <!-- 商品列表 -->
-    <view class="item" wx:for="{{all_Order}}" wx:key="index">
-      <view class="list_item">
-        <view class="product_top">
-          <text class="text1">海鲜商城</text>
-          <text class="text2">已选择</text>
-        </view>
-        <view class="product_bottom">
-          <image src="{{item.src}}" class="product_image"></image>
-          <view class="detail">
-            <view class="product_name">
-              <text>{{item.name}}</text>
-            </view>
-            <view class="standard">
-              <text>规格：{{item.specifiation}}</text>
-            </view>
-            <view class="money_Return">
-              <text>{{item.message}}</text>
-            </view>
-          </view>
-          <view class="product_price">
-            <view class="right">
-              <text class="price">¥ {{item.unitPrice}}</text>
-            </view>
-            <view class="right">
-              <text class="buyNumber">×{{item.buyNumber}}</text>
-            </view>
-          </view>
-        </view>
-      </view>
-      <view class="second_bottom">
-          <view class="total">
-            <text class="text_content">共{{item.buyNumber}}条  合计:¥ {{item.goodPrice}}</text>
-          </view>
-        </view>
-    </view>
-  </scroll-view>
-  
-  <!-- 总数量和价格 -->
-  <view class="bottom_border">
-    <view class="border_content">
-      <view class="border_left">
-        <text class="C">
-         <text class="L">共{{total_number}}件，</text>合计:<text class="R"> ¥{{total_money}}</text>
-        </text>
-      </view>
-      <view class="border_right">
-        <view class="outside" bindtap="submitOrder">
-          <text class="inside">提交订单</text> 
-        </view> 
-      </view>
-    </view>
-  </view>
+		<!-- 商品列表 -->
+		<view class="item" wx:for="{{all_Order}}" wx:key="index">
+			<view class="list_item">
+				<view class="product_top">
+					<text class="text1">海鲜商城</text>
+					<text class="text2">已选择</text>
+				</view>
+				<view class="product_bottom">
+					<image src="{{item.url}}" class="product_image"></image>
+					<view class="detail">
+						<view class="product_name">
+							<text>{{item.name}}</text>
+						</view>
+						<view class="standard">
+							<text>规格：{{item.specification}}</text>
+						</view>
+						<view class="money_Return">
+							<text>{{item.message}}</text>
+						</view>
+					</view>
+					<view class="product_price">
+						<view class="right">
+							<text class="price">¥ {{item.unitPrice}}</text>
+						</view>
+						<view class="right">
+							<text class="buyNumber">×{{item.buyNumber}}</text>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view class="second_bottom">
+				<view class="total">
+					<text class="text_content">共{{item.buyNumber}}条  合计:¥ {{item.goodPrice}}</text>
+				</view>
+			</view>
+		</view>
+		<!--优惠框-->
+		<navigator class="Border1">
+			<view class="borderLeft">优惠</view>
+			<view class="borderRight">
+				<view class="borderRightContent">暂无可用</view>
+				<image src="/images/pay_order/right_arrow.png" mode="widthFix"></image>
+			</view>
+		</navigator>
+		<!--配送方式框和留言框-->
+		<view class="Border2">
+			<view class="Border2_1">
+				<view class="borderLeft"> 配送方式</view>
+				<view class="borderRight">快递 ¥20.00</view>
+			</view>
+			<view class="Border2_2">
+				<view class="borderLeft">买家留言</view>
+				<input type="text" placeholder="留言建议提前协商(50字以内)" maxlength="50" bindinput="getUserWord"></input>
+			</view>
+		</view>
+		<!--商品金额和运费-->
+		<view class="Border3">
+			<view class="Border3_1">
+				<view class="borderLeft"> 商品金额</view>
+				<view class="borderRight">¥{{total_money}}</view>
+			</view>
+			<view class="Border3_2">
+				<view class="borderLeft"> 运费</view>
+				<view class="borderRight">+ ¥{{freight}}</view>
+			</view>
+			<view class="Border3_3">
+				<view class="borderRight">合计:<view class="rightContent">{{total_money+freight}}</view>
+				</view>
+			</view>
+		</view>
+    <view class="space"></view>
+	</scroll-view>
+
+	<!-- 总数量和价格 -->
+	<view class="bottom_border">
+		<view class="border_content">
+			<view class="border_left">
+				<text class="C">
+         <text class="L">共{{total_number}}件，</text>合计:<text class="R"> ¥{{total_money+freight}}</text>
+				</text>
+			</view>
+			<view class="border_right">
+				<view class="outside" bindtap="submitOrder">
+					<text class="inside">提交订单</text>
+				</view>
+			</view>
+		</view>
+	</view>
 </view>

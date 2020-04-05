@@ -372,7 +372,7 @@ image{
 }
 
 /* 选择规格 */
-.specifiation {
+.specification {
     position: fixed;
     top: 0;
     left: 0;
@@ -381,7 +381,7 @@ image{
     z-index: 2;
 }
 
-.specifiation .shadow {
+.specification .shadow {
     position: fixed;
     top: 0;
     left: 0;
@@ -391,7 +391,7 @@ image{
     z-index: 3;
 }
 
-.specifiation .content {
+.specification .content {
     position: fixed;
     padding: 16rpx 16rpx;
     border-top-right-radius: 16rpx;
@@ -403,7 +403,7 @@ image{
     z-index: 4;
 }
 
-.specifiation .content .spTop {
+.specification .content .spTop {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -411,7 +411,7 @@ image{
     margin-bottom: 20rpx;
 }
 
-.specifiation .content .goods {
+.specification .content .goods {
     flex: 3;
     display: flex;
     flex-direction: row;
@@ -419,13 +419,13 @@ image{
     align-items: center;
 }
 
-.specifiation .content .goods image {
+.specification .content .goods image {
     width: 30%;
     height: auto;
     border-radius: 6rpx;
 }
 
-.specifiation .content .goods .info {
+.specification .content .goods .info {
     height: 90%;
     flex: 6;
     display: flex;
@@ -435,7 +435,7 @@ image{
 
 }
 
-.specifiation .content .goods .info .name {
+.specification .content .goods .info .name {
     font-weight: bold;
     height: 100rpx;
     font-size: 28rpx;
@@ -446,7 +446,7 @@ image{
 }
 
 
-.specifiation .content .goods .info .price {
+.specification .content .goods .info .price {
     margin-top: 3rpx;
     margin-bottom: 3rpx;
     font-weight: bold;
@@ -455,44 +455,44 @@ image{
     color: #db7012;
 }
 
-.specifiation .content .goods .info .stock {
+.specification .content .goods .info .stock {
     font-weight: bold;
     font-size: 26rpx;
     color: #666;
 }
 
-.specifiation .content .close {
+.specification .content .close {
     height: 100%;
     flex: 0.2;
 }
 
-.specifiation .content .close image {
+.specification .content .close image {
     width: 100%;
     height: auto
 }
 
-.specifiation .content .mid {
+.specification .content .mid {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
 }
 
-.specifiation .content .mid .size {
+.specification .content .mid .size {
     width: 100%;
     font-size: 30rpx;
     margin-top: 20rpx;
     margin-bottom: 20rpx;
 }
 
-.specifiation .content .mid .lableWrpa {
+.specification .content .mid .lableWrpa {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     margin-right: 40rpx;
 }
 
-.specifiation .content .mid .lableWrpa .lable {
+.specification .content .mid .lableWrpa .lable {
     font-size: 28rpx;
     padding: 10rpx 20rpx;
     border-radius: 10rpx;
@@ -501,18 +501,18 @@ image{
     border: 1px solid #f8f8f8;
 }
 
-.specifiation .content .mid .lableWrpa .active {
+.specification .content .mid .lableWrpa .active {
     color: #db7012;
     border: 1px solid #db7012;
 }
 
-.specifiation .content .bot {
+.specification .content .bot {
     margin-top: 20rpx;
     width: 100%;
     display: flex;
 }
 
-.specifiation .content .bot .compelete {
+.specification .content .bot .compelete {
     width: 100%;
     height: 89rpx;
     text-align: center;

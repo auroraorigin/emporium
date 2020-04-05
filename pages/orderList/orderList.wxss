@@ -131,19 +131,29 @@ page {
 .product_price {
   width: 25%;
   margin-top: -30rpx;
-  position: absolute;
-  right: -45rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.right {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
 .price {
   font-size: 30rpx;
+  direction: rtl;
+  position: relative;
+  left: 130rpx;
 }
 
 .buyNumber {
   font-size: 20rpx;
   color: #ccc;
-  position: absolute;
-  right: 75rpx;
+  direction: rtl;
+  position: relative;
+  left: 130rpx;
 }
 
 .second_bottom {

@@ -12,7 +12,9 @@ Page({
     total_money: "", //总价格
     datetimeTo: "", //关闭时间
     waitPaidOrder: {}, //待支付订单
-    waitReceivedOrder:{}//待收货订单
+    waitReceivedOrder:{},//待收货订单
+    userWord:"",//用户留言
+    freight:0//运费
   },
 
   //修改支付的个人信息
@@ -153,6 +155,13 @@ Page({
     })
   },
 
+  //获取用户留言
+  getUserWord(e){
+    this.setData({
+      userWord:e.detail.value
+    })
+  },
+
   //获取默认地址
   getDefaultAddress() {
     var that = this;
@@ -189,29 +198,29 @@ Page({
     //提取缓存中的购物车信息
     var cart = wx.getStorageSync("cart");
     var total = 0;
-    var order = []
+    var order = [];
     //计算每个商品的价格和总商品的价格
     for (var i = 0; i < cart.length; i++) {
-      cart[i].all_money = cart[i].buyNumber * cart[i].specifiation[cart[i].specifiationIndex].price;
+      cart[i].all_money = cart[i].buyNumber * Number(cart[i].specification[cart[i].specificationIndex].price);
       total = total + cart[i].all_money;
       //将商品显示的数据存入order数组
       order[i] = {
         name: cart[i].name,
-        src: cart[i].src,
-        specifiation: cart[i].specifiation[cart[i].specifiationIndex].name,
+        url: cart[i].url,
+        specification: cart[i].specification[cart[i].specificationIndex].name,
         buyNumber: cart[i].buyNumber,
         message: '三天无理由退款',
-        unitPrice: cart[i].specifiation[cart[i].specifiationIndex].price,
+        unitPrice: cart[i].specification[cart[i].specificationIndex].price,
         goodPrice: JSON.stringify(cart[i].all_money)
       }
-    }
+    };
+    if(total>100)
+    this.setData({
+      freight:20
+    })
     this.setData({
       all_Order: order,
-    })
-    //计算总数量
-    var all_product = cart.length;
-    this.setData({
-      total_number: all_product,
+      total_number: cart.length,
       total_money: total
     })
   },

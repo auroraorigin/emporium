@@ -8,15 +8,12 @@
   <!-- 内容描述 -->
   <view class="info">
     <text class="name">{{detail.goods.name}}</text>
-    <text class="price" wx:if="{{detail.goods.specifiation.length === 1}}">
-      ¥{{detail.goods.maxPrice}}
-    </text>
+    <text class="desc">{{detail.goods.desc}}</text>
+    <text class="price" wx:if="{{detail.goods.specification.length === 1}}">¥{{detail.goods.maxPrice}}</text>
     <text class="price" wx:else>¥{{detail.goods.minPrice}} - {{detail.goods.maxPrice}}</text>
     <view class="divLine1"></view>
     <view class="freight">
-      <text wx:if="{{detail.goods.specifiation.length === 1}}">
-        运费 ¥{{detail.goods.maxFreight}}
-      </text>
+      <text wx:if="{{detail.goods.specification.length === 1}}">运费 ¥{{detail.goods.maxFreight}}</text>
       <text wx:else> 运费 ¥{{detail.goods.minFreight}} ~ {{detail.goods.maxFreight}}</text>
       <text>库存 {{detail.goods.stock}}</text>
     </view>
@@ -31,7 +28,7 @@
   <view class="divLine2"></view>
   <view class="selectSpecifiation" bindtap="selectSpecifiation">
     <text>规格 ：</text>
-    <text>{{detail.goods.specifiation[lableCurrentIndex].name}}</text>
+    <text>{{detail.goods.specification[lableCurrentIndex].name}}</text>
     <view class="arrow1"></view>
   </view>
   <view class="divLine1"></view>
@@ -47,7 +44,7 @@
     <text>商品详情</text>
     <view class="divLine"></view>
   </view>
-  <view class="images" wx:for="{{detail.goods.urls}}" wx:key="{{index}}">
+  <view class="images" wx:for="{{detail.goods.urls}}" wx:key="index">
     <image mode="widthFix" src="{{item}}"></image>
   </view>
 </scroll-view>
@@ -72,25 +69,19 @@
   <view bindtap="buy" class="buy">立即购买</view>
 </view>
 <!-- 商品规格 -->
-<view class="specifiation" hidden="{{hideSpecifiation}}" catchtouchmove='prevent'>
+<view class="specification" hidden="{{hideSpecifiation}}" catchtouchmove='prevent'>
   <view class="shadow" bindtap="closeSpecifiation" animation="{{animationDataShadow}}"></view>
   <view class="content" animation="{{animationData}}">
     <view class="top">
       <view class="goods">
-        <image mode="widthFix" src="../../images/detail/3.jpg"></image>
+        <image mode="widthFix" src="{{detail.goods.url}}"></image>
         <view class="info">
           <view class="name">{{detail.goods.name}}</view>
-          <text class="price" wx:if="{{detail.goods.specifiation.length === 1}}">
-            ¥{{detail.goods.maxPrice}}
-          </text>
+          <text class="price" wx:if="{{detail.goods.specification.length === 1}}">¥{{detail.goods.maxPrice}}</text>
           <text class="price" wx:elif="{{lableCurrentIndex===-1}}">¥{{detail.goods.minPrice}} - {{detail.goods.maxPrice}}</text>
-          <text class="price" wx:else>¥{{detail.goods.specifiation[lableCurrentIndex].price}}</text>
-          <view class="stock" wx:if="{{detail.goods.specifiation.length === 1 || lableCurrentIndex===-1}}">
-            库存 {{detail.goods.stock}}
-          </view>
-          <view class="stock" wx:else>
-            库存 {{detail.goods.specifiation[lableCurrentIndex].stock}}
-          </view>
+          <text class="price" wx:else>¥{{detail.goods.specification[lableCurrentIndex].price}}</text>
+          <view class="stock" wx:if="{{detail.goods.specification.length === 1 || lableCurrentIndex===-1}}">库存 {{detail.goods.stock}}</view>
+          <view class="stock" wx:else>库存 {{detail.goods.specification[lableCurrentIndex].stock}}</view>
         </view>
       </view>
       <view class="close" bindtap="closePopupTap">
@@ -100,7 +91,7 @@
     <view class="divLine1"></view>
     <view class="mid">
       <text class="size">规格</text>
-      <view class="lableWrpa" wx:for="{{detail.goods.specifiation}}" wx:item="{{item}}" wx:key="{{index}}">
+      <view class="lableWrpa" wx:for="{{detail.goods.specification}}" wx:item="{{item}}" wx:key="index">
         <view class="lable {{index===lableCurrentIndex ? 'active' : '' }}" bindtap="labelTap" data-index="{{index}}">
           {{item.name}}
         </view>
@@ -133,14 +124,14 @@
   <view class="shadow" bindtap="closeSelect" animation="{{animationDataShadow}}"></view>
   <view class="discount" wx-if="{{selectType==0}}" animation="{{animationData}}">
     <view class="name">促销活动</view>
-    <view class="which" wx:for="{{detail.discount}}" wx:key="{{index}}" wx:item="{{item}}" bindtap="discountTap" data-index="{{index}}">
+    <view class="which" wx:for="{{detail.discount}}" wx:key="index" wx:item="{{item}}" bindtap="discountTap" data-index="{{index}}">
       <view class="info">{{item}}</view>
     <view class="selectArrow"></view>
     </view>
   </view>
   <view class="delivery" wx-if="{{selectType==1}}" animation="{{animationData}}">
     <view class="name">配送方式</view>
-    <view class="which" wx:for="{{detail.delivery}}" wx:key="{{index}}" wx:item="{{item}}" bindtap="deliveryTap" data-index="{{index}}">
+    <view class="which" wx:for="{{detail.delivery}}" wx:key="index" wx:item="{{item}}" bindtap="deliveryTap" data-index="{{index}}">
       <view class="info">{{item}}</view>
     <view class="selectArrow"></view>
     </view>

@@ -35,13 +35,13 @@
           <text class="text2">已选择</text>
         </view>
         <view class="product_bottom">
-          <image src="{{item.src}}" class="product_image"></image>
+          <image src="{{item.url}}" class="product_image"></image>
           <view class="detail">
             <view class="product_name">
               <text>{{item.name}}</text>
             </view>
             <view class="standard">
-              <text>规格：{{item.specifiation}}</text>
+              <text>规格：{{item.specification}}</text>
             </view>
             <view class="money_Return">
               <text>{{item.message}}</text>

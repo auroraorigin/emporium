@@ -1,4 +1,4 @@
-<view class="allBoder">
+<view class="allBoder"> 
   <view class="Border1">
     <view class="list">
       <navigator class="list-item arrow">

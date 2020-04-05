@@ -7,26 +7,25 @@
     </view>
     <view class="cateContainer">
         <scroll-view scroll-y class="leftMenu">
-            <view class=" {{index===currentIndex?'active':'cateName'}}" wx:for="{{cateList}}" wx:key="{{index}}" bindtap="handleItemTap" data-index="{{index}}">
-                {{item.cateName}} 
+            <view class=" {{index===currentIndex?'active':'cateName'}}" wx:for="{{cateList}}" wx:key="index" bindtap="handleItemTap" data-index="{{index}}">
+                {{item.name}} 
             </view>
         </scroll-view>
         <scroll-view scroll-y class="rightContent" scroll-into-view="{{toView}}" bindscroll="scroll">
-            <view id="group{{index1}}" class="group" wx:for="{{cateList}}" wx:for-index="index1" wx:for-item="item1" wx:key="{{index1}}">
+            <view id="group{{index1}}" class="group" wx:for="{{cateList}}" wx:for-index="index1" wx:for-item="item1" wx:key="index1">
                 <view class=" {{index1===currentIndex?'topActive':'top'}}" id="index{{index1}}">
-                    <view class="cname">{{item1.cateName}}</view>
+                    <view class="cname">{{item1.name}}</view>
                 </view>
-                <navigator class="product" hover-class="none" wx:for="{{item1.productList}}" wx:for-index="index2" wx:for-item="item2" wx:key="{{index2}}" url="/pages/detail/detail?id={{item2.id}}"> 
+                <navigator class="product" hover-class="none" wx:for="{{item1.goods}}" wx:for-index="index2" wx:for-item="item2" wx:key="index2" url="/pages/detail/detail?_id={{item2._id}}"> 
                     <view>
-                        <image src="{{item2.src}}" mode="widthFix" class="productImage"></image>
+                        <image src="{{item2.url}}" mode="widthFix" class="productImage"></image>
                     </view>
                     <view class="info">
                         <text class="name">{{item2.name}}</text>
                         <view class="trade">
                             <view class="left">
-                                <text class="price" wx:if="{{item2.specifiation.length === 1}}">
-                                    ¥{{item2.maxPrice}}
-                                </text>
+                            <!-- this -->
+                                <text class="price" wx:if="{{item2.specification.length === 1}}">¥{{item2.maxPrice}}</text>
                                 <text class="price" wx:else>¥{{item2.minPrice}}-{{item2.maxPrice}}</text>
                             </view>
                             <view class="right" catchtap="cart" data-index2="{{index2}}" data-index1="{{index1}}">
@@ -42,25 +41,19 @@
 
 
 <!-- 商品规格 -->
-<view class="specifiation" hidden="{{hideSpecifiation}}" catchtouchmove='prevent'>
+<view class="specification" hidden="{{hideSpecifiation}}" catchtouchmove='prevent'>
   <view class="shadow" bindtap="closeSpecifiation" animation="{{animationDataShadow}}"></view>
   <view class="content" animation="{{animationData}}">
     <view class="top">
       <view class="goods"> 
-        <image mode="widthFix" src="../../images/detail/3.jpg" class="goodImage"></image>
+        <image mode="widthFix" src="{{cateList[index1].goods[index2].url}}" class="goodImage"></image>
         <view class="info">
-          <view class="name">{{cateList[index1].productList[index2].name}}</view>
-          <text class="price" wx:if="{{cateList[index1].productList[index2].specifiation.length === 1}}">
-            ¥{{detail.goods.maxPrice}}
-          </text>
-          <text class="price" wx:elif="{{cateList[index1].productList[index2].lableCurrentIndex===-1}}">¥{{cateList[index1].productList[index2].minPrice}} - {{cateList[index1].productList[index2].maxPrice}}</text>
-          <text class="price" wx:else>¥{{cateList[index1].productList[index2].specifiation[cateList[index1].productList[index2].lableCurrentIndex].price}}</text>
-          <view class="stock" wx:if="{{cateList[index1].productList[index2].specifiation.length === 1 || cateList[index1].productList[index2].lableCurrentIndex===-1}}">
-            库存 {{cateList[index1].productList[index2].stock}}
-          </view>
-          <view class="stock" wx:else>
-            库存 {{cateList[index1].productList[index2].specifiation[cateList[index1].productList[index2].lableCurrentIndex].stock}}
-          </view>
+          <view class="name">{{cateList[index1].goods[index2].name}}</view>
+          <text class="price" wx:if="{{cateList[index1].goods[index2].specification.length === 1}}">¥{{cateList[index1].goods[index2].maxPrice}}</text>
+          <text class="price" wx:elif="{{cateList[index1].goods[index2].lableCurrentIndex===-1}}">¥{{cateList[index1].goods[index2].minPrice}} - {{cateList[index1].goods[index2].maxPrice}}</text>
+          <text class="price" wx:else>¥{{cateList[index1].goods[index2].specification[cateList[index1].goods[index2].lableCurrentIndex].price}}</text>
+          <view class="stock" wx:if="{{cateList[index1].goods[index2].specification.length === 1 || cateList[index1].goods[index2].lableCurrentIndex===-1}}">库存 {{cateList[index1].goods[index2].stock}}</view>
+          <view class="stock" wx:else>库存 {{cateList[index1].goods[index2].specification[cateList[index1].goods[index2].lableCurrentIndex].stock}}</view>
         </view>
       </view>
       <view class="close" bindtap="closePopupTap">
@@ -70,8 +63,8 @@
     <view class="divLine1"></view>
     <view class="mid">
       <text class="size">规格</text> 
-      <view class="lableWrpa" wx:for="{{cateList[index1].productList[index2].specifiation}}" wx:item="{{item}}" wx:key="{{index}}">
-        <view class="lable {{index===cateList[index1].productList[index2].lableCurrentIndex ? 'active' : '' }}" bindtap="labelTap" data-index="{{index}}">
+      <view class="lableWrpa" wx:for="{{cateList[index1].goods[index2].specification}}" wx:item="{{item}}" wx:key="index">
+        <view class="lable {{index===cateList[index1].goods[index2].lableCurrentIndex ? 'active' : '' }}" bindtap="labelTap" data-index="{{index}}">
           {{item.name}}
         </view>
       </view>
@@ -80,13 +73,13 @@
     <view class="under">
       <view class="left">购买数量</view>
       <view class="right">
-        <view class="reduceNumber {{cateList[index1].productList[index2].buyNumber <= 1 ? 'gray': ''}}" bindtap="reduceNumber">
+        <view class="reduceNumber {{cateList[index1].goods[index2].buyNumber <= 1 ? 'gray': ''}}" bindtap="reduceNumber">
           -
         </view>
         <view class="input">
-          <input type="number" value="{{cateList[index1].productList[index2].buyNumber}}" disabled="{{ture}}" bindinput="inputNumber" bindblur="inputNumberOut" />
+          <input type="number" value="{{cateList[index1].goods[index2].buyNumber}}" disabled="{{ture}}" bindinput="inputNumber" bindblur="inputNumberOut" />
         </view>
-        <view class="addNumber {{cateList[index1].productList[index2].buyNumber === cateList[index1].productList[index2].buyMaxNumber ? 'gray': ''}}" bindtap="addNumber">
+        <view class="addNumber {{cateList[index1].goods[index2].buyNumber === cateList[index1].goods[index2].buyMaxNumber ? 'gray': ''}}" bindtap="addNumber">
           +
         </view>
       </view>
