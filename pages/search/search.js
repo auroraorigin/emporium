@@ -1,5 +1,5 @@
 import {
-  request
+  request 
 } from "../../request/request.js";
 import regeneratorRuntime from "../../lib/runtime/runtime"
 //Page Object
@@ -13,7 +13,23 @@ Page({
     animationDataShadow: {},
     animationData: {},
     index: 0,
-    first:1
+    first:1,
+    isSearch:0,
+    searchWord:[],
+    searchKey:[]
+  },
+  getSearchKey(){
+    var that = this;
+    wx.request({
+      url: 'http://localhost:8888/wx/searchKey',
+      method: 'GET',
+      success(res) {
+        that.setData({
+          searchKey:res.data.data
+        })
+      },
+      fail() {}
+    })
   },
   //options(Object)
   inputValue(e) {
@@ -22,18 +38,62 @@ Page({
       value
     })
   },
+  searchKey(e)
+  {
+    let value = e.currentTarget.dataset.name
+    this.search(value)
+    this.setData({
+      isSearch:1,
+      value
+    })
+
+    let searchWord = this.data.searchWord || []
+
+    if(!searchWord.includes(value))
+    {
+      searchWord.push(value)
+     this.setData({
+       searchWord
+      })
+     wx.setStorageSync('searchWord', searchWord)
+    }
+  },
   //重置输入框内容
   clear() {
     this.setData({
-      value: ''
+      value: '',
+      isSearch:0
     })
+  },
+  //点击垃圾桶
+  trash()
+  {
+    this.setData({
+      searchWord:[]
+    })
+    wx.setStorageSync('searchWord', [])
   },
   //点击输入法搜索
   complete(e) {
-    const value = e.detail.value;
-    if (!value.trim())
+    const value = e.detail.value.trim();
+    if (!value)
       return;
     this.search(value);
+    this.setData({
+      isSearch:1
+    })
+
+    
+    let searchWord = this.data.searchWord || []
+
+    if(!searchWord.includes(value))
+    {
+      searchWord.push(value)
+     this.setData({
+       searchWord
+      })
+     wx.setStorageSync('searchWord', searchWord)
+    }
   },
   //将搜索框数据发送至服务器并接受服务器返回数据
   search(query) {
@@ -226,6 +286,9 @@ Page({
     let stock = this.data.searchList[index].stock;
     let labIndex = e.currentTarget.dataset.index1;
 
+    if(this.data.searchList[index].specification[labIndex].stock===0)
+        return
+      
     if (lableCurrentIndex == labIndex) {
       buyMaxNumber = stock;
       this.setData({
@@ -352,14 +415,40 @@ Page({
       mask: true,
     });
   },
-  onLoad: function (options) {
+  pay_goods(){
+    let index = this.data.index;
+    let lableCurrentIndex = this.data.searchList[index].lableCurrentIndex;
 
+    if (lableCurrentIndex === -1) {
+      wx.showToast({
+        title: '请先选择商品规格',
+        icon: 'none',
+        mask: true,
+      });
+      return;
+    }
+
+    let cart = []
+    cart.push(this.data.searchList[index])
+    cart[0].specificationIndex=lableCurrentIndex
+    let data = {cart:cart,isCart:false}
+  
+    wx.navigateTo({
+      url: `/pages/payOrder/payOrder?cart=${data}`,
+    })
+  },
+  onLoad: function (options) {
+    
   },
   onReady: function () {
 
   },
   onShow: function () {
-
+    let searchWord = wx.getStorageSync('searchWord')
+    this.setData({
+      searchWord
+    })
+    this.getSearchKey()
   },
   onHide: function () {
 

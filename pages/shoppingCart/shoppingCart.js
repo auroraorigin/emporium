@@ -13,8 +13,29 @@ Page({
   },
   //获取缓存中的购物车信息
   getProduct() {
+    let that = this
     const cart = wx.getStorageSync("cart") || [];
-    this.setCart(cart);
+    wx.request({
+      url: 'http://localhost:8888/wx/cart',
+      method: 'GET',
+      data:{cart},
+      success(res) {
+        that.setData({
+          cart:res.data.data
+        })
+        wx.setStorageSync('cart', res.data.data)
+      },
+      fail() {}
+    })
+    // this.setCart(cart);
+  },
+  toDecimal(x) {   
+    var f = parseFloat(x);   
+    if (isNaN(f)) {   
+      return;   
+    }   
+    f = Math.round(x*100)/100;   
+  return f;   
   },
   //更新购物车信息
   setCart(cart) {
@@ -33,11 +54,11 @@ Page({
     })
 
     isAll = cart.length ? isAll : false;
-
+    
     this.setData({
       cart,
       isAll,
-      sum,
+      sum:this.toDecimal(sum),
       select,
       count
     })
@@ -253,6 +274,9 @@ Page({
     let cart = this.data.cart;
     let index = e.currentTarget.dataset.index;
 
+    if(cart[currentIndex].specification[index].stock===0)
+        return
+    
     if (cart[currentIndex].tempIndex != index) {
       cart[currentIndex].tempIndex = index;
       this.setCart(cart)
@@ -286,8 +310,11 @@ Page({
     }
   },
   pay_shoppingCart(){
+    let cart = wx.getStorageSync("cart") || [];
+    let data = {cart:cart,isCart:true}
+    
     wx.navigateTo({
-      url: '/pages/payOrder/payOrder',
+      url: `/pages/payOrder/payOrder?cart=${data}`,
     })
   },
   onLoad: function (options) {

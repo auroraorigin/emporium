@@ -1,4 +1,4 @@
-//Page Object
+//Page Object 
 import {request} from "../../request/request.js";
 
 Page({
@@ -10,16 +10,20 @@ Page({
     distance: [],
     //判断是否为点击左侧菜单分类
     isLeft: 0,
-    isFirst:1,
     index1: 0,
     index2: 0,
     top:0,
     hideSpecifiation: 1,
     animationDataShadow: {},
     animationData: {},
+    animationFloatData:{},
+    lastY: 0,
+    direction:1
   },
   getCates() {
     let that = this
+    that.data.distance=[]
+    that.distance=[]
       wx.request({
         url: 'http://localhost:8888/wx/categories',
         method: 'GET',
@@ -63,15 +67,12 @@ Page({
             cateList:temp,
             top:res.data.length
           },function(){
-            setTimeout(() => {
-              this.getHeight();
+            setTimeout(() => {    
+              that.getHeight();
             }, 250);
             setTimeout(() => {
-              this.calc()
-              this.isHomepage();
-              this.setData({
-                isFirst:0
-              })
+              that.calc()
+              that.isHomepage();
             }, 500);
           })
         },fail() {}
@@ -118,13 +119,15 @@ Page({
     for (let i = 0; i < length - 1; i++) {
       groupId = "#group" + i;
       let query = wx.createSelectorQuery();
-      query.select(groupId).boundingClientRect((rect) => {
-        distance.push(rect.height);
-      }).exec(
-        this.setData({
-          distance
-        })
-      );
+        query.select(groupId).boundingClientRect((rect) => {
+          if(!rect)
+            return
+          distance.push(rect.height);
+        }).exec(
+          this.setData({
+            distance
+          })
+        );
     }
   },
   // 计算判断高度
@@ -141,7 +144,6 @@ Page({
   },
   //判断是否为主页导航跳转
   isHomepage() {
-    
     let categoriesIndex = wx.getStorageSync("categoriesIndex")
     if (categoriesIndex || categoriesIndex === 0) {
       if (categoriesIndex === -1)
@@ -237,6 +239,9 @@ Page({
     let buyMaxNumber = this.data.cateList[index1].goods[index2].buyMaxNumber;
     let stock = this.data.cateList[index1].goods[index2].stock;
     let index = e.currentTarget.dataset.index;
+
+    if(this.data.cateList[index1].goods[index2].specification[index].stock===0)
+      return
 
     if (lableCurrentIndex == index) {
       buyMaxNumber = stock;
@@ -369,8 +374,80 @@ Page({
       mask: true,
     });
   },
+  // 隐藏浮动图标
+  hideFloat(){
+    let that = this;
+    //规格窗口弹出
+    let animal = wx.createAnimation({
+      timingFunction: 'linear'
+    }).translate(150, 0).step({
+      duration: 300
+    });
+    that.setData({
+      animationFloatData: animal.export()
+    })
+  },
+  showFloat(){
+    let that = this;
+    //规格窗口弹出
+    let animal = wx.createAnimation({
+      timingFunction: 'linear'
+    }).translate(0, 0).step({
+      duration: 300
+    });
+    that.setData({
+      animationFloatData: animal.export()
+    })
+  },
+  handletouchstart: function (event) {
+    this.data.lastY = event.touches[0].pageY
+  },
+  handletouchend: function (event) {
+    const ty = this.data.lastY - event.changedTouches[0].pageY
+    const direction = this.data.direction
+    //向上滑 方向向上
+    if(ty<0 && direction)
+      return
+    //向下滑 方向向下
+    else if(ty>0 && !direction)
+      return
+    //向上滑 方向向下
+    else if(ty<0 && !direction)
+    {
+      this.data.direction = !direction
+      this.showFloat()
+    }
+    else if(ty>0 && direction)
+    {
+      this.data.direction = !direction
+      this.hideFloat()
+    }
+  },
+  pay_goods(){
+    let index1 = this.data.index1;
+    let index2 = this.data.index2;
+    let lableCurrentIndex = this.data.cateList[index1].goods[index2].lableCurrentIndex;
+
+    if (lableCurrentIndex === -1) {
+      wx.showToast({
+        title: '请先选择商品规格',
+        icon: 'none',
+        mask: true,
+      });
+      return;
+    }
+
+    let cart = []
+    cart.push(this.data.cateList[index1].goods[index2])
+    cart[0].specificationIndex=lableCurrentIndex
+    let data = {cart:cart,isCart:false}
+    
+    wx.navigateTo({
+      url: `/pages/payOrder/payOrder?cart=${data}`,
+    })
+  },
   onLoad: function (options) {
-    this.getCates()
+    
     //本地缓存
     // const cate = wx.getStorageSync("cateList");
     // if (!cate) {
@@ -388,9 +465,7 @@ Page({
   onReady: function () {
   },
   onShow: function () {
-    let isFirst=this.data.isFirst
-    if(!isFirst)
-      this.isHomepage();
+    this.getCates()
   },
   onHide: function () {
     let hideSpecifiation = this.data.hideSpecifiation;

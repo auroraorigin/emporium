@@ -1,6 +1,6 @@
 <!-- 搜索框 -->
 <searchInput></searchInput> 
-<view class="container">
+<view class="container" bindtouchend="handletouchend" bindtouchstart="handletouchstart">
   <!-- 轮播图 -->
   <swiper class="homePageSwiper" indicator-dots autoplay circular indicator-color="#eaf1f7" indicator-active-color="#2b4c7f">
     <swiper-item wx:for="{{swiperList}}" wx:key="index">
@@ -49,7 +49,18 @@
         </navigator>
       </view>
     </view>
-  </view>
+    </view>
+      <view class="float" animation="{{animationFloatData}}">
+        <button class='floatBtn1' open-type='share'>
+        <image class='floatBtnImg' src='../../icons/homePage/share.png' ></image>
+        <view>分享</view>
+        </button>
+
+        <button class='floatBtn2' open-type='contact'>
+        <image class='floatBtnImg' src='../../icons/homePage/service.png' ></image>
+        <view>客服</view>
+        </button>
+      </view>
 </view>
 
 
@@ -81,7 +92,7 @@
     <view class="mid">
       <text class="size">规格</text>
       <view class="lableWrpa" wx:for="{{floorList[index1].goods[index2].specification}}" wx:item="{{item}}" wx:key="index">
-        <view class="lable {{index===floorList[index1].goods[index2].lableCurrentIndex ? 'active' : '' }}" bindtap="labelTap" data-index="{{index}}">
+        <view class="lable {{index===floorList[index1].goods[index2].lableCurrentIndex ? 'active' : '' }} {{item.stock===0 ? 'noStock' : '' }}" bindtap="labelTap" data-index="{{index}}">
           {{item.name}}
         </view>
       </view>
@@ -104,7 +115,7 @@
     <view class="divLine1"></view>
     <view class="bot">
       <view class="selectAddCart" bindtap="addCart">加入购物车</view>
-      <view class="selectBuy">立即购买</view>
+      <view class="selectBuy" bindtap="pay_goods">立即购买</view>
     </view>
   </view>
 </view>

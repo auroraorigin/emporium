@@ -103,7 +103,7 @@
         <view class="mid">
             <text class="size">规格</text>
             <view class="lableWrpa" wx:for="{{cart[currentIndex].specification}}" wx:item="{{item}}" wx:key="index">
-                <view class="lable {{index==cart[currentIndex].tempIndex ? 'active' : '' }}" bindtap="labelTap" data-index="{{index}}">
+                <view class="lable {{index==cart[currentIndex].tempIndex ? 'active' : '' }} {{item.stock===0 ? 'noStock' : '' }}" bindtap="labelTap" data-index="{{index}}">
                     {{item.name}}
                 </view>
             </view>

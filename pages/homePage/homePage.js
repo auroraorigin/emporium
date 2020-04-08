@@ -1,7 +1,7 @@
 //Page Object
 import {
   request
-} from "../../request/request.js";
+} from "../../request/request.js"; 
 
 Page({
   data: {
@@ -18,10 +18,13 @@ Page({
     hideSpecification:1,
     animationDataShadow:{},
     animationData:{},
+    animationFloatData:{},
+    lastY: 0,
+    direction:1
   },
   //options(Object)
   onLoad: function (options) {
-    this.getHomePage();
+    
   },
 
   //获取首页数据
@@ -168,7 +171,8 @@ Page({
     let stock = this.data.floorList[index1].goods[index2].stock; 
     let index = e.currentTarget.dataset.index;
     
-    
+    if(this.data.floorList[index1].goods[index2].specification[index].stock===0)
+        return
 
     if (lableCurrentIndex == index) {
       buyMaxNumber = stock;
@@ -301,11 +305,92 @@ Page({
       mask: true,
     });
   },
+  // 分享商城
+  onShareAppMessage: function () {
+    let goods = this.detail
+    return {
+      title: goods.name,
+      desc: goods.desc,
+      path: `/page/homePage` // 路径，传递参数到指定页面。
+    }
+   },
+  // 隐藏浮动图标
+  hideFloat(){
+    let that = this;
+    //规格窗口弹出
+    let animal = wx.createAnimation({
+      timingFunction: 'linear'
+    }).translate(150, 0).step({
+      duration: 300
+    });
+    that.setData({
+      animationFloatData: animal.export()
+    })
+  },
+  showFloat(){
+    let that = this;
+    //规格窗口弹出
+    let animal = wx.createAnimation({
+      timingFunction: 'linear'
+    }).translate(0, 0).step({
+      duration: 300
+    });
+    that.setData({
+      animationFloatData: animal.export()
+    })
+  },
+  handletouchstart: function (event) {
+    this.data.lastY = event.touches[0].pageY
+  },
+  handletouchend: function (event) {
+    const ty = this.data.lastY - event.changedTouches[0].pageY
+    const direction = this.data.direction
+    //向上滑 方向向上
+    if(ty<0 && direction)
+      return
+    //向下滑 方向向下
+    else if(ty>0 && !direction)
+      return
+    //向上滑 方向向下
+    else if(ty<0 && !direction)
+    {
+      this.data.direction = !direction
+      this.showFloat()
+    }
+    else if(ty>0 && direction)
+    {
+      this.data.direction = !direction
+      this.hideFloat()
+    }
+  },
+  pay_goods(){
+    let index1=this.data.index1;
+    let index2=this.data.index2;
+    let lableCurrentIndex = this.data.floorList[index1].goods[index2].lableCurrentIndex;
+
+    if (lableCurrentIndex === -1) {
+      wx.showToast({
+        title: '请先选择商品规格',
+        icon: 'none',
+        mask: true,
+      });
+      return;
+    }
+
+    let cart = []
+    cart.push(this.data.floorList[index1].goods[index2])
+    cart[0].specificationIndex=lableCurrentIndex
+    let data = {cart:cart,isCart:false}
+    
+    wx.navigateTo({
+      url: `/pages/payOrder/payOrder?cart=${data}`,
+    })
+  },
   onReady: function () {
     this.initialization()
   },
   onShow: function () {
-
+    this.getHomePage();
   },
   onHide: function () {
     let hideSpecification = this.data.hideSpecification;

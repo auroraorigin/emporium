@@ -164,7 +164,7 @@ page {
 }
 
 .product_name {
-  width: 35%;
+  width: 50%;
   line-height: 38rpx;
   font-size: 30rpx;
   text-overflow: -o-ellipsis-lastline;
@@ -178,7 +178,7 @@ page {
 }
 
 .standard {
-  width: 35%;
+  width: 50%;
   font-size: 20rpx;
   color: #ccc;
   text-overflow: -o-ellipsis-lastline;
@@ -193,7 +193,7 @@ page {
 }
 
 .money_Return {
-  width: 35%;
+  width: 50%;
   color: red;
   font-size: 20rpx;
   text-overflow: -o-ellipsis-lastline;
@@ -207,31 +207,26 @@ page {
 }
 
 .product_price {
-  width: 25%;
-  margin-top: -30rpx;
+  width: 20%;
   display: flex;
-  flex-direction: column;
-}
-
-.right {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+  flex-direction: column; 
+  position: absolute;
+  left: 580rpx;
 }
 
 .price {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
   font-size: 30rpx;
-  direction: rtl;
-  position: relative;
-  left: 130rpx;
 }
 
 .buyNumber {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
   font-size: 20rpx;
   color: #ccc;
-  direction: rtl;
-  position: relative;
-  left: 130rpx;
 }
 
 .second_bottom {

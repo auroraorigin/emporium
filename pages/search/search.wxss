@@ -354,6 +354,9 @@ image{
     border: 1px solid #db7012;
   }
   
+  .content .mid .lableWrpa .noStock {
+    color: #a1a1a1;
+  }
   
   .content .under {
     display: flex;
@@ -489,4 +492,34 @@ image{
 
   .noSearch view{
     color: #666;
+  }
+
+  .word{
+    padding: 40rpx 20rpx;
+  }
+
+  .Wtop{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20rpx;
+  }
+  .WtopWord{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .WtopKeyWord{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  .searchWord{
+    display: flex;
+    font-size: 28rpx;
+    padding: 10rpx 20rpx;
+    border-radius: 10rpx;
+    margin: 0 20rpx 20rpx 0;
+    background-color: #f8f8f8;
+    border: 1px solid #f8f8f8;
   }

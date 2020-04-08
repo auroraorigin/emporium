@@ -41,19 +41,15 @@
 							<text>{{item.name}}</text>
 						</view>
 						<view class="standard">
-							<text>规格：{{item.specification}}</text>
+							<text>规格：{{item.specification}}</text> 
 						</view>
 						<view class="money_Return">
 							<text>{{item.message}}</text>
 						</view>
 					</view>
 					<view class="product_price">
-						<view class="right">
-							<text class="price">¥ {{item.unitPrice}}</text>
-						</view>
-						<view class="right">
-							<text class="buyNumber">×{{item.buyNumber}}</text>
-						</view>
+						<text class="price">¥ {{item.unitPrice}}</text> 
+						<text class="buyNumber">×{{item.buyNumber}}</text>
 					</view>
 				</view>
 			</view>
@@ -93,7 +89,7 @@
 				<view class="borderRight">+ ¥{{freight}}</view>
 			</view>
 			<view class="Border3_3">
-				<view class="borderRight">合计:<view class="rightContent">{{total_money+freight}}</view>
+				<view class="borderRight">合计：<view class="rightContent">{{total_money+freight}}</view>
 				</view>
 			</view>
 		</view>

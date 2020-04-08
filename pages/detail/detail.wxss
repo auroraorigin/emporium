@@ -39,21 +39,21 @@ swiper image {
 
 .info .name {
   font-weight: bold;
-  height: 85rpx;
+  height: 42.5rpx;
   font-size: 32rpx;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   overflow: hidden;
   margin-bottom: 16rpx;
 }
 .info .desc {
   font-weight: bold;
-  height: 85rpx;
+  height: 35rpx;
   font-size: 26rpx;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   overflow: hidden;
   margin-bottom: 16rpx;
 }
@@ -400,6 +400,10 @@ swiper image {
   border: 1px solid #db7012;
 }
 
+.content .mid .lableWrpa .noStock {
+  color: #a1a1a1;
+}
+
 
 .content .under {
   display: flex;
@@ -614,4 +618,40 @@ swiper image {
 
 .select .discount .which .info{
   font-size: 30rpx;
+}
+
+
+.floatBtnImg {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+ .floatBtn2 {
+  width: 110rpx;
+  height: 110rpx;
+  color: #999999;
+  border-radius:100rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 28rpx;
+  font-size: 18rpx;
+  background-color: #eaf1f7;
+  border: 1px solid #f8f8f8;
+ }
+
+ .floatBtn2::after {
+  border: 0; 
+}
+
+.float
+{
+  display: flex;
+  flex-direction: column;
+  height: 200rpx;
+  width: 70rpx;
+  position: fixed;
+  bottom: 100rpx;
+  right: 50rpx;
 }

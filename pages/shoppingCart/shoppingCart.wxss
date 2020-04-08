@@ -506,6 +506,11 @@ image{
     border: 1px solid #db7012;
 }
 
+.specification .content .mid .lableWrpa .noStock {
+    color: #a1a1a1;
+}
+
+
 .specification .content .bot {
     margin-top: 20rpx;
     width: 100%;

@@ -84,25 +84,50 @@
        },
        success(res) {
          if (that.data.presentType == 1) {
+           let all_Order=res.data.goods;
+           for(var i=0;i<all_Order.length;i++){
+             all_Order[i].totalPrice=Number(all_Order[i].totalPrice);
+             all_Order[i].freight=Number(all_Order[i].freight);
+           };
            that.setData({
-             all_Order: res.data.goods
+             all_Order:all_Order
            })
          } else if (that.data.presentType == 2) {
-           that.setData({
-             wait_Paid: res.data.goods
-           })
+          let wait_Paid=res.data.goods;
+          for(var i=0;i<wait_Paid.length;i++){
+            wait_Paid[i].totalPrice=Number(wait_Paid[i].totalPrice);
+            wait_Paid[i].freight=Number(wait_Paid[i].freight);
+          };
+          that.setData({
+            wait_Paid:wait_Paid
+          })
          } else if (that.data.presentType == 3) {
-           that.setData({
-             wait_Sent: res.data.goods
-           })
+          let wait_Sent=res.data.goods;
+          for(var i=0;i<wait_Sent.length;i++){
+            wait_Sent[i].totalPrice=Number(wait_Sent[i].totalPrice);
+            wait_Sent[i].freight=Number(wait_Sent[i].freight);
+          };
+          that.setData({
+            waitSent:waitSent
+          })
          } else if (that.data.presentType == 4) {
-           that.setData({
-             wait_Received: res.data.goods
-           })
+          let wait_Received=res.data.goods;
+          for(var i=0;i<wait_Received.length;i++){
+            wait_Received[i].totalPrice=Number(wait_Received[i].totalPrice);
+            wait_Received[i].freight=Number(wait_Received[i].freight);
+          };
+          that.setData({
+            wait_Received:wait_Received
+          })
          } else if (that.data.presentType == 5) {
-           that.setData({
-             haved_Return: res.data.goods
-           })
+          let haved_Return=res.data.goods;
+          for(var i=0;i<haved_Return.length;i++){
+            haved_Return[i].totalPrice=Number(haved_Return[i].totalPrice);
+            haved_Return[i].freight=Number(haved_Return[i].freight);
+          };
+          that.setData({
+            haved_Return:haved_Return
+          })
          }
        },
        fail() {}

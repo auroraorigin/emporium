@@ -10,6 +10,8 @@
       </view>
     </view>
   </view>
+
+  <view wx:if="{{isSearch}}">
   <view class="sort">
     <view class="left {{type==1 ? 'leftActive' : 'left'}}" bindtap="left">综合</view>
     <view class="right" bindtap="right">
@@ -44,6 +46,22 @@
     <view class="info">没有找到您想要的商品</view>
     <view class="info">换个搜索词试试</view>
   </view>
+  </view>
+  <view wx:else class="word">
+    <view class="Wtop">
+      <view style="color: #9e9e9e;">最近搜索</view>
+      <image bindtap="trash" src="../../icons/search/trash.png" mode="widthFix" style="width:50rpx"></image>
+   </view>
+   <view wx:if="{{searchWord.length!=0}}" class="WtopWord">
+     <view bindtap="searchKey" data-name="{{item}}" class="searchWord" wx:for="{{searchWord}}" wx:for-item="item" wx:for-index="index" wx:key="index">{{item}}</view>
+   </view>
+   <view wx:else>暂无搜索记录</view>
+   <view style="color: #9e9e9e;margin-top: 20rpx;margin-bottom:20rpx;">搜索发现</view>
+   <view wx:if="{{searchKey.length!=0}}" class="WtopKeyWord">
+    <view bindtap="searchKey" class="searchWord" wx:for="{{searchKey}}" data-name="{{item}}" wx:for-item="item" wx:for-index="index" wx:key="index">{{item}}</view>
+   </view>
+   <view wx:else>暂无搜索发现</view>
+  </view>
 </view>
 <!-- 商品规格 -->
 <view class="specification" hidden="{{hideSpecifiation}}" catchtouchmove='prevent'>
@@ -51,7 +69,7 @@
   <view class="content" animation="{{animationData}}">
     <view class="top">
       <view class="goods">
-        <image mode="widthFix" src="{{searchList[index].url}}"></image>
+        <image wx:if="{{searchList[index].url}}" mode="widthFix" src="{{searchList[index].url}}"></image>
         <view class="info">
           <view class="name">{{searchList[index].name}}</view>
           <text class="price" wx:if="{{searchList[index].specification.length === 1}}">¥{{searchList[index].maxPrice}}</text>
@@ -69,7 +87,7 @@
     <view class="mid">
       <text class="size">规格</text>
       <view class="lableWrpa" wx:for="{{searchList[index].specification}}" wx:for-item="item1" wx:for-index="index1" wx:key="index1">
-        <view class="lable {{index1==searchList[index].lableCurrentIndex ? 'active' : '' }}" bindtap="labelTap" data-index1="{{index1}}">
+        <view class="lable {{index1==searchList[index].lableCurrentIndex ? 'active' : '' }} {{item1.stock===0 ? 'noStock' : '' }}" bindtap="labelTap" data-index1="{{index1}}">
           {{item1.name}}
         </view>
       </view>
@@ -92,7 +110,7 @@
     <view class="divLine1"></view>
     <view class="bot">
       <view class="selectAddCart" bindtap="addCart">加入购物车</view>
-      <view class="selectBuy">立即购买</view>
+      <view class="selectBuy" bindtap="pay_goods">立即购买</view>
     </view>
   </view>
 </view>

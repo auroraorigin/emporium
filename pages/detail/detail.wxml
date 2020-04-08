@@ -1,4 +1,4 @@
-<scroll-view scroll-y>
+<scroll-view scroll-y bindtouchend="handletouchend" bindtouchstart="handletouchstart">
   <!-- 商品轮播图 -->
   <swiper indicator-dots circular indicator-color="#eaf1f7" indicator-active-color="#2b4c7f">
     <swiper-item wx:for="{{detail.goods.swiperUrl}}" wx:key="index" bindtap="handlePrevewImage" data-url="{{item}}">
@@ -47,6 +47,13 @@
   <view class="images" wx:for="{{detail.goods.urls}}" wx:key="index">
     <image mode="widthFix" src="{{item}}"></image>
   </view>
+
+  <view class="float" animation="{{animationFloatData}}">
+    <button class='floatBtn2' open-type='contact'>
+    <image class='floatBtnImg' src='../../icons/homePage/service.png' ></image>
+    <view>客服</view>
+    </button>
+  </view>
 </scroll-view>
 <!-- 底部操作栏 -->
 <view class="bottom">
@@ -92,7 +99,7 @@
     <view class="mid">
       <text class="size">规格</text>
       <view class="lableWrpa" wx:for="{{detail.goods.specification}}" wx:item="{{item}}" wx:key="index">
-        <view class="lable {{index===lableCurrentIndex ? 'active' : '' }}" bindtap="labelTap" data-index="{{index}}">
+        <view class="lable {{index===lableCurrentIndex ? 'active' : '' }} {{item.stock===0 ? 'noStock' : '' }}" bindtap="labelTap" data-index="{{index}}">
           {{item.name}}
         </view>
       </view>
@@ -113,7 +120,7 @@
     <view class="divLine1"></view>
     <view class="bot">
       <view class="addCart" wx-if="{{buyType===1}}" bindtap="addCart">加入购物车</view>
-      <view class="buy" wx-if="{{buyType===2}}">立即购买</view>
+      <view class="buy" wx-if="{{buyType===2}}" bindtap="tobuy">立即购买</view>
         <view class="selectAddCart" wx-if="{{buyType===3}}" bindtap="addCart">加入购物车</view>
         <view class="selectBuy" wx-if="{{buyType===3}}" bindtap="tobuy">立即购买</view>
     </view>

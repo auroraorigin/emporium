@@ -5,7 +5,7 @@
             <text>搜索</text>
         </navigator>
     </view>
-    <view class="cateContainer">
+    <view class="cateContainer" bindtouchend="handletouchend" bindtouchstart="handletouchstart">
         <scroll-view scroll-y class="leftMenu">
             <view class=" {{index===currentIndex?'active':'cateName'}}" wx:for="{{cateList}}" wx:key="index" bindtap="handleItemTap" data-index="{{index}}">
                 {{item.name}} 
@@ -36,6 +36,17 @@
                 </navigator>
             </view>
         </scroll-view>
+        <view class="float" animation="{{animationFloatData}}">
+          <button class='floatBtn1' open-type='share'>
+          <image class='floatBtnImg' src='../../icons/homePage/share.png' ></image>
+          <view>分享</view>
+          </button>
+
+          <button class='floatBtn2' open-type='contact'>
+          <image class='floatBtnImg' src='../../icons/homePage/service.png' ></image>
+          <view>客服</view>
+          </button>
+      </view>
     </view>
 </view>
 
@@ -64,7 +75,7 @@
     <view class="mid">
       <text class="size">规格</text> 
       <view class="lableWrpa" wx:for="{{cateList[index1].goods[index2].specification}}" wx:item="{{item}}" wx:key="index">
-        <view class="lable {{index===cateList[index1].goods[index2].lableCurrentIndex ? 'active' : '' }}" bindtap="labelTap" data-index="{{index}}">
+        <view class="lable {{index===cateList[index1].goods[index2].lableCurrentIndex ? 'active' : '' }} {{item.stock===0 ? 'noStock' : '' }}" bindtap="labelTap" data-index="{{index}}">
           {{item.name}}
         </view>
       </view>
@@ -87,7 +98,7 @@
     <view class="divLine1"></view>
     <view class="bot">
       <view class="selectAddCart" bindtap="addCart">加入购物车</view>
-      <view class="selectBuy">立即购买</view>
+      <view class="selectBuy" bindtap="pay_goods">立即购买</view>
     </view>
   </view>
 </view>
