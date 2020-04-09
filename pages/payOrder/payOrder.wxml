@@ -41,14 +41,14 @@
 							<text>{{item.name}}</text>
 						</view>
 						<view class="standard">
-							<text>规格：{{item.specification}}</text> 
+							<text>规格：{{item.specification}}</text>
 						</view>
 						<view class="money_Return">
 							<text>{{item.message}}</text>
 						</view>
 					</view>
 					<view class="product_price">
-						<text class="price">¥ {{item.unitPrice}}</text> 
+						<text class="price">¥ {{item.unitPrice}}</text>
 						<text class="buyNumber">×{{item.buyNumber}}</text>
 					</view>
 				</view>
@@ -60,18 +60,19 @@
 			</view>
 		</view>
 		<!--优惠框-->
-		<navigator class="Border1">
+		<view class="Border1">
 			<view class="borderLeft">优惠</view>
 			<view class="borderRight">
-				<view class="borderRightContent">暂无可用</view>
+				<view wx:if="{{!selectCoupon.name}}" class="borderRightContent" bindtap="toUseCoupon">{{cheap}}</view>
+				<view wx:else class="borderRightContent">满{{selectCoupon.money[0]}}元减{{selectCoupon.money[1]}}元</view>
 				<image src="/images/pay_order/right_arrow.png" mode="widthFix"></image>
 			</view>
-		</navigator>
+		</view>
 		<!--配送方式框和留言框-->
 		<view class="Border2">
 			<view class="Border2_1">
 				<view class="borderLeft"> 配送方式</view>
-				<view class="borderRight">快递 ¥20.00</view>
+				<view class="borderRight">快递 ¥{{freight}}</view>
 			</view>
 			<view class="Border2_2">
 				<view class="borderLeft">买家留言</view>
@@ -88,20 +89,33 @@
 				<view class="borderLeft"> 运费</view>
 				<view class="borderRight">+ ¥{{freight}}</view>
 			</view>
-			<view class="Border3_3">
+			<view wx:if="{{selectCoupon.name}}" class="Border3_2">
+				<view class="borderLeft"> 优惠卷优惠</view>
+				<text class="borderRight">- ¥{{selectCoupon.money[1]}}</text>
+			</view>
+			<view wx:if="{{selectCoupon.name}}" class="Border3_3">
+				<view class="borderRight">合计：<view class="rightContent">{{total_money+freight-selectCoupon.money[1]}}</view>
+				</view>
+			</view>
+			<view wx:else class="Border3_3">
 				<view class="borderRight">合计：<view class="rightContent">{{total_money+freight}}</view>
 				</view>
 			</view>
 		</view>
-    <view class="space"></view>
+		<view class="space"></view>
 	</scroll-view>
 
 	<!-- 总数量和价格 -->
 	<view class="bottom_border">
 		<view class="border_content">
-			<view class="border_left">
+			<view class="border_left" wx:if="{{!selectCoupon.name}}">
 				<text class="C">
          <text class="L">共{{total_number}}件，</text>合计:<text class="R"> ¥{{total_money+freight}}</text>
+				</text>
+			</view>
+			<view class="border_left" wx:else>
+				<text class="C">
+         <text class="L">共{{total_number}}件，</text>合计:<text class="R"> ¥{{total_money+freight+-selectCoupon.money[1]}}</text>
 				</text>
 			</view>
 			<view class="border_right">

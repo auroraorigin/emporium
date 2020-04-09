@@ -22,12 +22,13 @@ Page({
       success(res) {
         that.setData({
           cart:res.data.data
+        },function(){
+          that.setCart(cart)
+          wx.setStorageSync('cart', res.data.data)
         })
-        wx.setStorageSync('cart', res.data.data)
       },
       fail() {}
     })
-    // this.setCart(cart);
   },
   toDecimal(x) {   
     var f = parseFloat(x);   
@@ -310,9 +311,22 @@ Page({
     }
   },
   pay_shoppingCart(){
-    let cart = wx.getStorageSync("cart") || [];
-    let data = {cart:cart,isCart:true}
-    
+    let temp = wx.getStorageSync("cart") || [];
+    let cart=[]
+    for (let i = 0; i < temp.length; i++) {
+      if(temp[i].checked)
+        cart.push(temp[i])
+    }
+    if(!cart.length)
+      {
+        wx.showToast({
+          title: '请先选择商品',
+          icon: 'none',
+          mask: true,
+        });
+        return 
+      }
+    let data = JSON.stringify({cart:cart,isCart:true})
     wx.navigateTo({
       url: `/pages/payOrder/payOrder?cart=${data}`,
     })
@@ -331,6 +345,7 @@ Page({
 
     if (isEdit)
       this.editComplete();
+    this.setData({hideSpecifiation:1})
   },
   onUnload: function () {
 

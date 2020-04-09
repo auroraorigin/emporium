@@ -431,7 +431,7 @@ Page({
     let cart = []
     cart.push(this.data.searchList[index])
     cart[0].specificationIndex=lableCurrentIndex
-    let data = {cart:cart,isCart:false}
+    let data = JSON.stringify({cart:cart,isCart:false})
   
     wx.navigateTo({
       url: `/pages/payOrder/payOrder?cart=${data}`,

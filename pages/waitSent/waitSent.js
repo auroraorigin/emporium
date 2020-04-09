@@ -9,7 +9,8 @@ Page({
     total_number: "", //总数量
     total_money: "", //总价格
     orderId: "", //订单id,
-    freight: "" //运费
+    freight: "",//运费
+    coupon:{}//选择的优惠卷
   },
 
   //获取订单详情
@@ -30,17 +31,15 @@ Page({
           addressList: res.data.order.address,
           all_Order: res.data.order.goods,
           total_money: Number(res.data.order.totalPrice),
-          freight: Number(res.data.order.freight)
+          freight: Number(res.data.order.freight),
+          coupon: res.data.order.coupon
         })
       },
-      fail() {}
+      fail() { }
     })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
+  onLoad(options) {
     //1.获取当前小程序的页面栈-数组 最大长度为10页面
     let pages = getCurrentPages();
     //2.数组中索引最大的页面就是当前页面
@@ -52,7 +51,34 @@ Page({
     this.setData({
       orderId: orderId
     })
-    this.getOrderDetail();
+    if (orderId) {
+      this.getOrderDetail();
+    } else {
+      var waitSentOrder = JSON.parse(options.waitSentOrder);
+      //判断是否有使用优惠卷
+      if (waitSentOrder.coupon) {
+        this.setData({
+          addressList: waitSentOrder.address,
+          all_Order: waitSentOrder.goods,
+          total_money: Number(waitSentOrder.totalPrice),
+          freight: Number(waitSentOrder.freight),
+          coupon: waitSentOrder.coupon
+        });
+      } else {
+        this.setData({
+          addressList: waitSentOrder.address,
+          all_Order: waitSentOrder.goods,
+          total_money: Number(waitSentOrder.totalPrice),
+          freight: Number(waitSentOrder.freight),
+        });
+      }
+    };
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
     //获取页面标志
     var aShow = wx.getStorageSync("aShow");
     if (!aShow) {

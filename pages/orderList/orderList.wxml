@@ -37,7 +37,8 @@
 				</view>
 				<view class="second_bottom">
 					<view class="total">
-						<text>共{{item.goods.length}}件商品  合计:¥ {{item.totalPrice+item.freight}}</text>
+						<text wx:if="{{item.coupon.name}}">共{{item.goods.length}}件商品 合计:¥ {{item.totalPrice+item.freight-item.coupon.money[1]}}</text>
+						<text wx:else>共{{item.goods.length}}件商品 合计:¥ {{item.totalPrice+item.freight}}</text>
 						<view class="button_type" wx:if="{{item.state=='已完成'}}" data-id="{{item._id}}" catchtap="deleteOrder">
 							<text>删除订单</text>
 						</view>
@@ -93,7 +94,8 @@
 				</view>
 				<view class="second_bottom">
 					<view class="total">
-						<text>共{{item.goods.length}}件商品  合计:¥ {{item.totalPrice+item.freight}}</text>
+						<text wx:if="{{item.coupon.name}}">共{{item.goods.length}}件商品 合计:¥ {{item.totalPrice+item.freight-item.coupon.money[1]}}</text>
+						<text wx:else>共{{item.goods.length}}件商品 合计:¥ {{item.totalPrice+item.freight}}</text>
 						<view class="button_type">
 							<text>确认付款</text>
 						</view>
@@ -137,7 +139,8 @@
 				</view>
 				<view class="second_bottom">
 					<view class="total">
-						<text>共{{item.goods.length}}件商品  合计:¥ {{item.totalPrice+item.freight}}</text>
+						<text wx:if="{{item.coupon.name}}">共{{item.goods.length}}件商品 合计:¥ {{item.totalPrice+item.freight-item.coupon.money[1]}}</text>
+						<text wx:else>共{{item.goods.length}}件商品 合计:¥ {{item.totalPrice+item.freight}}</text>
 						<view class="button_type">
 							<text>提醒发货</text>
 						</view>
@@ -181,7 +184,8 @@
 				</view>
 				<view class="second_bottom">
 					<view class="total">
-						<text>共{{item.goods.length}}件商品  合计:¥ {{item.totalPrice+item.freight}}</text>
+						<text wx:if="{{item.coupon.name}}">共{{item.goods.length}}件商品 合计:¥ {{item.totalPrice+item.freight-item.coupon.money[1]}}</text>
+						<text wx:else>共{{item.goods.length}}件商品 合计:¥ {{item.totalPrice+item.freight}}</text>
 						<view class="button_type">
 							<text>确认收货</text>
 						</view>
@@ -225,7 +229,8 @@
 				</view>
 				<view class="second_bottom">
 					<view class="total">
-						<text>共{{item.goods.length}}件商品  合计:¥ {{item.totalPrice+item.freight}}</text>
+						<text wx:if="{{item.coupon.name}}">共{{item.goods.length}}件商品 合计:¥ {{item.totalPrice+item.freight-item.coupon.money[1]}}</text>
+						<text wx:else>共{{item.goods.length}}件商品 合计:¥ {{item.totalPrice+item.freight}}</text>
 						<view class="button_type">
 							<text>查看详情</text>
 						</view>

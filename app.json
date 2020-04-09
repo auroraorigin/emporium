@@ -20,7 +20,8 @@
     "pages/addAddress/addAddress",
     "pages/coupon/coupon",
     "pages/setting/setting",
-    "pages/couponCenter/couponCenter"
+    "pages/couponCenter/couponCenter",
+    "pages/myCoupon/myCoupon"
   ],
   "window": {
     "backgroundTextStyle": "dark",

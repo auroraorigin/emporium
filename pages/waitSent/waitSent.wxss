@@ -195,7 +195,7 @@ page {
 .buyNumber {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: flex-end; 
   font-size: 20rpx;
   color: #ccc;
 }
@@ -220,6 +220,34 @@ page {
   position: relative;
   top: -40rpx;
   left: -20rpx;
+}
+
+.goods {
+  margin-top: 20rpx;
+  background-color: white;
+  height: 60rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #aaa;
+}
+
+.title {
+  margin-left: 25rpx;
+  font-size: 30rpx;
+}
+
+.price1 {
+  font-size: 30rpx;
+}
+
+.freight {
+  background-color: white;
+  height: 60rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #aaa;
 }
 
 .bottom_border {
@@ -249,8 +277,7 @@ page {
   color: black;
   font-size: 30rpx;
   position: relative;
-  left: -60rpx;
-  top: -20rpx;
+  left: -160rpx;
 }
 
 .L {
@@ -261,18 +288,19 @@ page {
   top: 30rpx;
 }
 
-.L_bottom {
-  position: relative;
-  top: -20rpx;
-}
-
 .R {
   color: red;
   font-size: 40rpx;
 }
 
 .border_right {
-  width: 30%;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+  left: -20rpx;
 }
 
 .outside {
@@ -280,8 +308,6 @@ page {
   height: 70rpx;
   width: 180rpx;
   border-radius: 50rpx;
-  position: relative;
-  left: 20rpx;
   display: flex;
   justify-content: center;
   align-items: center;

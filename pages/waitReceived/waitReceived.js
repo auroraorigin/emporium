@@ -9,7 +9,8 @@ Page({
     datetimeTo: "", // 关闭时间
     timeLeft: "", // 剩下的时间（天时分秒）
     orderId: "", //订单id,
-    freight:""//运费
+    freight: "",//运费
+    coupon: {}//优惠卷
   },
 
   //根据orderId加载订单详情
@@ -30,16 +31,16 @@ Page({
           addressList: res.data.order.address,
           all_Order: res.data.order.goods,
           total_money: Number(res.data.order.totalPrice),
-          freight:Number(res.data.order.freight),
-          datetimeTo: res.data.order.datetimeTo
+          freight: Number(res.data.order.freight),
+          datetimeTo: res.data.order.datetimeTo,
+          coupon: res.data.order.coupon
         })
       },
-      fail() {}
+      fail() { }
     })
   },
-  
-  onLoad: function(options) {
-    var datetimeTo = options.datetimeTo;
+
+  onShow: function () {
     //1.获取当前小程序的页面栈-数组 最大长度为10页面
     let pages = getCurrentPages();
     //2.数组中索引最大的页面就是当前页面
@@ -51,29 +52,7 @@ Page({
     this.setData({
       orderId: orderId
     })
-    if (orderId) {
-      this.getOrderDetail();
-    } else {
-      var waitReceivedOrder = JSON.parse(options.waitReceivedOrder);
-      this.setData({
-        addressList: waitReceivedOrder.address,
-        all_Order: waitReceivedOrder.goods,
-        total_money: Number(waitReceivedOrder.totalPrice),
-        freight: Number(waitReceivedOrder.freight),
-        datetimeTo: datetimeTo
-      });
-    };
-    this.data.timer = setInterval(() => { //注意箭头函数！！
-      this.setData({
-        timeLeft: util.getTimeLeft(this.data.datetimeTo) //使用了util.getTimeLeft
-      });
-      if (this.data.timeLeft == "0天0时0分0秒" || this.data.timeLeft == "false") {
-        clearInterval(this.data.timer);
-      }
-    }, 1000);
-  },
-
-  onShow: function() {
+    this.getOrderDetail();
     //获取页面标志
     var aShow = wx.getStorageSync("aShow");
     if (!aShow) {

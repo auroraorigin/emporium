@@ -108,7 +108,7 @@
             wait_Sent[i].freight=Number(wait_Sent[i].freight);
           };
           that.setData({
-            waitSent:waitSent
+            wait_Sent:wait_Sent
           })
          } else if (that.data.presentType == 4) {
           let wait_Received=res.data.goods;

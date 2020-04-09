@@ -11,7 +11,8 @@ Page({
     total_money: "",//总价格
     orderId: "", //订单id
     freight: "",//运费
-    state:""//订单状态
+    state:"",//订单状态
+    coupon: {}//优惠卷
   },
 
   //根据orderId加载订单详情
@@ -33,7 +34,8 @@ Page({
           all_Order: res.data.order.goods,
           total_money: Number(res.data.order.totalPrice),
           freight: Number(res.data.order.freight),
-          state:res.data.order.state
+          state:res.data.order.state,
+          coupon:res.data.order.coupon
         })
       },
       fail() { }
@@ -67,7 +69,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    //1.获取当前小程序的页面栈-数组 最大长度为10页面
+    //1.获取当前小程序的页面栈-数组 最大长度为10页面 
     let pages = getCurrentPages();
     //2.数组中索引最大的页面就是当前页面
     let currentPage = pages[pages.length - 1];

@@ -3,8 +3,7 @@ import {request} from "../../request/request.js";
 
 Page({
   data: {
-    cateList: [
-    ],
+    cateList: [],
     currentIndex: 0,
     toView: 'index0',
     distance: [],
@@ -440,7 +439,7 @@ Page({
     let cart = []
     cart.push(this.data.cateList[index1].goods[index2])
     cart[0].specificationIndex=lableCurrentIndex
-    let data = {cart:cart,isCart:false}
+    let data = JSON.stringify({cart:cart,isCart:false})
     
     wx.navigateTo({
       url: `/pages/payOrder/payOrder?cart=${data}`,

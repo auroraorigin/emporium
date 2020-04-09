@@ -1,0 +1,85 @@
+page {
+  background-color: #f8f8f8;
+}
+
+.allPage {
+  height: 100vh;
+}
+
+.item {
+  border: 1rpx solid white;
+  border-radius: 20rpx;
+  background-color: white;
+  margin: 20rpx 30rpx 0 30rpx;
+  height: 200rpx;
+}
+
+.listItem {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 70%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.listItem .top {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 45rpx;
+  font-weight: 400;
+  margin: 0 0 0 20rpx;
+}
+
+.topBottom {
+  font-size: 25rpx;
+  color: #ccc;
+}
+
+.state {
+  width: 100rpx;
+  height: 100rpx;
+  position: relative;
+  right: 50rpx;
+}
+
+.overplus{
+  font-size: 30rpx;
+  position: relative;
+  right: 35rpx;
+}
+
+.bottom {
+  width: 100%;
+  height: 30%;
+  margin-bottom: 0;
+  border-top: 1rpx solid #2b4c7f;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.couponName {
+  color: #c3b353;
+  font-size: 20rpx;
+  margin-left: 20rpx;
+}
+
+.buttonType {
+  background-color: #7ca7d1;
+  width: 18%;
+  height: 48rpx;
+  border-radius: 30rpx;
+  position: absolute;
+  right: 50rpx
+}
+
+.buttonType text {
+  font-size: 25rpx;
+  color: white;
+  position: absolute;
+  right: 25rpx;
+  top:8rpx
+}

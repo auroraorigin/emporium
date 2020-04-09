@@ -12,9 +12,12 @@ Page({
     total_money: "", //总价格
     datetimeTo: "", //关闭时间
     waitPaidOrder: {}, //待支付订单
-    waitReceivedOrder:{},//待收货订单
-    userWord:"",//用户留言
-    freight:0//运费
+    waitSentOrder: {},//待发货订单 
+    userWord: "",//用户留言
+    freight: 0,//运费
+    cheap: "",//优惠
+    canUseCoupon: [],//可用优惠卷数组
+    selectCoupon: {}//选择的优惠卷
   },
 
   //修改支付的个人信息
@@ -57,7 +60,7 @@ Page({
     var now_time = Y + "/" + M + "/" + D + " " + h + ": " + m + ":" + s + " GMT+0800";
 
     //加一天的时间戳：  
-    var tomorrow_timetamp = timestamp + 24*60*60;
+    var tomorrow_timetamp = timestamp + 24 * 60 * 60;
     //加一天的时间：  
     var n_to = tomorrow_timetamp * 1000;
     var tomorrow_date = new Date(n_to);
@@ -94,7 +97,7 @@ Page({
       title: '提示',
       content: '您确定要提交订单吗？',
       success: (result) => {
-        //确认支付即为待收货订单
+        //确认支付即为待发货订单
         if (result.confirm) {
           wx.request({
             url: 'http://localhost:8888/wx/createOrder',
@@ -105,22 +108,41 @@ Page({
             },
             data: {
               address: JSON.stringify(address),
-              state: "待收货",
+              state: "待发货",
               goods: JSON.stringify(that.data.all_Order),
               totalPrice: that.data.total_money,
-              datetimeTo:datetimeTo
+              coupon: JSON.stringify(that.data.selectCoupon)
             },
             success(res) {
-              //将数据渲染给本地appData
-              that.setData({
-                waitReceivedOrder: res.data.order
-              });
-              //跳转时携带参数
-              wx.navigateTo({
-                url: '/pages/waitReceived/waitReceived?datetimeTo=' + datetimeTo + '&waitReceivedOrder=' + JSON.stringify(that.data.waitReceivedOrder)
-              })
+              if (res.data.stockMessage == "库存减少成功") {
+                //将数据渲染给本地appData
+                that.setData({
+                  waitSentOrder: res.data.order
+                });
+                //跳转时携带参数
+                wx.navigateTo({
+                  url: '/pages/waitSent/waitSent?waitSentOrder=' + JSON.stringify(that.data.waitSentOrder)
+                });
+                //清除购物车缓存
+                wx.removeStorageSync("cart");
+              } else if (res.data.stockMessage == "库存不足") {
+                //显示提交失败信息
+                wx.showModal({
+                  title: '提交失败',
+                  content: '存在商品库存不足，请重新添加商品',
+                  success: (result) => {
+                    if (result.confirm) {
+                      //回到上一级页面
+                      wx.navigateBack({
+                        delta: 1
+                      })
+                    } else
+                      return;
+                  }
+                })
+              }
             },
-            fail() {}
+            fail() { }
           })
         } else {
           //取消则为待付款订单
@@ -136,19 +158,39 @@ Page({
               state: "待付款",
               goods: JSON.stringify(that.data.all_Order),
               totalPrice: that.data.total_money,
-              datetimeTo:datetimeTo
+              datetimeTo: datetimeTo,
+              coupon: JSON.stringify(that.data.selectCoupon)
             },
             success(res) {
-              //将数据渲染给本地appData
-              that.setData({
-                waitPaidOrder: res.data.order
-              });
-              //跳转时携带参数
-              wx.navigateTo({
-                url: '/pages/waitPaid/waitPaid?datetimeTo=' + datetimeTo + '&waitPaidOrder=' + JSON.stringify(that.data.waitPaidOrder)
-              })
+              if (res.data.stockMessage == "库存减少成功") {
+                //将数据渲染给本地appData
+                that.setData({
+                  waitPaidOrder: res.data.order
+                });
+                //跳转时携带参数
+                wx.navigateTo({
+                  url: '/pages/waitPaid/waitPaid?datetimeTo=' + datetimeTo + '&waitPaidOrder=' + JSON.stringify(that.data.waitPaidOrder)
+                });
+                //清除购物车缓存
+                wx.removeStorageSync("cart");
+              } else if (res.data.stockMessage == "库存不足") {
+                //显示提交失败信息
+                wx.showModal({
+                  title: '提交失败',
+                  content: '存在商品库存不足，请重新添加商品',
+                  success: (result) => {
+                    if (result.confirm) {
+                      //回到上一级页面
+                      wx.navigateBack({
+                        delta: 1
+                      })
+                    } else
+                      return;
+                  }
+                })
+              }
             },
-            fail() {}
+            fail() { }
           });
         }
       }
@@ -156,9 +198,9 @@ Page({
   },
 
   //获取用户留言
-  getUserWord(e){
+  getUserWord(e) {
     this.setData({
-      userWord:e.detail.value
+      userWord: e.detail.value
     })
   },
 
@@ -178,14 +220,52 @@ Page({
           addressList: res.data.defaultAddress
         })
       },
-      fail() {}
+      fail() { }
     })
+  },
+
+  //优惠状态(暂无可用，有可用优惠卷)
+  cheapState() {
+    var that = this;
+    wx.request({
+      url: 'http://localhost:8888/wx/cheapState',
+      method: "POST",
+      header: { //请求头
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": wx.getStorageSync('LocalToken')
+      },
+      data: {
+        totalMoney: that.data.total_money
+      },
+      success(res) {
+        if (res.data.state == "有可用优惠卷") {
+          that.setData({
+            canUseCoupon: res.data.canUseCoupon,
+            cheap: res.data.state
+          })
+        } else if (res.data.state == "无可用优惠卷") {
+          that.setData({
+            cheap: res.data.state
+          })
+        }
+      },
+      fail() { }
+    })
+  },
+
+  //跳转到可使用优惠卷页面
+  toUseCoupon() {
+    if (this.data.cheap == "有可用优惠卷") {
+      wx.navigateTo({
+        url: '/pages/myCoupon/myCoupon?canUseCoupon=' + JSON.stringify(this.data.canUseCoupon),
+      })
+    }
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     //每次刷新页面判断默认地址或选择地址
     this.getDefaultAddress();
     //如果缓存中有修改的地址信息，优先选择
@@ -211,17 +291,20 @@ Page({
         buyNumber: cart[i].buyNumber,
         message: '三天无理由退款',
         unitPrice: cart[i].specification[cart[i].specificationIndex].price,
-        goodPrice: JSON.stringify(cart[i].all_money)
+        goodPrice: JSON.stringify(cart[i].all_money),
+        _id: cart[i]._id,
+        specificationIndex: cart[i].specificationIndex
       }
     };
-    if(total>100)
-    this.setData({
-      freight:20
-    })
+    if (total > 100)
+      this.setData({
+        freight: 20
+      })
     this.setData({
       all_Order: order,
       total_number: cart.length,
       total_money: total
-    })
+    });
+    this.cheapState();
   },
 })

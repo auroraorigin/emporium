@@ -1,0 +1,25 @@
+ <scroll-view scroll-y="true" class="allPage">
+ 	<view class='item' wx:for="{{canUseCoupon}}" wx:key="index">
+ 		<view class='listItem'>
+ 			<view class='top'>
+ 				满{{item.money[0]}}元减{{item.money[1]}}元
+ 				<view class="topBottom">
+ 					<view>
+ 						{{item.effective[0]}}-{{item.effective[1]}}
+ 					</view>
+ 				</view>
+ 			</view>
+ 			<view>
+ 				<image class='state' src='/images/personal_center/can_use.png' mode="widthFix"></image>
+ 			</view>
+ 		</view>
+ 		<view class="bottom">
+ 			<view class="couponName">
+ 				{{item.name}}:{{item.effective[0]}}-{{item.effective[1]}}
+ 			</view>
+ 			<view class="buttonType" data-id="{{index}}" bindtap="useCoupon">
+ 				<text>立即使用</text>
+ 			</view>
+ 		</view>
+ 	</view>
+ </scroll-view>
