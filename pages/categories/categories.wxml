@@ -17,7 +17,10 @@
                     <view class="cname">{{item1.name}}</view>
                 </view>
                 <navigator class="product" hover-class="none" wx:for="{{item1.goods}}" wx:for-index="index2" wx:for-item="item2" wx:key="index2" url="/pages/detail/detail?_id={{item2._id}}"> 
-                    <view>
+                    <view style="position:relative">
+                    
+                        <image wx:if="{{item2.stock===0}}" class="nogoodsImg" src="../../icons/homePage/none.png"></image>
+				              	<view wx:if="{{item2.stock===0}}" class="nogoods"></view>
                         <image src="{{item2.url}}" mode="widthFix" class="productImage"></image>
                     </view>
                     <view class="info">

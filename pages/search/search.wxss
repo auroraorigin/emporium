@@ -523,3 +523,18 @@ image{
     background-color: #f8f8f8;
     border: 1px solid #f8f8f8;
   }
+
+  .nogoods{
+    position:absolute;
+    height: 170rpx;
+    width: 200rpx;
+    background-color: rgba(0, 0, 0, 0.5);
+    
+  }
+
+  .nogoodsImg{
+    width: 170rpx;
+    height: 170rpx;
+    position:absolute;
+    z-index: 1;
+  }

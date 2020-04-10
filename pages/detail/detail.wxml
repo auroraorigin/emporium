@@ -47,6 +47,9 @@
   <view class="images" wx:for="{{detail.goods.urls}}" wx:key="index">
     <image mode="widthFix" src="{{item}}"></image>
   </view>
+  <view class="images" wx:for="{{url}}" wx:key="index">
+    <image mode="widthFix" src="{{item}}"></image>
+  </view>
 
   <view class="float" animation="{{animationFloatData}}">
     <button class='floatBtn2' open-type='contact'>

@@ -19,14 +19,17 @@ Page({
     animationDataShadow: {}, //背景阴影渐变动画
     animationFloatData:{},
     lastY: 0,
-    direction:1
+    direction:1,
+    discount:0,
+    url:[]
   },
   // 服务器获取数据
   getGoodsDetail(_id){
     let that = this
     wx.request({url:"http://localhost:8888/wx/detail",data:{_id}, method: 'GET', success(res) {
-      let goods = res.data.data
-      console.log(goods)
+      let discount = res.data.data.discount
+      let url = res.data.data.detail
+      let goods = res.data.data.goods
       let maxPrice = goods.specification[0].price
       let minPrice = goods.specification[0].price
       let maxFreight = goods.specification[0].freight
@@ -51,12 +54,14 @@ Page({
       
       let detail={
         goods,
-        discount: ["部分地区满100包邮"],
+        discount: [`部分地区满${discount}包邮`],
         delivery: ["快递", "送货上门 (仅限博贺镇内)"]
       }
       that.setData({
         detail,
-        buyMaxNumber:stock
+        buyMaxNumber:stock,
+        discount,
+        url
       })
     },fail() {}})
   },

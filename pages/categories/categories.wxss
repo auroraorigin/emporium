@@ -128,6 +128,7 @@ image{
     position: sticky;
     top: 0;
     background-color: white;
+    z-index: 2;
 }
 
 /* .group .top .divLine {
@@ -533,4 +534,21 @@ image{
     position: fixed;
     bottom: 60rpx;
     right: 50rpx;
+  }
+
+  .nogoods{
+    position:absolute;
+    height: 170rpx;
+    width: 200rpx;
+    margin-left: 10rpx;
+    background-color: rgba(0, 0, 0, 0.5);
+    
+  }
+
+  .nogoodsImg{
+    width: 170rpx;
+    height: 170rpx;
+    position:absolute;
+    margin-left: 10rpx;
+    z-index: 1;
   }

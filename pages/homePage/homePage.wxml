@@ -1,121 +1,126 @@
 <!-- 搜索框 -->
-<searchInput></searchInput> 
+<searchInput></searchInput>
 <view class="container" bindtouchend="handletouchend" bindtouchstart="handletouchstart">
-  <!-- 轮播图 -->
-  <swiper class="homePageSwiper" indicator-dots autoplay circular indicator-color="#eaf1f7" indicator-active-color="#2b4c7f">
-    <swiper-item wx:for="{{swiperList}}" wx:key="index">
-      <navigator hover-class="none">
-        <image src="{{item}}" mode="widthFix"></image>
-      </navigator>
-    </swiper-item>
-  </swiper>
-  <!-- 公告 -->
-  <view class="notice">
-    <image src="../../icons/homePage/horn.png" mode="widthFix"></image>
-    <swiper autoplay="true" interval="3000" vertical="true" circular="true">
-      <swiper-item wx:for="{{noticeList}}" wx:key="index">
-        <text>{{item.name}}</text>
-      </swiper-item>
-    </swiper>
-  </view>
-  <!-- 分类导航 -->
-  <view class="category">
-    <navigator wx:for="{{cateList}}" wx:key="index" hover-class="none" url="/pages/categories/categories" open-type="switchTab" bindtap="categoriesIndex" data-index="{{index}}">
-      <image src="{{item.url}}"></image>
-      <text>{{item.name}}</text>
-    </navigator>
-  </view>
-  <!-- 楼层 -->
-  <view class="floor">
-    <view class="floorGroup" wx:for="{{floorList}}" wx:for-item="item1" wx:for-index="index1" wx:key="index1">
-      <!-- 标题 -->
-      <image class="title" src="{{item1.url}}" mode="widthFix"></image>
-      <!-- 内容 -->
-      <view class="productGroup">
-        <navigator class="product" hover-class="none" wx:for="{{item1.goods}}" wx:for-item="item2" wx:for-index="index2" wx:key="index2" url="/pages/detail/detail?_id={{item2._id}}">
-          <image class="productPicture" src="{{item2.url}}" mode="widthFix"></image>
-          <view class="info">
-            <text class="name">{{item2.name}}</text>
-            <view class="trade">
-              <view class="left">
-                <text class="price" wx:if="{{item2.specification.length === 1}}">¥{{item2.maxPrice}}</text>
-                <text class="price" wx:else>¥{{item2.minPrice}}-{{item2.maxPrice}}</text>
-              </view>
-              <view class="right" catchtap="cart" data-index2="{{index2}}" data-index1="{{index1}}">
-                <image src="../../icons/homePage/cart.png" mode="widthFix"></image>
-              </view>
-            </view>
-          </view>
-        </navigator>
-      </view>
-    </view>
-    </view>
-      <view class="float" animation="{{animationFloatData}}">
-        <button class='floatBtn1' open-type='share'>
-        <image class='floatBtnImg' src='../../icons/homePage/share.png' ></image>
-        <view>分享</view>
-        </button>
+	<!-- 轮播图 -->
+	<swiper class="homePageSwiper" indicator-dots autoplay circular indicator-color="#eaf1f7" indicator-active-color="#2b4c7f">
+		<swiper-item wx:for="{{swiperList}}" wx:key="index">
+			<navigator hover-class="none">
+				<image src="{{item}}" mode="widthFix"></image>
+			</navigator>
+		</swiper-item>
+	</swiper>
+	<!-- 公告 -->
+	<view class="notice">
+		<image src="../../icons/homePage/horn.png" mode="widthFix"></image>
+		<swiper autoplay="true" interval="3000" vertical="true" circular="true">
+			<swiper-item wx:for="{{noticeList}}" wx:key="index">
+				<text>{{item.name}}</text>
+			</swiper-item>
+		</swiper>
+	</view>
+	<!-- 分类导航 -->
+	<view class="category">
+		<navigator wx:for="{{cateList}}" wx:key="index" hover-class="none" url="/pages/categories/categories" open-type="switchTab" bindtap="categoriesIndex" data-index="{{index}}">
+			<image src="{{item.url}}"></image>
+			<text>{{item.name}}</text>
+		</navigator>
+	</view>
+	<!-- 楼层 -->
+	<view class="floor">
+		<view class="floorGroup" wx:for="{{floorList}}" wx:for-item="item1" wx:for-index="index1" wx:key="index1">
+			<!-- 标题 -->
+			<image class="title" src="{{item1.url}}" mode="widthFix"></image>
+			<!-- 内容 -->
+			<view class="productGroup">
+				<navigator style="position:relative" class="product" hover-class="none" wx:for="{{item1.goods}}" wx:for-item="item2" wx:for-index="index2" wx:key="index2" url="/pages/detail/detail?_id={{item2._id}}">
+					
+          
+					<image wx:if="{{item2.stock===0}}" class="nogoodsImg" src="../../icons/homePage/none.png"></image>
+					<view wx:if="{{item2.stock===0}}" class="nogoods"></view>
+					<image class="productPicture" src="{{item2.url}}" mode="widthFix"></image>
 
-        <button class='floatBtn2' open-type='contact'>
-        <image class='floatBtnImg' src='../../icons/homePage/service.png' ></image>
-        <view>客服</view>
-        </button>
-      </view>
+					<view class="info">
+						<text class="name">{{item2.name}}</text>
+						<view class="trade">
+							<view class="left">
+								<text class="price" wx:if="{{item2.specification.length === 1}}">¥{{item2.maxPrice}}</text>
+								<text class="price" wx:else>¥{{item2.minPrice}}-{{item2.maxPrice}}</text>
+							</view>
+							<view class="right" catchtap="cart" data-index2="{{index2}}" data-index1="{{index1}}">
+								<image src="../../icons/homePage/cart.png" mode="widthFix"></image>
+							</view>
+						</view>
+					</view>
+				</navigator>
+			</view>
+		</view>
+	</view>
+	<view class="float" animation="{{animationFloatData}}">
+		<button class='floatBtn1' open-type='share'>
+			<image class='floatBtnImg' src='../../icons/homePage/share.png'></image>
+			<view>分享</view>
+		</button>
+
+		<button class='floatBtn2' open-type='contact'>
+			<image class='floatBtnImg' src='../../icons/homePage/service.png'></image>
+			<view>客服</view>
+		</button>
+	</view>
 </view>
 
 
 <!-- 商品规格 -->
 <view class="specification" hidden="{{hideSpecification}}" catchtouchmove='prevent'>
-  <view class="shadow" bindtap="closeSpecification" animation="{{animationDataShadow}}"></view>
-  <view class="content" animation="{{animationData}}">
-    <view class="top">
-      <view class="goods">
-        <image mode="widthFix" src="{{floorList[index1].goods[index2].url}}"></image>
-        <view class="info">
-          <view class="name">{{floorList[index1].goods[index2].name}}</view>
-          <text class="price" wx:if="{{floorList[index1].goods[index2].specification.length === 1}}">¥{{floorList[index1].goods[index2].maxPrice}}</text>
-          <text class="price" wx:elif="{{floorList[index1].goods[index2].lableCurrentIndex===-1}}">¥{{floorList[index1].goods[index2].minPrice}} - {{floorList[index1].goods[index2].maxPrice}}</text>
-          <text class="price" wx:else>¥{{floorList[index1].goods[index2].specification[floorList[index1].goods[index2].lableCurrentIndex].price}}</text>
-          <view class="stock" wx:if="{{floorList[index1].goods[index2].specification.length === 1 || floorList[index1].goods[index2].lableCurrentIndex===-1}}">
-            库存 {{floorList[index1].goods[index2].stock}}
-          </view>
-          <view class="stock" wx:else>
-            库存 {{floorList[index1].goods[index2].specification[floorList[index1].goods[index2].lableCurrentIndex].stock}}
-          </view>
-        </view>
-      </view>
-      <view class="close" bindtap="closePopupTap">
-        <image mode="widthFix" src="../../icons/homePage/close.png"></image>
-    </view>
-    </view>
-    <view class="divLine1"></view>
-    <view class="mid">
-      <text class="size">规格</text>
-      <view class="lableWrpa" wx:for="{{floorList[index1].goods[index2].specification}}" wx:item="{{item}}" wx:key="index">
-        <view class="lable {{index===floorList[index1].goods[index2].lableCurrentIndex ? 'active' : '' }} {{item.stock===0 ? 'noStock' : '' }}" bindtap="labelTap" data-index="{{index}}">
-          {{item.name}}
-        </view>
-      </view>
-    </view>
-    <view class="divLine1"></view>
-    <view class="under">
-      <view class="left">购买数量</view>
-      <view class="right">
-        <view class="reduceNumber {{floorList[index1].goods[index2].buyNumber <= 1 ? 'gray': ''}}" bindtap="reduceNumber">
-          -
-        </view>
-        <view class="input">
-          <input type="number" value="{{floorList[index1].goods[index2].buyNumber}}" disabled="{{ture}}" bindinput="inputNumber" bindblur="inputNumberOut" />
-        </view>
-        <view class="addNumber {{floorList[index1].goods[index2].buyNumber === floorList[index1].goods[index2].buyMaxNumber ? 'gray': ''}}" bindtap="addNumber">
-          +
-        </view>
-      </view>
-    </view>
-    <view class="divLine1"></view>
-    <view class="bot">
-      <view class="selectAddCart" bindtap="addCart">加入购物车</view>
-      <view class="selectBuy" bindtap="pay_goods">立即购买</view>
-    </view>
-  </view>
+	<view class="shadow" bindtap="closeSpecification" animation="{{animationDataShadow}}"></view>
+	<view class="content" animation="{{animationData}}">
+		<view class="top">
+			<view class="goods">
+				<image mode="widthFix" src="{{floorList[index1].goods[index2].url}}"></image>
+				<view class="info">
+					<view class="name">{{floorList[index1].goods[index2].name}}</view>
+					<text class="price" wx:if="{{floorList[index1].goods[index2].specification.length === 1}}">¥{{floorList[index1].goods[index2].maxPrice}}</text>
+					<text class="price" wx:elif="{{floorList[index1].goods[index2].lableCurrentIndex===-1}}">¥{{floorList[index1].goods[index2].minPrice}} - {{floorList[index1].goods[index2].maxPrice}}</text>
+					<text class="price" wx:else>¥{{floorList[index1].goods[index2].specification[floorList[index1].goods[index2].lableCurrentIndex].price}}</text>
+					<view class="stock" wx:if="{{floorList[index1].goods[index2].specification.length === 1 || floorList[index1].goods[index2].lableCurrentIndex===-1}}">
+						库存 {{floorList[index1].goods[index2].stock}}
+					</view>
+					<view class="stock" wx:else>
+						库存 {{floorList[index1].goods[index2].specification[floorList[index1].goods[index2].lableCurrentIndex].stock}}
+					</view>
+				</view>
+			</view>
+			<view class="close" bindtap="closePopupTap">
+				<image mode="widthFix" src="../../icons/homePage/close.png"></image>
+			</view>
+		</view>
+		<view class="divLine1"></view>
+		<view class="mid">
+			<text class="size">规格</text>
+			<view class="lableWrpa" wx:for="{{floorList[index1].goods[index2].specification}}" wx:item="{{item}}" wx:key="index">
+				<view class="lable {{index===floorList[index1].goods[index2].lableCurrentIndex ? 'active' : '' }} {{item.stock===0 ? 'noStock' : '' }}" bindtap="labelTap" data-index="{{index}}">
+					{{item.name}}
+				</view>
+			</view>
+		</view>
+		<view class="divLine1"></view>
+		<view class="under">
+			<view class="left">购买数量</view>
+			<view class="right">
+				<view class="reduceNumber {{floorList[index1].goods[index2].buyNumber <= 1 ? 'gray': ''}}" bindtap="reduceNumber">
+					-
+				</view>
+				<view class="input">
+					<input type="number" value="{{floorList[index1].goods[index2].buyNumber}}" disabled="{{ture}}" bindinput="inputNumber" bindblur="inputNumberOut" />
+				</view>
+				<view class="addNumber {{floorList[index1].goods[index2].buyNumber === floorList[index1].goods[index2].buyMaxNumber ? 'gray': ''}}" bindtap="addNumber">
+					+
+				</view>
+			</view>
+		</view>
+		<view class="divLine1"></view>
+		<view class="bot">
+			<view class="selectAddCart" bindtap="addCart">加入购物车</view>
+			<view class="selectBuy" bindtap="pay_goods">立即购买</view>
+		</view>
+	</view>
 </view>
