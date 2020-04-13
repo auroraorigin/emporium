@@ -6,11 +6,13 @@ Page({
     all_Order: [], //商品列表
     total_number: "", //总数量
     total_money: "", //总价格
-    datetimeTo: "", // 关闭时间
+    timestamp: "", // 关闭时间戳
     timeLeft: "", // 剩下的时间（天时分秒）
     orderId: "", //订单id,
     freight: "",//运费
-    coupon: {}//优惠卷
+    coupon: {},//优惠卷
+    expressNumber: "",//快递单号
+    createDate: ""//订单创建日期
   },
 
   //根据orderId加载订单详情
@@ -33,10 +35,101 @@ Page({
           total_money: Number(res.data.order.totalPrice),
           freight: Number(res.data.order.freight),
           datetimeTo: res.data.order.datetimeTo,
-          coupon: res.data.order.coupon
-        })
+          coupon: res.data.order.coupon,
+          expressNumber: res.data.order.expressNumber,
+          createDate: res.data.order.createDate
+        });
+        var timestamp = that.data.timestamp;
+        //加一天的时间：  
+        var n_to = timestamp * 1000;
+        var tomorrow_date = new Date(n_to);
+        //加一天后的年份  
+        var Y_tomorrow = tomorrow_date.getFullYear();
+        //加一天后的月份  
+        var M_tomorrow = (tomorrow_date.getMonth() + 1 < 10 ? '0' + (tomorrow_date.getMonth() + 1) : tomorrow_date.getMonth() + 1);
+        //加一天后的日期  
+        var D_tomorrow = tomorrow_date.getDate() < 10 ? '0' + tomorrow_date.getDate() : tomorrow_date.getDate();
+        //加一天后的时刻  
+        var h_tomorrow = tomorrow_date.getHours();
+        //加一天后的分钟  
+        var m_tomorrow = tomorrow_date.getMinutes();
+        //加一天后的秒数  
+        var s_tomorrow = tomorrow_date.getSeconds();
+        var datetimeTo = Y_tomorrow + "/" + M_tomorrow + "/" + D_tomorrow + " " + h_tomorrow + ": " + m_tomorrow + ":" + s_tomorrow + " GMT+0800";
+        that.data.timer = setInterval(() => { //注意箭头函数！！
+          that.setData({
+            timeLeft: util.getTimeLeft(datetimeTo) //使用了util.getTimeLeft
+          });
+          if (that.data.timeLeft == "0天0时0分0秒" || that.data.timeLeft == "订单关闭") {
+            clearInterval(that.data.timer);
+            that.setData({
+              timeLeft: "订单关闭"
+            });
+            //订单超时自动转为交易失败订单
+            wx.request({
+              url: 'http://localhost:8888/wx/changeOrderState',
+              method: 'POST',
+              header: { //请求头
+                "Content-Type": "application/x-www-form-urlencoded",
+                "Authorization": wx.getStorageSync('LocalToken')
+              },
+              data: {
+                _id: that.data.orderId,
+                state: "待收货"
+              },
+              success(res) { },
+              fail() { }
+            })
+          }
+        }, 1000);
       },
       fail() { }
+    })
+  },
+
+  //确认收货
+  toReceive() {
+    var that = this;
+    //显示是否确认收货弹窗
+    wx.showModal({
+      title: '提示',
+      content: '您确定要确认收货吗？',
+      success: (result) => {
+        if (result.confirm) {
+          var _id = that.data.orderId;
+          wx.request({
+            url: 'http://localhost:8888/wx/changeOrderState',
+            method: 'POST',
+            header: { //请求头
+              "Content-Type": "application/x-www-form-urlencoded",
+              "Authorization": wx.getStorageSync('LocalToken')
+            },
+            data: {
+              _id: _id,
+              state: "待收货"
+            },
+            success(res) {
+              var aShow = wx.getStorageSync('aShow');
+              let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
+              let prevPage = pages[pages.length - 2];
+              var tabs = prevPage.data.tabs;
+              if (aShow = "待收货")
+                tabs[3].isActive = true;
+              if (aShow = "全部")
+                tabs[0].isActive = true;
+              //prevPage 是获取上一个页面的js里面的pages的所有信息。 -2 是上一个页面，-3是上上个页面以此类推。
+              prevPage.setData({  // 将我们想要传递的参数在这里直接setData。上个页面就会执行这里的操作。
+                tabs: tabs
+              })
+              wx.navigateBack({
+                delta: 1
+              })
+            },
+            fail() { }
+          })
+        } else
+          return;
+      }
     })
   },
 

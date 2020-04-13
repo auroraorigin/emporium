@@ -1,4 +1,4 @@
-// pages/payOrder/payOrder.js
+// pages/payOrder/payOrder.js 
 Page({
 
   /**
@@ -10,14 +10,15 @@ Page({
     all_Order: [], //商品列表
     total_number: "", //总数量
     total_money: "", //总价格
-    datetimeTo: "", //关闭时间
+    timestamp: "", //关闭时间戳
     waitPaidOrder: {}, //待支付订单
     waitSentOrder: {},//待发货订单 
-    userWord: "",//用户留言
+    userWord: "无",//用户留言
     freight: 0,//运费
     cheap: "",//优惠
     canUseCoupon: [],//可用优惠卷数组
-    selectCoupon: {}//选择的优惠卷
+    selectCoupon: {},//选择的优惠卷
+    isCart: Boolean,//判断是否是从购物车来的数据
   },
 
   //修改支付的个人信息
@@ -60,25 +61,9 @@ Page({
     var now_time = Y + "/" + M + "/" + D + " " + h + ": " + m + ":" + s + " GMT+0800";
 
     //加一天的时间戳：  
-    var tomorrow_timetamp = timestamp + 24 * 60 * 60;
-    //加一天的时间：  
-    var n_to = tomorrow_timetamp * 1000;
-    var tomorrow_date = new Date(n_to);
-    //加一天后的年份  
-    var Y_tomorrow = tomorrow_date.getFullYear();
-    //加一天后的月份  
-    var M_tomorrow = (tomorrow_date.getMonth() + 1 < 10 ? '0' + (tomorrow_date.getMonth() + 1) : tomorrow_date.getMonth() + 1);
-    //加一天后的日期  
-    var D_tomorrow = tomorrow_date.getDate() < 10 ? '0' + tomorrow_date.getDate() : tomorrow_date.getDate();
-    //加一天后的时刻  
-    var h_tomorrow = tomorrow_date.getHours();
-    //加一天后的分钟  
-    var m_tomorrow = tomorrow_date.getMinutes();
-    //加一天后的秒数  
-    var s_tomorrow = tomorrow_date.getSeconds();
-    var datetimeTo = Y_tomorrow + "/" + M_tomorrow + "/" + D_tomorrow + " " + h_tomorrow + ": " + m_tomorrow + ":" + s_tomorrow + " GMT+0800";
+    var tomorrow_timetamp = timestamp + 20 * 60 * 60;
     this.setData({
-      datetimeTo: datetimeTo,
+      timestamp: tomorrow_timetamp,
     })
   },
 
@@ -86,7 +71,7 @@ Page({
   submitOrder() {
     var that = this;
     that.getTime();
-    var datetimeTo = that.data.datetimeTo;
+    var timestamp = that.data.timestamp;
     //判断地址是否有重新选择
     if (!that.data.select_address) {
       var address = that.data.addressList
@@ -111,25 +96,61 @@ Page({
               state: "待发货",
               goods: JSON.stringify(that.data.all_Order),
               totalPrice: that.data.total_money,
-              coupon: JSON.stringify(that.data.selectCoupon)
+              coupon: JSON.stringify(that.data.selectCoupon),
+              userWord: that.data.userWord
             },
             success(res) {
               if (res.data.stockMessage == "库存减少成功") {
                 //将数据渲染给本地appData
                 that.setData({
-                  waitSentOrder: res.data.order
+                  waitSentOrder: res.data.order,
                 });
                 //跳转时携带参数
-                wx.navigateTo({
+                wx.reLaunch({
                   url: '/pages/waitSent/waitSent?waitSentOrder=' + JSON.stringify(that.data.waitSentOrder)
                 });
-                //清除购物车缓存
-                wx.removeStorageSync("cart");
+                //如果数据从购物车传过来的，提交订单成功后情况对应购物车缓存
+                if (that.data.isCart == true) {
+                  //获取缓存中的购物车列表
+                  var cart = wx.getStorageSync('cart');
+                  //假如购物车的商品全选结算
+                  if (cart.length == that.data.all_Order.length)
+                    //提交订单成功后情况购物车
+                    wx.removeStorageSync('cart');
+                  //如果选择的是购物车的某些商品结算
+                  else if (cart.length > that.data.all_Order.length) {
+                    cart.forEach(function (v, i) {
+                      that.data.all_Order.forEach(function (value, index) {
+                        //找到购物车与订单商品相同的，就删除购物车对应商品的数据
+                        if (v._id == value._id) {
+                          cart.splice(i, 1)
+                        }
+                      })
+                    });
+                    //将购物车列表重新放入缓存
+                    wx.setStorageSync('cart', cart);
+                  }
+                }
               } else if (res.data.stockMessage == "库存不足") {
                 //显示提交失败信息
                 wx.showModal({
                   title: '提交失败',
                   content: '存在商品库存不足，请重新添加商品',
+                  success: (result) => {
+                    if (result.confirm) {
+                      //回到上一级页面
+                      wx.navigateBack({
+                        delta: 1
+                      })
+                    } else
+                      return;
+                  }
+                })
+              } else if (res.data.stateMessage = "存在商品下架") {
+                //显示提交失败信息
+                wx.showModal({
+                  title: '提交失败',
+                  content: '存在商品已下架，请重新添加商品',
                   success: (result) => {
                     if (result.confirm) {
                       //回到上一级页面
@@ -158,26 +179,64 @@ Page({
               state: "待付款",
               goods: JSON.stringify(that.data.all_Order),
               totalPrice: that.data.total_money,
-              datetimeTo: datetimeTo,
-              coupon: JSON.stringify(that.data.selectCoupon)
+              timestamp: timestamp,
+              coupon: JSON.stringify(that.data.selectCoupon),
+              userWord: that.data.userWord
             },
             success(res) {
               if (res.data.stockMessage == "库存减少成功") {
                 //将数据渲染给本地appData
                 that.setData({
-                  waitPaidOrder: res.data.order
+                  waitPaidOrder: res.data.order,
                 });
                 //跳转时携带参数
-                wx.navigateTo({
-                  url: '/pages/waitPaid/waitPaid?datetimeTo=' + datetimeTo + '&waitPaidOrder=' + JSON.stringify(that.data.waitPaidOrder)
+                wx.reLaunch({
+                  url: '/pages/waitPaid/waitPaid?timestamp=' + timestamp + '&waitPaidOrder=' + JSON.stringify(that.data.waitPaidOrder) + '&_id=' + that.data.waitPaidOrder._id
                 });
-                //清除购物车缓存
-                wx.removeStorageSync("cart");
+                //设置从生产订单页面跳转的标志
+                wx.setStorageSync('tip', true)
+                //如果数据从购物车传过来的，提交订单成功后情况对应购物车缓存
+                if (that.data.isCart == true) {
+                  //获取缓存中的购物车列表
+                  var cart = wx.getStorageSync('cart');
+                  //假如购物车的商品全选结算
+                  if (cart.length == that.data.all_Order.length)
+                    //提交订单成功后情况购物车
+                    wx.removeStorageSync('cart');
+                  //如果选择的是购物车的某些商品结算
+                  else if (cart.length > that.data.all_Order.length) {
+                    cart.forEach(function (v, i) {
+                      that.data.all_Order.forEach(function (value, index) {
+                        //找到购物车与订单商品相同的，就删除购物车对应商品的数据
+                        if (v._id == value._id) {
+                          cart.splice(i, 1)
+                        }
+                      })
+                    });
+                    //将购物车列表重新放入缓存
+                    wx.setStorageSync('cart', cart);
+                  }
+                }
               } else if (res.data.stockMessage == "库存不足") {
                 //显示提交失败信息
                 wx.showModal({
                   title: '提交失败',
                   content: '存在商品库存不足，请重新添加商品',
+                  success: (result) => {
+                    if (result.confirm) {
+                      //回到上一级页面
+                      wx.navigateBack({
+                        delta: 1
+                      })
+                    } else
+                      return;
+                  }
+                })
+              } else if (res.data.stateMessage = "存在商品下架") {
+                //显示提交失败信息
+                wx.showModal({
+                  title: '提交失败',
+                  content: '存在商品已下架，请重新添加商品',
                   success: (result) => {
                     if (result.confirm) {
                       //回到上一级页面
@@ -262,21 +321,9 @@ Page({
     }
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    //每次刷新页面判断默认地址或选择地址
-    this.getDefaultAddress();
-    //如果缓存中有修改的地址信息，优先选择
-    var select = wx.getStorageSync("select_address");
-    if (!select.cosignee)
-      this.setData({
-        select_address: select
-      })
-    wx.removeStorageSync("select_address");
-    //提取缓存中的购物车信息
-    var cart = wx.getStorageSync("cart");
+  onLoad(options) {
+    //页面进入时，获取传过来的商品数据
+    var cart = JSON.parse(options.cart).cart;
     var total = 0;
     var order = [];
     //计算每个商品的价格和总商品的价格
@@ -303,8 +350,26 @@ Page({
     this.setData({
       all_Order: order,
       total_number: cart.length,
-      total_money: total
+      total_money: total,
+      isCart: JSON.parse(options.cart).isCart
     });
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    //每次刷新页面判断默认地址或选择地址
+    this.getDefaultAddress();
+    //如果缓存中有修改的地址信息，优先选择
+    var select = wx.getStorageSync("select_address");
+    if (!select.cosignee)
+      this.setData({
+        select_address: select
+      })
+    wx.removeStorageSync("select_address");
+    //提取缓存中的购物车信息
+    var cart = wx.getStorageSync("cart");
     this.cheapState();
   },
 })

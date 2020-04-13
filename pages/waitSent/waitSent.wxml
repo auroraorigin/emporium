@@ -21,13 +21,17 @@
 				<view class="center">{{addressList.region_name}}{{addressList.detail_address}}</view>
 			</view>
 		</view>
+		<view class="bottom">
+			<view class="bottom_left">交易开始时间</view>
+			<view class="bottom_right">{{createDate}}</view>
+		</view>
 
 		<!-- 商品列表 -->
 		<view class="item" wx:for="{{all_Order}}" wx:key="index">
 			<view class="list_item">
 				<view class="product_top">
 					<text class="text1">海鲜商城</text>
-					<text class="text2">已完成</text>
+					<text class="text2">已选择</text>
 				</view>
 				<view class="product_bottom">
 					<image src="{{item.url}}" class="product_image"></image>
@@ -84,6 +88,9 @@
 				</text>
 			</view>
 			<view class="border_right">
+				<view class="outside" bindtap="toReturn">
+					<text class="inside">申请退款</text>
+				</view>
 				<view class="outside">
 					<text class="inside">提醒发货</text>
 				</view>

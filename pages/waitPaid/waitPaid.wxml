@@ -6,10 +6,10 @@
 			<view class="state_left">
 				<image src="/images/personal_center/waitPaid.png" mode="widthFix"></image>
 			</view>
-			<view wx:if="{{timeLeft!='false'}}" class="state_right">等待买家付款
+			<view wx:if="{{timeLeft!='订单关闭'}}" class="state_right">等待买家付款
 				<view class="state_right1">{{timeLeft}}后自动关闭</view>
 			</view>
-			<view wx:else class="close">订单超时，已关闭</view>
+			<view wx:if="{{timeLeft=='订单关闭'}}" class="close">订单超时，已关闭</view>
 		</view>
 
 		<!-- 地址信息 -->
@@ -24,7 +24,7 @@
 		</view>
 		<view class="bottom">
 			<view class="bottom_left">交易开始时间</view>
-			<view class="bottom_right">2020年1月11日</view>
+			<view class="bottom_right">{{createDate}}</view>
 		</view>
 
 		<!-- 商品列表 -->
@@ -79,7 +79,7 @@
 			<view class="border_left" wx:if="{{coupon.name}}">
 				<text class="C">
          <text class="L"> 
-         </text>待付款:<text class="R"> ¥{{total_money+freight-coupon.money[1]}}</text>
+         </text>待付款:<text class="R"> ¥{{total_money+freight-coupon.money[1]}}</text> 
 				</text>
 			</view>
 			<view class="border_left" wx:else>
@@ -89,8 +89,8 @@
 				</text>
 			</view>
 			<view class="border_right">
-				<view class="outside">
-					<text class="inside">取消订单</text>
+				<view class="outside" bindtap="cancelOrder">
+					<text class="inside">取消订单</text> 
 				</view>
 				<view class="outside">
 					<text class="inside">确认付款</text>

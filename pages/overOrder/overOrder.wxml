@@ -6,7 +6,10 @@
 			<view class="state_left">
 				<image src="/images/personal_center/over_order.png" mode="widthFix"></image>
 			</view>
-			<view class="state_right">交易已完成
+			<view wx:if="{{state=='交易成功'}}" class="state_right">交易已完成
+				<view class="state_right1">订单关闭</view>
+			</view>
+			<view wx:if="{{state=='交易失败'}}" class="state_right">交易未完成
 				<view class="state_right1">订单关闭</view>
 			</view>
 		</view>
@@ -22,8 +25,8 @@
 			</view>
 		</view>
 		<view class="bottom">
-			<view class="bottom_left">交易完成时间</view>
-			<view class="bottom_right">2020年1月11日</view>
+			<view class="bottom_left">交易开始时间</view>
+			<view class="bottom_right">{{createDate}}</view> 
 		</view>
 
 		<!-- 商品列表 -->
@@ -31,7 +34,7 @@
 			<view class="list_item">
 				<view class="product_top">
 					<text class="text1">海鲜商城</text>
-					<text class="text2">已完成</text>
+					<text class="text2">已选择</text>
 				</view>
 				<view class="product_bottom">
 					<image src="{{item.url}}" class="product_image"></image>
@@ -58,32 +61,46 @@
 				</view>
 			</view>
 		</view>
+		<view class="goods">
+			<view class="title">商品总价格：</view>
+			<view class="price1">{{total_money}}</view>
+		</view>
+		<view class="freight">
+			<view class="title">运费：</view>
+			<view class="price1">¥{{freight}}</view>
+		</view>
+		<view class="freight" wx:if="{{coupon.name}}">
+			<view class="title">优惠价格：</view>
+			<view class="price1">¥{{coupon.money[1]}}</view>
+		</view>
 	</scroll-view>
 
 	<!-- 总金额 -->
 	<view class="bottom_border">
 		<view class="border_content">
-			<view class="border_left" wx:if="{{coupon.name}}">
-				<text class="C">
-         <text class="L">商品价格：¥{{total_money}}
-         <text class="L_bottom">运费：{{freight}}</text></text>实付款:<text class="R"> ¥{{total_money+freight-coupon.money[1]}}</text>
+			<view class="border_left" wx:if="{{state=='交易失败'}}">
+				<text class="C" wx:if="{{coupon.name}}">
+         <text class="L"> 
+         </text>未付款:<text class="R"> ¥{{total_money+freight-coupon.money[1]}}</text>
+				</text>
+				<text class="C" wx:if="{{!coupon.name}}">
+         <text class="L"> 
+         </text>未付款:<text class="R"> ¥{{total_money+freight}}</text>
 				</text>
 			</view>
-      <view class="border_left" wx:else>
-				<text class="C">
-         <text class="L">商品价格：¥{{total_money}}
-         <text class="L_bottom">运费：{{freight}}</text></text>实付款:<text class="R"> ¥{{total_money+freight-coupon.money[1]}}</text>
+			<view class="border_left" wx:if="{{state=='交易成功'}}">
+				<text class="C" wx:if="{{coupon.name}}">
+         <text class="L"> 
+         </text>已付款:<text class="R"> ¥{{total_money+freight-coupon.money[1]}}</text>
 				</text>
-			</view>
-			<view class="border_left" wx:if="{{coupon.name}}">
-				<text class="C">
-         <text class="L">商品价格：¥{{total_money}}
-         <text class="L_bottom">运费：{{freight}}</text></text>实付款:<text class="R"> ¥{{total_money+freight}}</text>
+				<text class="C" wx:if="{{!coupon.name}}">
+         <text class="L"> 
+         </text>已付款:<text class="R"> ¥{{total_money+freight}}</text>
 				</text>
 			</view>
 			<view class="border_right">
-				<view class="outside" bindtap="deleteOrder">
-					<text class="inside">删除订单</text>
+				<view class="outside">
+					<text class="inside" bindtap="deleteOrder">删除订单</text>
 				</view>
 			</view>
 		</view>

@@ -34,7 +34,7 @@ page {
 }
 
 .address_list {
-  background-color: white;
+  background-color: white; 
   height: auto;
   position: relative;
   top: 50rpx;

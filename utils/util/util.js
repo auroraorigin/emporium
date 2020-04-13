@@ -16,9 +16,27 @@ function getTimeLeft(datetimeTo) {
   if (days >= 0 && hours >= 0 && minutes >= 0 && seconds >= 0)
     return days + "天" + hours + "时" + minutes + "分" + seconds + "秒"
   else
-    return false
+    return "订单关闭"
+}
+
+function formatTime(date) {
+  var year = date.getFullYear()
+  var month = date.getMonth() + 1
+  var day = date.getDate()
+ 
+  var hour = date.getHours()
+  var minute = date.getMinutes()
+  var second = date.getSeconds()
+ 
+  return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+}
+ 
+function formatNumber(n) {
+  n = n.toString()
+  return n[1] ? n : '0' + n
 }
 
 module.exports = {
-  getTimeLeft: getTimeLeft
+  getTimeLeft: getTimeLeft,
+  formatTime: formatTime
 }

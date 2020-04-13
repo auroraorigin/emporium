@@ -1,0 +1,22 @@
+<form class="allPage" bindsubmit="saveReason">
+	<view class="border1">
+		<view class="border1_left">退款原因:</view>
+		<picker class="border1_right" bindchange="bindReasonChange" value="{{index}}" range="{{returnReason}}">
+			<view wx:if="{{!selectReason}}">请选择退款原因</view>
+			<view wx:else class="selectContent">{{selectReason}}</view>
+		</picker>
+	</view>
+
+	<view class="border2" wx:if="{{selectReason=='其他'}}">
+		<view class="border2_top">其他</view>
+		<view class="border2_bottom">
+			<input class="inputStyle" name="orderReason" bindinput="orderReason" placeholder="退款原因（30字以内）" value="{{value}}" type="text" maxlength="30"></input>
+		</view>
+	</view>
+
+	<view class="border3">
+		<button class="buttonType" form-type="submit">
+			确定
+		</button>
+	</view>
+</form>

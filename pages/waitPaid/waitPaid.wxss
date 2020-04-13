@@ -333,7 +333,7 @@ page {
 }
 
 .outside {
-  background-color: #7ca7d1;
+  background-color: #7ca7d1; 
   height: 70rpx;
   width: 180rpx;
   border-radius: 50rpx;

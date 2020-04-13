@@ -1,5 +1,5 @@
-// pages/overOrder/overOrder.js 
-Page({ 
+// pages/overOrder/overOrder.js  
+Page({
 
   /**
    * 页面的初始数据 
@@ -11,8 +11,9 @@ Page({
     total_money: "",//总价格
     orderId: "", //订单id
     freight: "",//运费
-    state:"",//订单状态
-    coupon: {}//优惠卷
+    state: "",//订单状态
+    coupon: {},//优惠卷 
+    createDate:""//订单创建日期
   },
 
   //根据orderId加载订单详情
@@ -34,8 +35,9 @@ Page({
           all_Order: res.data.order.goods,
           total_money: Number(res.data.order.totalPrice),
           freight: Number(res.data.order.freight),
-          state:res.data.order.state,
-          coupon:res.data.order.coupon
+          state: res.data.order.state,
+          coupon: res.data.order.coupon,
+          createDate:res.data.order.createDate
         })
       },
       fail() { }
@@ -44,31 +46,41 @@ Page({
 
   //删除订单
   deleteOrder() {
-    var that=this;
-    wx.request({
-      url: 'http://localhost:8888/wx/deleteOrder',
-      method: 'POST',
-      header: { //请求头
-        "Content-Type": "application/x-www-form-urlencoded",
-        "Authorization": wx.getStorageSync('LocalToken')
-      },
-      data: {
-        _id: that.data.orderId
-      },
-      success(res) {
-        console.log(res.data.message)
-      },
-      fail() { }
-    });
-    wx.navigateBack({
-      delta: 1
+    //显示是否删除订单弹窗
+    wx.showModal({
+      title: '提示',
+      content: '您确定要删除该订单吗？',
+      success: (result) => {
+        if (result.confirm) {
+          var that = this;
+          wx.request({
+            url: 'http://localhost:8888/wx/deleteOrder',
+            method: 'POST',
+            header: { //请求头
+              "Content-Type": "application/x-www-form-urlencoded",
+              "Authorization": wx.getStorageSync('LocalToken')
+            },
+            data: {
+              _id: that.data.orderId
+            },
+            success(res) {
+              console.log(res.data.message)
+            },
+            fail() { }
+          });
+          wx.navigateBack({
+            delta: 1
+          })
+        } else
+          return;
+      }
     })
   },
-  
+
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     //1.获取当前小程序的页面栈-数组 最大长度为10页面 
     let pages = getCurrentPages();
     //2.数组中索引最大的页面就是当前页面
@@ -82,7 +94,7 @@ Page({
     })
     this.getOrderDetail();
     //将该页面参数放入缓存
-    var type=1;
+    var type = 1;
     wx.setStorageSync("type", type);
   },
 })

@@ -1,60 +1,80 @@
-<view class="content"> 
-  <scroll-view scroll-y="true" class="SV">
-    <!-- 订单状态 --> 
-    <view class="order_state">
-      <view class="state_left">
-        <image src="/images/personal_center/havedReturn.png" mode="widthFix"></image>
-      </view>
-      <view class="state_right">已退款
-        <view class="state_right1">2020年1月1日 16:40</view>
-      </view>
-    </view>
-    <!-- 退款信息 -->
-    <view class="returnTitle">
-      <view class="titleContent">退款信息</view>
-    </view>
-    <view class="item" wx:for="{{all_Order}}" wx:key="index">
-      <view class="list_item">
-        <view class="product_top">
-          <text class="text1">海鲜商城</text>
-          <text class="text2">已完成</text>
-        </view>
-        <view class="product_bottom">
-          <image src="{{item.url}}" class="product_image"></image>
-          <view class="detail">
-            <view class="product_name">
-              <text>{{item.name}}</text>
-            </view>
-            <view class="standard">
-              <text>规格：{{item.specification}}</text>
-            </view>
-            <view class="money_Return">
-              <text>{{item.message}}</text>
-            </view>
-          </view>
-          <view class="product_price">
-            <text class="price">¥ {{item.unitPrice}}</text>
-            <text class="buyNumber">×{{item.buyNumber}}</text>
-          </view>
-        </view>
-      </view>
-      <view class="second_bottom">
-        <view class="total">
-          <text class="text_content">共{{item.buyNumber}}条  合计:¥ {{item.goodPrice}}</text>
-        </view>
-      </view>
-    </view>
-    <view class="returnReason">
-      <view class="reasonTitle">退款原因：</view>
-      <view class="reasonContent">未按约定时间发货</view>
-    </view>
-    <view class="returnMoney">
-      <view class="reasonTitle">退款金额：</view>
-      <view class="reasonContent">¥{{total_money+freight}}</view>
-    </view>
-    <view class="returnTime">
-      <view class="reasonTitle">申请时间：</view>
-      <view class="reasonContent">2020-01-01 10:00</view>
-    </view>
-  </scroll-view>
+<view class="content">
+	<scroll-view scroll-y="true" class="SV">
+		<!-- 订单状态 -->
+		<view class="order_state">
+			<view class="state_left">
+				<image src="/images/personal_center/havedReturn.png" mode="widthFix"></image>
+			</view>
+			<view class="state_right">退款中
+				<view class="state_right1">等待商家处理</view>
+			</view>
+		</view>
+		<!-- 退款信息 -->
+		<view class="returnTitle">
+			<view class="titleContent">退款信息</view>
+		</view>
+		<view class="item" wx:for="{{all_Order}}" wx:key="index">
+			<view class="list_item">
+				<view class="product_top">
+					<text class="text1">海鲜商城</text>
+					<text class="text2">已选择</text>
+				</view>
+				<view class="product_bottom">
+					<image src="{{item.url}}" class="product_image"></image>
+					<view class="detail">
+						<view class="product_name">
+							<text>{{item.name}}</text>
+						</view>
+						<view class="standard">
+							<text>规格：{{item.specification}}</text>
+						</view>
+						<view class="money_Return">
+							<text>{{item.message}}</text>
+						</view>
+					</view>
+					<view class="product_price">
+						<text class="price">¥ {{item.unitPrice}}</text>
+						<text class="buyNumber">×{{item.buyNumber}}</text>
+					</view>
+				</view>
+			</view>
+			<view class="second_bottom">
+				<view class="total">
+					<text class="text_content">共{{item.buyNumber}}件  合计:¥ {{item.goodPrice}}</text>
+				</view>
+			</view>
+		</view>
+		<view class="returnReason">
+			<view class="reasonTitle">退款原因：</view>
+			<view class="reasonContent">{{returnReason}}</view>
+		</view>
+		<view class="returnMoney">
+			<view class="reasonTitle">运费：</view>
+			<view class="reasonContent">¥{{freight}}</view>
+		</view>
+		<view wx:if="{{!coupon.name}}">
+			<view class="returnMoney">
+				<view class="reasonTitle">退款金额：</view>
+				<view class="reasonContent">¥{{total_money+freight}}</view>
+			</view>
+		</view>
+		<view wx:else>
+			<view class="returnMoney">
+				<view class="reasonTitle">优惠价格：</view>
+				<view class="reasonContent">¥{{coupon.money[1]}}</view>
+			</view>
+			<view class="returnMoney">
+				<view class="reasonTitle">退款金额：</view>
+				<view class="reasonContent">¥{{total_money+freight-coupon.money[1]}}</view>
+			</view>
+		</view>
+		<view class="returnTime" wx:if="{{expressNumber}}">
+			<view class="reasonTitle">快递单号：</view>
+			<view class="reasonContent">{{expressNumber}}</view>
+		</view>
+		<view class="returnMoney">
+			<view class="reasonTitle">订单创建日期：</view>
+			<view class="reasonContent">{{createDate}}</view>
+		</view>
+	</scroll-view>
 </view>
