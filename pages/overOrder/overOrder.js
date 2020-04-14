@@ -13,7 +13,8 @@ Page({
     freight: "",//运费
     state: "",//订单状态
     coupon: {},//优惠卷 
-    createDate:""//订单创建日期
+    createDate:"",//订单创建日期
+    havedPaid:""//实付款
   },
 
   //根据orderId加载订单详情
@@ -37,14 +38,15 @@ Page({
           freight: Number(res.data.order.freight),
           state: res.data.order.state,
           coupon: res.data.order.coupon,
-          createDate:res.data.order.createDate
+          createDate:res.data.order.createDate,
+          havedPaid:res.data.order.havedPaid
         })
       },
       fail() { }
     })
   },
 
-  //删除订单
+  /*//删除订单
   deleteOrder() {
     //显示是否删除订单弹窗
     wx.showModal({
@@ -68,14 +70,14 @@ Page({
             },
             fail() { }
           });
-          wx.navigateBack({
+          wx.navigateBack({ 
             delta: 1
           })
         } else
           return;
       }
     })
-  },
+  },*/
 
   /**
    * 生命周期函数--监听页面显示

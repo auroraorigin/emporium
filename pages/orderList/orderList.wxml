@@ -37,13 +37,12 @@
 				</view>
 				<view class="second_bottom">
 					<view class="total">
-						<text wx:if="{{item.coupon.name}}" class="priceText">共{{item.goods.length}}件商品 合计:¥ {{item.totalPrice+item.freight-item.coupon.money[1]}}</text>
-						<text class="priceText" wx:else>共{{item.goods.length}}件商品 合计:¥ {{item.totalPrice+item.freight}}</text>
-						<view class="buttonFlex" wx:if="{{item.state=='交易失败'||item.state=='交易成功'}}">
+						<text class="priceText">共{{item.goods.length}}件商品 合计:¥ {{item.havedPaid}}</text>
+						<!--<view class="buttonFlex" wx:if="{{item.state=='交易失败'||item.state=='交易成功'}}">
 							<view class="button_type" data-id="{{item._id}}" catchtap="deleteOrder">
 								<text>删除订单</text>
 							</view>
-						</view>
+						</view>-->
 						<view class="buttonFlex" wx:if="{{item.state=='待付款'}}">
 							<view class="button_type" data-id="{{item._id}}" catchtap="cancelOrder">
 								<text>取消订单</text>
@@ -56,9 +55,9 @@
 							<view class="button_type" catchtap="toReturn" data-id="{{item._id}}">
 								<text>申请退款</text>
 							</view>
-							<view class="button_type">
+							<!--<view class="button_type">
 								<text>提醒发货</text>
-							</view>
+							</view>-->
 						</view>
 						<view class="buttonFlex" wx:if="{{item.state=='待收货'}}">
 							<view class="button_type" catchtap="toReturn" data-id="{{item._id}}">
@@ -113,8 +112,7 @@
 				</view>
 				<view class="second_bottom">
 					<view class="total">
-						<text wx:if="{{item.coupon.name}}" class="priceText">共{{item.goods.length}}件商品 合计:¥ {{item.totalPrice+item.freight-item.coupon.money[1]}}</text>
-						<text wx:else class="priceText">共{{item.goods.length}}件商品 合计:¥ {{item.totalPrice+item.freight}}</text>
+						<text class="priceText">共{{item.goods.length}}件商品 合计:¥ {{item.havedPaid}}</text>
 						<view class="buttonFlex">
 							<view class="button_type" data-id="{{item._id}}" catchtap="cancelOrder">
 								<text>取消订单</text>
@@ -163,15 +161,14 @@
 				</view>
 				<view class="second_bottom">
 					<view class="total">
-						<text wx:if="{{item.coupon.name}}" class="priceText">共{{item.goods.length}}件商品 合计:¥ {{item.totalPrice+item.freight-item.coupon.money[1]}}</text>
-						<text wx:else class="priceText">共{{item.goods.length}}件商品 合计:¥ {{item.totalPrice+item.freight}}</text>
+						<text class="priceText">共{{item.goods.length}}件商品 合计:¥ {{item.havedPaid}}</text>
 						<view class="buttonFlex">
 							<view class="button_type" catchtap="toReturn" data-id="{{item._id}}">
 								<text>申请退款</text>
 							</view>
-							<view class="button_type">
+							<!--<view class="button_type">
 								<text>提醒发货</text>
-							</view>
+							</view>-->
 						</view>
 					</view>
 				</view>
@@ -213,8 +210,7 @@
 				</view>
 				<view class="second_bottom">
 					<view class="total">
-						<text wx:if="{{item.coupon.name}}" class="priceText">共{{item.goods.length}}件商品 合计:¥ {{item.totalPrice+item.freight-item.coupon.money[1]}}</text>
-						<text wx:else class="priceText">共{{item.goods.length}}件商品 合计:¥ {{item.totalPrice+item.freight}}</text>
+						<text class="priceText">共{{item.goods.length}}件商品 合计:¥ {{item.havedPaid}}</text>
 						<view class="buttonFlex">
 							<view class="button_type" catchtap="toReturn" data-id="{{item._id}}">
 								<text>申请退款</text>
@@ -263,8 +259,7 @@
 				</view>
 				<view class="second_bottom">
 					<view class="total">
-						<text wx:if="{{item.coupon.name}}" class="priceText">共{{item.goods.length}}件商品 合计:¥ {{item.totalPrice+item.freight-item.coupon.money[1]}}</text>
-						<text wx:else class="priceText">共{{item.goods.length}}件商品 合计:¥ {{item.totalPrice+item.freight}}</text>
+						<text class="priceText">共{{item.goods.length}}件商品 合计:¥ {{item.havedPaid}}</text>
 						<view class="buttonFlex" wx:if="{{item.state=='退款中'}}">
 							<view class="button_type" catchtap="cancelReturn" data-id="{{item._id}}" data-expressNumber="{{item.expressNumber}}">
 								<text>取消退款</text>

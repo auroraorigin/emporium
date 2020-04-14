@@ -12,7 +12,8 @@ Page({
     freight: "",//运费
     coupon: {},//选择的优惠卷
     orderId: "",//订单ID
-    createDate:""//订单创建日期
+    createDate:"",//订单创建日期
+    havedPaid:""//实付款
   },
 
   //获取订单详情
@@ -35,7 +36,8 @@ Page({
           total_money: Number(res.data.order.totalPrice),
           freight: Number(res.data.order.freight),
           coupon: res.data.order.coupon,
-          createDate:res.data.order.createDate
+          createDate:res.data.order.createDate,
+          havedPaid:res.data.order.havedPaid
         })
       },
       fail() { }

@@ -1,5 +1,5 @@
 <scroll-view scroll-y="true" class="SV">
-  <view wx:for="{{addressList}}" wx:key="{{index}}" class="address_list" data-index="{{index}}" bindtap="select_address">
+  <view wx:for="{{addressList}}" wx:key="index" class="address_list" data-index="{{index}}" bindtap="select_address">
     <view wx:if="{{!item.consignee}}"></view>
     <view wx:else>
         <view class="address1">

@@ -52,21 +52,13 @@
 			<view class="reasonTitle">运费：</view>
 			<view class="reasonContent">¥{{freight}}</view>
 		</view>
-		<view wx:if="{{!coupon.name}}">
-			<view class="returnMoney">
-				<view class="reasonTitle">退款金额：</view>
-				<view class="reasonContent">¥{{total_money+freight}}</view>
-			</view>
+		<view class="returnMoney" wx:if="{{coupon.name}}">
+			<view class="reasonTitle">优惠价格：</view>
+			<view class="reasonContent">¥{{coupon.money[1]}}</view>
 		</view>
-		<view wx:else>
-			<view class="returnMoney">
-				<view class="reasonTitle">优惠价格：</view>
-				<view class="reasonContent">¥{{coupon.money[1]}}</view>
-			</view>
-			<view class="returnMoney">
-				<view class="reasonTitle">退款金额：</view>
-				<view class="reasonContent">¥{{total_money+freight-coupon.money[1]}}</view>
-			</view>
+		<view class="returnMoney">
+			<view class="reasonTitle">退款金额：</view>
+			<view class="reasonContent">¥{{havedPaid}}</view>
 		</view>
 		<view class="returnTime" wx:if="{{expressNumber}}">
 			<view class="reasonTitle">快递单号：</view>

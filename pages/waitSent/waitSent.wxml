@@ -77,23 +77,23 @@
 		<view class="border_content">
 			<view class="border_left" wx:if="{{coupon.name}}">
 				<text class="C">
-         <text class="L">
-          </text>实付款:<text class="R"> ¥{{total_money+freight-coupon.money[1]}}</text>
+         <text class="L"> 
+         </text>已付款:<text class="R"> ¥{{total_money+freight-coupon.money[1]}}</text> 
 				</text>
 			</view>
 			<view class="border_left" wx:else>
 				<text class="C">
-         <text class="L">
-          </text>实付款:<text class="R"> ¥{{total_money+freight}}</text>
+         <text class="L"> 
+         </text>已付款:<text class="R"> ¥{{total_money+freight}}</text>
 				</text>
 			</view>
 			<view class="border_right">
 				<view class="outside" bindtap="toReturn">
 					<text class="inside">申请退款</text>
 				</view>
-				<view class="outside">
+				<!--<view class="outside">
 					<text class="inside">提醒发货</text>
-				</view>
+				</view>-->
 			</view>
 		</view>
 	</view>

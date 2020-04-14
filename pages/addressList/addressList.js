@@ -175,7 +175,6 @@ Page({
       success() {
         //保存成功则清空地址缓存
         wx.removeStorageSync('addressList');
-        wx.removeStorageSync('defaultAddress');
       },
       fail() {}
     })

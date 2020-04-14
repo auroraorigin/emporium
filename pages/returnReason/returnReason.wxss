@@ -21,7 +21,8 @@ page {
 
 .border1_right {
   font-size: 30rpx;
-  color: #808080
+  color: #808080;
+  width: 80%;
 }
 
 .border1_right .selectContent {

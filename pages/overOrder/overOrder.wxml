@@ -9,7 +9,7 @@
 			<view wx:if="{{state=='交易成功'}}" class="state_right">交易已完成
 				<view class="state_right1">订单关闭</view>
 			</view>
-			<view wx:if="{{state=='交易失败'}}" class="state_right">交易未完成
+			<view wx:if="{{state=='交易关闭'}}" class="state_right">交易未完成
 				<view class="state_right1">订单关闭</view>
 			</view>
 		</view>
@@ -66,7 +66,7 @@
 			<view class="price1">{{total_money}}</view>
 		</view>
 		<view class="freight">
-			<view class="title">运费：</view>
+			<view class="title">总运费：</view>
 			<view class="price1">¥{{freight}}</view>
 		</view>
 		<view class="freight" wx:if="{{coupon.name}}">
@@ -79,30 +79,22 @@
 	<view class="bottom_border">
 		<view class="border_content">
 			<view class="border_left" wx:if="{{state=='交易失败'}}">
-				<text class="C" wx:if="{{coupon.name}}">
+				<text class="C">
          <text class="L"> 
-         </text>未付款:<text class="R"> ¥{{total_money+freight-coupon.money[1]}}</text>
-				</text>
-				<text class="C" wx:if="{{!coupon.name}}">
-         <text class="L"> 
-         </text>未付款:<text class="R"> ¥{{total_money+freight}}</text>
+         </text>未付款:<text class="R"> ¥{{havedPaid}}</text>
 				</text>
 			</view>
 			<view class="border_left" wx:if="{{state=='交易成功'}}">
-				<text class="C" wx:if="{{coupon.name}}">
+				<text class="C">
          <text class="L"> 
-         </text>已付款:<text class="R"> ¥{{total_money+freight-coupon.money[1]}}</text>
-				</text>
-				<text class="C" wx:if="{{!coupon.name}}">
-         <text class="L"> 
-         </text>已付款:<text class="R"> ¥{{total_money+freight}}</text>
+         </text>已付款:<text class="R"> ¥{{havedPaid}}</text>
 				</text>
 			</view>
-			<view class="border_right">
+			<!--<view class="border_right">
 				<view class="outside">
 					<text class="inside" bindtap="deleteOrder">删除订单</text>
 				</view>
-			</view>
+			</view>-->
 		</view>
 	</view>
 </view>

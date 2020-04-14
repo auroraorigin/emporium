@@ -88,6 +88,7 @@ Page({
           for (var i = 0; i < all_Order.length; i++) {
             all_Order[i].totalPrice = Number(all_Order[i].totalPrice);
             all_Order[i].freight = Number(all_Order[i].freight);
+            all_Order[i].havedPaid = Number(all_Order[i].havedPaid);
           };
           that.setData({
             all_Order: all_Order
@@ -97,6 +98,7 @@ Page({
           for (var i = 0; i < wait_Paid.length; i++) {
             wait_Paid[i].totalPrice = Number(wait_Paid[i].totalPrice);
             wait_Paid[i].freight = Number(wait_Paid[i].freight);
+            wait_Paid[i].havedPaid = Number(wait_Paid[i].havedPaid);
           };
           that.setData({
             wait_Paid: wait_Paid
@@ -106,6 +108,7 @@ Page({
           for (var i = 0; i < wait_Sent.length; i++) {
             wait_Sent[i].totalPrice = Number(wait_Sent[i].totalPrice);
             wait_Sent[i].freight = Number(wait_Sent[i].freight);
+            wait_Sent[i].havedPaid = Number(wait_Sent[i].havedPaid);
           };
           that.setData({
             wait_Sent: wait_Sent
@@ -115,6 +118,7 @@ Page({
           for (var i = 0; i < wait_Received.length; i++) {
             wait_Received[i].totalPrice = Number(wait_Received[i].totalPrice);
             wait_Received[i].freight = Number(wait_Received[i].freight);
+            wait_Received[i].havedPaid = Number(wait_Received[i].havedPaid);
           };
           that.setData({
             wait_Received: wait_Received
@@ -124,6 +128,7 @@ Page({
           for (var i = 0; i < haved_Return.length; i++) {
             haved_Return[i].totalPrice = Number(haved_Return[i].totalPrice);
             haved_Return[i].freight = Number(haved_Return[i].freight);
+            haved_Return[i].havedPaid = Number(haved_Return[i].havedPaid);
           };
           that.setData({
             haved_Return: haved_Return
@@ -134,7 +139,7 @@ Page({
     });
   },
 
-  deleteOrder(e) {
+  /*deleteOrder(e) {
     //显示是否删除订单弹窗
     wx.showModal({
       title: '提示',
@@ -170,7 +175,7 @@ Page({
           return;
       }
     })
-  },
+  },*/
 
   //取消订单
   cancelOrder(e) {
@@ -209,7 +214,7 @@ Page({
     var id = e.currentTarget.dataset.id;
     var state = e.currentTarget.dataset.state;
     //根据全部订单的状态，分别进入不同的页面
-    if (state == "交易失败" || state == "交易成功") {
+    if (state == "交易关闭" || state == "交易成功") {
       wx.navigateTo({
         url: '/pages/overOrder/overOrder?orderId=' + id,
       })

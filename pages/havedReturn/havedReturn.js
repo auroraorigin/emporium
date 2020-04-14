@@ -13,7 +13,8 @@ Page({
     coupon: "",//优惠卷
     returnReason: "",//退款原因
     expressNumber: "",//快递单号
-    createDate:""//订单创建日期
+    createDate:"",//订单创建日期
+    havedPaid:""//实付款
   },
 
   //获取订单详情
@@ -38,7 +39,8 @@ Page({
           coupon: res.data.order.coupon,
           returnReason: res.data.order.returnReason,
           expressNumber: res.data.order.expressNumber,
-          createDate:res.data.order.createDate
+          createDate:res.data.order.createDate,
+          havedPaid:res.data.order.havedPaid
         })
       },
       fail() { }

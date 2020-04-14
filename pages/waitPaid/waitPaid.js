@@ -11,7 +11,8 @@ Page({
     orderId: "", //订单id,
     freight: "", //运费
     coupon: {},//优惠卷
-    createDate: ""//订单创建日期
+    createDate: "",//订单创建日期
+    waitToPaid:""//待付款
   },
 
   //根据orderId加载订单详情
@@ -35,7 +36,8 @@ Page({
           freight: Number(res.data.order.freight),
           timestamp: res.data.order.timestamp,
           coupon: res.data.order.coupon,
-          createDate: res.data.order.createDate
+          createDate: res.data.order.createDate,
+          waitToPaid:res.data.order.havedPaid
         });
         var timestamp = that.data.timestamp;
         //加一天的时间：  

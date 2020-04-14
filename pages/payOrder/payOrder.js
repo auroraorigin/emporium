@@ -19,6 +19,7 @@ Page({
     canUseCoupon: [],//可用优惠卷数组
     selectCoupon: {},//选择的优惠卷
     isCart: Boolean,//判断是否是从购物车来的数据
+    discount: ""//包邮价格
   },
 
   //修改支付的个人信息
@@ -73,11 +74,14 @@ Page({
     that.getTime();
     var timestamp = that.data.timestamp;
     //判断地址是否有重新选择
-    if (!that.data.select_address) {
+    if (!that.data.select_address.cosignee) {
+      console.log("111")
       var address = that.data.addressList
     } else {
+      console.log("222")
       var address = that.data.select_address
     }
+    console.log(address)
     wx.showModal({
       title: '提示',
       content: '您确定要提交订单吗？',
@@ -97,7 +101,8 @@ Page({
               goods: JSON.stringify(that.data.all_Order),
               totalPrice: that.data.total_money,
               coupon: JSON.stringify(that.data.selectCoupon),
-              userWord: that.data.userWord
+              userWord: that.data.userWord,
+              freight: that.data.freight
             },
             success(res) {
               if (res.data.stockMessage == "库存减少成功") {
@@ -181,7 +186,8 @@ Page({
               totalPrice: that.data.total_money,
               timestamp: timestamp,
               coupon: JSON.stringify(that.data.selectCoupon),
-              userWord: that.data.userWord
+              userWord: that.data.userWord,
+              freight: that.data.freight
             },
             success(res) {
               if (res.data.stockMessage == "库存减少成功") {
@@ -263,7 +269,7 @@ Page({
     })
   },
 
-  //获取默认地址
+  /*//获取默认地址
   getDefaultAddress() {
     var that = this;
     wx.request({
@@ -276,12 +282,13 @@ Page({
       data: {},
       success(res) {
         that.setData({
-          addressList: res.data.defaultAddress
+          addressList: res.data.defaultAddress,
+          discount: res.data.discount
         })
       },
       fail() { }
     })
-  },
+  },*/
 
   //优惠状态(暂无可用，有可用优惠卷)
   cheapState() {
@@ -321,55 +328,91 @@ Page({
     }
   },
 
-  onLoad(options) {
-    //页面进入时，获取传过来的商品数据
-    var cart = JSON.parse(options.cart).cart;
-    var total = 0;
-    var order = [];
-    //计算每个商品的价格和总商品的价格
-    for (var i = 0; i < cart.length; i++) {
-      cart[i].all_money = cart[i].buyNumber * Number(cart[i].specification[cart[i].specificationIndex].price);
-      total = total + cart[i].all_money;
-      //将商品显示的数据存入order数组
-      order[i] = {
-        name: cart[i].name,
-        url: cart[i].url,
-        specification: cart[i].specification[cart[i].specificationIndex].name,
-        buyNumber: cart[i].buyNumber,
-        message: '三天无理由退款',
-        unitPrice: cart[i].specification[cart[i].specificationIndex].price,
-        goodPrice: JSON.stringify(cart[i].all_money),
-        _id: cart[i]._id,
-        specificationIndex: cart[i].specificationIndex
-      }
-    };
-    if (total > 100)
-      this.setData({
-        freight: 20
-      })
-    this.setData({
-      all_Order: order,
-      total_number: cart.length,
-      total_money: total,
-      isCart: JSON.parse(options.cart).isCart
-    });
-  },
-
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-    //每次刷新页面判断默认地址或选择地址
-    this.getDefaultAddress();
-    //如果缓存中有修改的地址信息，优先选择
-    var select = wx.getStorageSync("select_address");
-    if (!select.cosignee)
-      this.setData({
-        select_address: select
-      })
-    wx.removeStorageSync("select_address");
-    //提取缓存中的购物车信息
-    var cart = wx.getStorageSync("cart");
-    this.cheapState();
+  onShow: function (options) {
+    var that = this;
+    wx.request({
+      url: 'http://localhost:8888/wx/getDiscount',
+      method: 'GET',
+      header: { //请求头
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": wx.getStorageSync('LocalToken')
+      },
+      data: {},
+      success(res) {
+        that.setData({
+          discount: res.data.discount
+        }, function () {
+          var defaultAddress = wx.getStorageSync('defaultAddress');
+          that.setData({
+            addressList: defaultAddress
+          })
+          //如果缓存中有修改的地址信息，优先选择
+          var select = wx.getStorageSync("select_address");
+          if (select) {
+            this.setData({
+              select_address: select
+            });
+            //获取订单地区
+            var region_name = select.region_name;
+            //截取所在省份
+            var province = region_name.substring(0, 3);
+          } else {
+            //获取订单地区
+            var region_name = defaultAddress.region_name;
+            //截取所在省份
+            var province = region_name.substring(0, 3);
+          }
+          wx.removeStorageSync("select_address");
+          //1.获取当前小程序的页面栈-数组 最大长度为10页面
+          let pages = getCurrentPages();
+          //2.数组中索引最大的页面就是当前页面
+          let currentPage = pages[pages.length - 1];
+          //3.获取url上的cart参数
+          var cart = JSON.parse(currentPage.options.cart).cart;
+          var total = 0;
+          var order = [];
+          var freight = 0;
+          //计算每个商品的价格和总商品的价格
+          for (var i = 0; i < cart.length; i++) {
+            cart[i].all_money = cart[i].buyNumber * Number(cart[i].specification[cart[i].specificationIndex].price);
+            total = total + cart[i].all_money;
+            //将商品显示的数据存入order数组
+            order[i] = {
+              name: cart[i].name,
+              url: cart[i].url,
+              specification: cart[i].specification[cart[i].specificationIndex].name,
+              buyNumber: cart[i].buyNumber,
+              message: '三天无理由退款',
+              unitPrice: cart[i].specification[cart[i].specificationIndex].price,
+              goodPrice: JSON.stringify(cart[i].all_money),
+              _id: cart[i]._id,
+              specificationIndex: cart[i].specificationIndex,
+              freight: cart[i].specification[cart[i].specificationIndex].freight
+            };
+          };
+          //如果为广大省且满discount
+          if (province == '广东省' && total >= that.data.discount)
+            freight = 0;
+          else {
+            for (var i = 0; i < cart.length; i++) {
+              //计算总运费
+              freight = freight + cart[i].specification[cart[i].specificationIndex].freight * cart[i].buyNumber
+            }
+          }
+          that.setData({
+            all_Order: order,
+            total_number: cart.length,
+            total_money: total,
+            isCart: JSON.parse(currentPage.options.cart).isCart,
+            freight: freight
+          });
+          that.cheapState();
+        })
+      },
+      fail() { }
+    })
   },
 })

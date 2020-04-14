@@ -83,7 +83,7 @@
 		<view class="Border3">
 			<view class="Border3_1">
 				<view class="borderLeft"> 商品金额</view>
-				<view class="borderRight">¥{{total_money}}</view>
+				<view class="borderRight">¥{{total_money}}</view> 
 			</view>
 			<view class="Border3_2">
 				<view class="borderLeft"> 运费</view>
