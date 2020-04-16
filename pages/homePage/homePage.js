@@ -2,6 +2,8 @@
 import {
   request
 } from "../../request/request.js"; 
+//导入接口api公共域名
+var common = require("../../utils/util/conmonApi.js");
 
 Page({
   data: {
@@ -31,7 +33,7 @@ Page({
   getHomePage(){
     var that = this;
     wx.request({
-      url: 'http://localhost:8888/wx/homePage',
+      url: common.apiHost+'wx/homePage',
       method: 'GET',
       success(res) {
         let temp = res.data.data.floorList

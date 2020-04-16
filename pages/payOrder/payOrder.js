@@ -1,4 +1,7 @@
 // pages/payOrder/payOrder.js 
+//导入接口api公共域名
+var common = require("../../utils/util/conmonApi.js");
+
 Page({
 
   /**
@@ -89,7 +92,7 @@ Page({
         //确认支付即为待发货订单
         if (result.confirm) {
           wx.request({
-            url: 'http://localhost:8888/wx/createOrder',
+            url: common.apiHost+'wx/createOrder',
             method: 'POST',
             header: { //请求头
               "Content-Type": "application/x-www-form-urlencoded",
@@ -173,7 +176,7 @@ Page({
         } else {
           //取消则为待付款订单
           wx.request({
-            url: 'http://localhost:8888/wx/createOrder',
+            url: common.apiHost+'wx/createOrder',
             method: 'POST',
             header: { //请求头
               "Content-Type": "application/x-www-form-urlencoded",
@@ -294,7 +297,7 @@ Page({
   cheapState() {
     var that = this;
     wx.request({
-      url: 'http://localhost:8888/wx/cheapState',
+      url: common.apiHost+'wx/cheapState',
       method: "POST",
       header: { //请求头
         "Content-Type": "application/x-www-form-urlencoded",
@@ -334,7 +337,7 @@ Page({
   onShow: function (options) {
     var that = this;
     wx.request({
-      url: 'http://localhost:8888/wx/getDiscount',
+      url: common.apiHost+'wx/getDiscount',
       method: 'GET',
       header: { //请求头
         "Content-Type": "application/x-www-form-urlencoded",

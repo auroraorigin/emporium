@@ -1,4 +1,7 @@
 // pages/couponCenter/couponCenter.js
+//导入接口api公共域名
+var common = require("../../utils/util/conmonApi.js");
+
 Page({
 
   /**
@@ -12,7 +15,7 @@ Page({
   getCouponCenter() {
     var that = this;
     wx.request({
-      url: 'http://localhost:8888/wx/getCouponCenter',
+      url: common.apiHost+'wx/getCouponCenter',
       method: "GET",
       data: {},
       header: {
@@ -43,7 +46,7 @@ Page({
           //获取data-id
           var index = e.currentTarget.dataset.id;
           wx.request({
-            url: 'http://localhost:8888/wx/getCoupon',
+            url: common.apiHost+'wx/getCoupon',
             method: "POST",
             header: { //请求头
               "Content-Type": "application/x-www-form-urlencoded",

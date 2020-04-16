@@ -1,3 +1,6 @@
+//导入接口api公共域名
+var common = require("../../utils/util/conmonApi.js");
+
 Page({
   data: {
     cart: [],
@@ -16,7 +19,7 @@ Page({
     let that = this
     const cart = wx.getStorageSync("cart") || [];
     wx.request({
-      url: 'http://localhost:8888/wx/cart',
+      url: common.apiHost+'wx/cart',
       method: 'GET',
       data:{cart},
       success(res) {

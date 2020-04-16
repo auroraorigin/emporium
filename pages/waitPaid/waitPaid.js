@@ -1,4 +1,6 @@
 const util = require('../../utils/util/util.js')
+//导入接口api公共域名
+var common = require("../../utils/util/conmonApi.js");
 
 Page({
   data: {
@@ -19,7 +21,7 @@ Page({
   getOrderDetail() {
     var that = this;
     wx.request({
-      url: 'http://localhost:8888/wx/getOrderDetail',
+      url: common.apiHost+'wx/getOrderDetail',
       method: 'POST',
       header: { //请求头
         "Content-Type": "application/x-www-form-urlencoded",
@@ -67,7 +69,7 @@ Page({
             });
             //订单超时自动转为交易失败订单
             wx.request({
-              url: 'http://localhost:8888/wx/changeOrderState',
+              url: common.apiHost+'wx/changeOrderState',
               method: 'POST',
               header: { //请求头
                 "Content-Type": "application/x-www-form-urlencoded",
@@ -99,7 +101,7 @@ Page({
           //获取订单id
           var id = that.data.orderId;
           wx.request({
-            url: 'http://localhost:8888/wx/deleteOrder',
+            url: common.apiHost+'wx/deleteOrder',
             method: 'POST',
             header: { //请求头
               "Content-Type": "application/x-www-form-urlencoded",
@@ -209,7 +211,7 @@ Page({
           });
           //订单超时自动转为交易失败订单 
           wx.request({
-            url: 'http://localhost:8888/wx/changeOrderState',
+            url: common.apiHost+'wx/changeOrderState',
             method: 'POST',
             header: { //请求头
               "Content-Type": "application/x-www-form-urlencoded",

@@ -1,3 +1,6 @@
+//导入接口api公共域名
+var common = require("./utils/util/conmonApi");
+
 //app.js
 App({
   //onLaunch,onShow: options(path,query,scene,shareTicket,referrerInfo(appId,extraData))
@@ -38,7 +41,7 @@ App({
     userInfo: null
   },
   globalApi: {
-    checkUser: 'http://localhost:8888/wx/checkUser'
+    checkUser: common.apiHost+'wx/checkUser'
   },
   getToken() {
     return new Promise((resolve, reject) => {

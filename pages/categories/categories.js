@@ -1,5 +1,7 @@
 //Page Object 
 import {request} from "../../request/request.js";
+//导入接口api公共域名
+var common = require("../../utils/util/conmonApi.js");
 
 Page({
   data: {
@@ -24,7 +26,7 @@ Page({
     that.data.distance=[]
     that.distance=[]
       wx.request({
-        url: 'http://localhost:8888/wx/categories',
+        url: common.apiHost+'wx/categories',
         method: 'GET',
         success(res) {
           let temp = res.data.data

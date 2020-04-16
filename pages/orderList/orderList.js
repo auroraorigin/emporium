@@ -2,6 +2,9 @@ import {
   request
 } from "../../request/index.js";
 import regeneratorRuntime from '../../lib/runtime/runtime.js';
+//导入接口api公共域名
+var common = require("../../utils/util/conmonApi.js");
+
 Page({
 
   /**
@@ -73,7 +76,7 @@ Page({
   getOrder() {
     var that = this;
     wx.request({
-      url: 'http://localhost:8888/wx/getOrder',
+      url: common.apiHost+'wx/getOrder',
       method: 'POST',
       header: { //请求头
         "Content-Type": "application/x-www-form-urlencoded",
@@ -189,7 +192,7 @@ Page({
           //获取订单id
           var id = e.currentTarget.dataset.id;
           wx.request({
-            url: 'http://localhost:8888/wx/deleteOrder',
+            url: common.apiHost+'wx/deleteOrder',
             method: 'POST',
             header: { //请求头
               "Content-Type": "application/x-www-form-urlencoded",
@@ -311,7 +314,7 @@ Page({
             var toState = "待发货"
           }
           wx.request({
-            url: 'http://localhost:8888/wx/changeOrderState',
+            url: common.apiHost+'wx/changeOrderState',
             method: 'POST',
             header: { //请求头
               "Content-Type": "application/x-www-form-urlencoded",
@@ -350,7 +353,7 @@ Page({
         if (result.confirm) {
           var _id = e.currentTarget.dataset.id;
           wx.request({
-            url: 'http://localhost:8888/wx/changeOrderState',
+            url: common.apiHost+'wx/changeOrderState',
             method: 'POST',
             header: { //请求头
               "Content-Type": "application/x-www-form-urlencoded",

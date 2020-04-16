@@ -1,3 +1,6 @@
+//导入接口api公共域名
+var common = require("../../utils/util/conmonApi.js");
+
 Page({
  
   /**
@@ -18,7 +21,7 @@ Page({
   getAddressList: function () {
     var that = this;
     wx.request({
-      url: 'http://localhost:8888/wx/getAddressList',
+      url: common.apiHost+'wx/getAddressList',
       method: 'GET',
       header: { //请求头
         "Content-Type": "application/x-www-form-urlencoded",

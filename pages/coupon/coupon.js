@@ -1,4 +1,7 @@
 //const app = getApp()
+//导入接口api公共域名
+var common = require("../../utils/util/conmonApi.js");
+
 Page({
 
   /**
@@ -23,7 +26,7 @@ Page({
   getCouponList() {
     var that = this;
     wx.request({
-      url: 'http://localhost:8888/wx/getCouponList',
+      url: common.apiHost+'wx/getCouponList',
       method: 'POST',
       header: { //请求头
         "Content-Type": "application/x-www-form-urlencoded",

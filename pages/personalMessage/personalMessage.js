@@ -1,3 +1,6 @@
+//导入接口api公共域名
+var common = require("../../utils/util/conmonApi.js");
+
 Page({
 
   /**
@@ -214,7 +217,7 @@ Page({
   getMessage() {
     var that = this; // 重置data{}里数据时候setData方法的this应为函数的this, 如果在下方的sucess直接写this就变成了wx.request()的this了
     wx.request({
-      url: 'http://localhost:8888/wx/getUserMessage',
+      url: common.apiHost+'wx/getUserMessage',
       method: 'GET',
       header: { //请求头
         "Content-Type": "application/x-www-form-urlencoded",
@@ -244,7 +247,7 @@ Page({
   //更新个人信息
   messageUpdata() {
     wx.request({
-      url: 'http://localhost:8888/wx/userMessageUpdata',
+      url: common.apiHost+'wx/userMessageUpdata',
       method: 'PUT',
       header: { //请求头
         "Content-Type": "application/x-www-form-urlencoded",

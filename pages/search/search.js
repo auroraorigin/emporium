@@ -2,6 +2,9 @@ import {
   request 
 } from "../../request/request.js";
 import regeneratorRuntime from "../../lib/runtime/runtime"
+//导入接口api公共域名
+var common = require("../../utils/util/conmonApi.js");
+
 //Page Object
 Page({
   data: {
@@ -21,7 +24,7 @@ Page({
   getSearchKey(){
     var that = this;
     wx.request({
-      url: 'http://localhost:8888/wx/searchKey',
+      url: common.apiHost+'wx/searchKey',
       method: 'GET',
       success(res) {
         that.setData({
@@ -100,7 +103,7 @@ Page({
     var that = this;
     let first=this.data.first;
     wx.request({
-      url: 'http://localhost:8888/wx/search',
+      url: common.apiHost+'wx/search',
       method: 'GET',
       data: {
         query

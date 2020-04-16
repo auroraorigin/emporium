@@ -1,6 +1,8 @@
 //Page Object 
 // import{request} from "../../request/request.js"
 import regeneratorRuntime from "../../lib/runtime/runtime"
+//导入接口api公共域名
+var common = require("../../utils/util/conmonApi.js");
 
 Page({
   data: {
@@ -17,53 +19,55 @@ Page({
     selectType: 0,
     animationData: {}, //动画
     animationDataShadow: {}, //背景阴影渐变动画
-    animationFloatData:{},
+    animationFloatData: {},
     lastY: 0,
-    direction:1,
-    discount:0,
-    url:[]
+    direction: 1,
+    discount: 0,
+    url: []
   },
   // 服务器获取数据
-  getGoodsDetail(_id){
+  getGoodsDetail(_id) {
     let that = this
-    wx.request({url:"http://localhost:8888/wx/detail",data:{_id}, method: 'GET', success(res) {
-      let discount = res.data.data.discount
-      let url = res.data.data.detail
-      let goods = res.data.data.goods
-      let maxPrice = goods.specification[0].price
-      let minPrice = goods.specification[0].price
-      let maxFreight = goods.specification[0].freight
-      let minFreight = goods.specification[0].freight
-      let stock = goods.specification[0].stock
-      for (let i = 1; i < goods.specification.length; i++) {
-        if(Number(maxPrice)<Number(goods.specification[i].price))
-          maxPrice=goods.specification[i].price
-        if(Number(minPrice)>Number(goods.specification[i].price))
-          minPrice=goods.specification[i].price
-        if(Number(maxFreight)<Number(goods.specification[i].freight))
-          maxFreight=goods.specification[i].freight
-        if(Number(minFreight)>Number(goods.specification[i].freight))
-          minFreight=goods.specification[i].freight
-          stock+=goods.specification[i].stock
-      }
-      goods.maxPrice=maxPrice
-      goods.minPrice=minPrice
-      goods.maxFreight=maxFreight
-      goods.minFreight=minFreight
-      goods.stock=stock
-      
-      let detail={
-        goods,
-        discount: [`部分地区满${discount}包邮`],
-        delivery: ["快递", "送货上门 (仅限博贺镇内)"]
-      }
-      that.setData({
-        detail,
-        buyMaxNumber:stock,
-        discount,
-        url
-      })
-    },fail() {}})
+    wx.request({
+      url: common.apiHost+"wx/detail", data: { _id }, method: 'GET', success(res) {
+        let discount = res.data.data.discount
+        let url = res.data.data.detail
+        let goods = res.data.data.goods
+        let maxPrice = goods.specification[0].price
+        let minPrice = goods.specification[0].price
+        let maxFreight = goods.specification[0].freight
+        let minFreight = goods.specification[0].freight
+        let stock = goods.specification[0].stock
+        for (let i = 1; i < goods.specification.length; i++) {
+          if (Number(maxPrice) < Number(goods.specification[i].price))
+            maxPrice = goods.specification[i].price
+          if (Number(minPrice) > Number(goods.specification[i].price))
+            minPrice = goods.specification[i].price
+          if (Number(maxFreight) < Number(goods.specification[i].freight))
+            maxFreight = goods.specification[i].freight
+          if (Number(minFreight) > Number(goods.specification[i].freight))
+            minFreight = goods.specification[i].freight
+          stock += goods.specification[i].stock
+        }
+        goods.maxPrice = maxPrice
+        goods.minPrice = minPrice
+        goods.maxFreight = maxFreight
+        goods.minFreight = minFreight
+        goods.stock = stock
+
+        let detail = {
+          goods,
+          discount: [`部分地区满${discount}包邮`],
+          delivery: ["快递", "送货上门 (仅限博贺镇内)"]
+        }
+        that.setData({
+          detail,
+          buyMaxNumber: stock,
+          discount,
+          url
+        })
+      }, fail() { }
+    })
   },
   //点击轮播图，放大预览图片
   handlePrevewImage(e) {
@@ -219,8 +223,8 @@ Page({
     let stock = this.data.detail.goods.stock;
     let index = e.currentTarget.dataset.index;
 
-    if(this.data.detail.goods.specification[index].stock===0)
-        return
+    if (this.data.detail.goods.specification[index].stock === 0)
+      return
 
     if (lableCurrentIndex == index) {
       buyMaxNumber = stock;
@@ -309,7 +313,7 @@ Page({
       desc: goods.desc,
       path: `/page/detail?_id=${goods._id}` // 路径，传递参数到指定页面。
     }
-   },
+  },
   //规格页面点击添加购物车按钮
   addCart() {
     let lableCurrentIndex = this.data.lableCurrentIndex;
@@ -356,7 +360,7 @@ Page({
     });
   },
   // 隐藏浮动图标
-  hideFloat(){
+  hideFloat() {
     let that = this;
     //规格窗口弹出
     let animal = wx.createAnimation({
@@ -368,7 +372,7 @@ Page({
       animationFloatData: animal.export()
     })
   },
-  showFloat(){
+  showFloat() {
     let that = this;
     //规格窗口弹出
     let animal = wx.createAnimation({
@@ -387,25 +391,22 @@ Page({
     const ty = this.data.lastY - event.changedTouches[0].pageY
     const direction = this.data.direction
     //向上滑 方向向上
-    if(ty<0 && direction)
+    if (ty < 0 && direction)
       return
     //向下滑 方向向下
-    else if(ty>0 && !direction)
+    else if (ty > 0 && !direction)
       return
     //向上滑 方向向下
-    else if(ty<0 && !direction)
-    {
+    else if (ty < 0 && !direction) {
       this.data.direction = !direction
       this.showFloat()
     }
-    else if(ty>0 && direction)
-    {
+    else if (ty > 0 && direction) {
       this.data.direction = !direction
       this.hideFloat()
     }
   },
-  tobuy()
-  {
+  tobuy() {
     let lableCurrentIndex = this.data.lableCurrentIndex;
     let buyNumber = this.data.buyNumber;
 
@@ -420,9 +421,9 @@ Page({
 
     let cart = []
     cart.push(this.data.detail.goods)
-    cart[0].specificationIndex=lableCurrentIndex
-    cart[0].buyNumber=buyNumber
-    let data = JSON.stringify({cart:cart,isCart:false})
+    cart[0].specificationIndex = lableCurrentIndex
+    cart[0].buyNumber = buyNumber
+    let data = JSON.stringify({ cart: cart, isCart: false })
     wx.navigateTo({
       url: `/pages/payOrder/payOrder?cart=${data}`,
     })

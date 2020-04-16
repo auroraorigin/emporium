@@ -1,3 +1,6 @@
+//导入接口api公共域名
+var common = require("../../utils/util/conmonApi.js");
+
 Page({
 
   /**
@@ -21,7 +24,7 @@ Page({
   getOrderDetail() {
     var that = this;
     wx.request({
-      url: 'http://localhost:8888/wx/getOrderDetail',
+      url: common.apiHost+'wx/getOrderDetail',
       method: 'POST',
       header: { //请求头
         "Content-Type": "application/x-www-form-urlencoded",

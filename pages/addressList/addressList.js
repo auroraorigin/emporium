@@ -4,6 +4,8 @@ import {
   openSetting
 } from "../../utils/asyncWx.js"; //导入异步函数
 import regeneratorRuntime from '../../lib/runtime/runtime.js';
+//导入接口api公共域名
+var common = require("../../utils/util/conmonApi.js");
 Page({
 
   /**
@@ -86,7 +88,7 @@ Page({
   },
 
   //删除
-  delItem: function(e) {
+  delItem: function (e) {
     //获取列表中要删除项的下标
     var index = e.currentTarget.dataset.index;
     //获取地址列表
@@ -114,7 +116,7 @@ Page({
   },
 
   //编辑地址
-  ref: function(e) {
+  ref: function (e) {
     //获取要编辑的地址所在地址列表的位置
     var index = e.currentTarget.dataset.index;
     this.data.addressList[index].id = index;
@@ -130,10 +132,10 @@ Page({
   },
 
   //获取地址列表
-  getAddressList: function() {
+  getAddressList: function () {
     var that = this;
     wx.request({
-      url: 'http://localhost:8888/wx/getAddressList',
+      url: common.apiHost+'wx/getAddressList',
       method: 'GET',
       header: { //请求头
         "Content-Type": "application/x-www-form-urlencoded",
@@ -158,10 +160,10 @@ Page({
   },
 
   //将地址列表存入数据库
-  saveAddressList: function() {
+  saveAddressList: function () {
     var that = this;
     wx.request({
-      url: 'http://localhost:8888/wx/saveAddressList',
+      url: common.apiHost+'wx/saveAddressList',
       method: 'PUT',
       header: { //请求头
         "Content-Type": "application/x-www-form-urlencoded",
@@ -176,14 +178,14 @@ Page({
         //保存成功则清空地址缓存
         wx.removeStorageSync('addressList');
       },
-      fail() {}
+      fail() { }
     })
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     //刷新页面时获取缓存中的地址列表，并赋值给appData
     var arr = wx.getStorageSync('addressList') || [];
     //每次刷新,在地址列表不为空的情况下,都设置列表头为默认地址

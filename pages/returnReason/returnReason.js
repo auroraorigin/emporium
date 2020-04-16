@@ -1,4 +1,7 @@
 // pages/returnReason/returnReason.js
+//导入接口api公共域名
+var common = require("../../utils/util/conmonApi.js");
+
 Page({
 
   /**
@@ -64,7 +67,7 @@ Page({
         var returnReason = value
       }
       wx.request({
-        url: 'http://localhost:8888/wx/changeOrderState',
+        url: common.apiHost+'wx/changeOrderState',
         method: 'POST',
         header: { //请求头
           "Content-Type": "application/x-www-form-urlencoded",
