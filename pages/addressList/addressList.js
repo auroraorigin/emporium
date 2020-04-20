@@ -76,7 +76,7 @@ Page({
         await openSetting();
       }
     } catch (error) {
-      console.log(error);
+      
     }
   },
 

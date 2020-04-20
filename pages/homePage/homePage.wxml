@@ -1,5 +1,6 @@
 <!-- 搜索框 -->
-<searchInput></searchInput>
+<searchInput style="position:relative;"></searchInput>
+<view class="topBgc"></view>
 <view class="container" bindtouchend="handletouchend" bindtouchstart="handletouchstart">
 	<!-- 轮播图 -->
 	<swiper class="homePageSwiper" indicator-dots autoplay circular indicator-color="#eaf1f7" indicator-active-color="#2b4c7f">
@@ -33,12 +34,9 @@
 			<!-- 内容 -->
 			<view class="productGroup">
 				<navigator style="position:relative" class="product" hover-class="none" wx:for="{{item1.goods}}" wx:for-item="item2" wx:for-index="index2" wx:key="index2" url="/pages/detail/detail?_id={{item2._id}}">
-					
-          
 					<image wx:if="{{item2.stock===0}}" class="nogoodsImg" src="../../icons/homePage/none.png"></image>
 					<view wx:if="{{item2.stock===0}}" class="nogoods"></view>
 					<image class="productPicture" src="{{item2.url}}" mode="widthFix"></image>
-
 					<view class="info">
 						<text class="name">{{item2.name}}</text>
 						<view class="trade">

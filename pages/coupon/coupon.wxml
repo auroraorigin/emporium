@@ -32,7 +32,7 @@
           <view class="volume_name">
             {{item.name}}: 满{{item.money[0]}}元减{{item.money[1]}}元
           </view>
-          <view class="button_type">
+          <view class="button_type" bindtap="toUse">
             <text>立即使用</text>
           </view>
         </view>

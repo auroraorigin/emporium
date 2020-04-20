@@ -27,8 +27,10 @@
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "海鲜商城",
-    "navigationBarTextStyle": "black",
-    "enablePullDownRefresh": true
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": true,
+    "navigationBarBackgroundColor":"#2b4c7f",
+    "backgroundColor":"2b4c7f"
   },
   "tabBar": {
     "color": "#2b4c7f",

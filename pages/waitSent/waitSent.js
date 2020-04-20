@@ -9,7 +9,7 @@ Page({
   data: {
     addressList: [], //地址信息
     all_Order: [], //商品列表
-    total_number: "", //总数量
+    total_number: "", //总数量 
     total_money: "", //总价格
     orderId: "", //订单id,
     freight: "",//运费

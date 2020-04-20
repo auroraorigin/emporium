@@ -9,7 +9,7 @@
     <view wx:else>
       <image src="{{userinfo.avatarUrl}}"></image>
       <view class="user_name">{{userinfo.nickName}}</view> 
-    </view>
+    </view> 
   </view>
 <!--订单框-->
   <view class="myPage1">

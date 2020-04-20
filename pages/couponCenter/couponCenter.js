@@ -39,7 +39,7 @@ Page({
     //弹框提示是否获取优惠卷
     wx.showModal({
       title: '提示',
-      content: '您确定要获取该优惠卷吗？',
+      content: '您确定要获取该优惠卷吗？', 
       success: (result) => {
         //确定则执行以下内容
         if (result.confirm) {

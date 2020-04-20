@@ -10,7 +10,7 @@ Page({
   data: {
     tabIndex: 1,
     list: [], //可用优惠卷列表
-    overList: [], //不可用优惠卷列表
+    overList: [], //不可用优惠卷列表 
   },
 
   //切换优惠卷功能
@@ -47,6 +47,12 @@ Page({
         }
       },
       fail() {}
+    })
+  },
+
+  toUse(){
+    wx.switchTab({
+      url: '/pages/categories/categories',
     })
   },
 

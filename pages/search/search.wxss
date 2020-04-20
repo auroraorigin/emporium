@@ -11,6 +11,7 @@ page{
   --themeColorLight:#eaf1f7;
   /*字体大小*/
   font-size: 28rpx;
+  background-color: #f3f3f3;
 }
 
 image{
@@ -43,6 +44,7 @@ image{
     border-radius: 16rpx;
     border-width: 5rpx;
     box-shadow: 0px 0px 7px #ededed;
+    background-color: white;
 }
 
 .container .searchInput image {
@@ -82,6 +84,7 @@ image{
     border-top: 1rpx solid #ededed;
     border-bottom: 1rpx solid #ededed;
     box-shadow: 0px 0px 1px #ededed;
+    background-color: white;
 }
 
 .container .sort .left {
@@ -157,7 +160,9 @@ image{
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 10rpx;
+    margin-bottom: 20rpx;
+    background-color: white;
+    padding-left: 20rpx;
 }
 
 .productGroup .product .productImage{
@@ -179,6 +184,8 @@ image{
     display: flex;
     flex-direction: column;
     margin-left: 10rpx;
+    padding-left: 10rpx;
+    padding-right: 30rpx;
 }
 
 .productGroup .product .info .name{
@@ -189,6 +196,7 @@ image{
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+    font-weight: 300;
 }
 
 .productGroup .product .info .trade{
@@ -211,6 +219,7 @@ image{
     font-size: 30rpx;
     color: #db7012;
     margin-right: 5rpx;
+    font-weight: bold;
 }
 
 .productGroup .product .info .trade .right{
@@ -291,6 +300,7 @@ image{
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+    font-weight: 300;
   }
   
   
@@ -520,8 +530,9 @@ image{
     padding: 10rpx 20rpx;
     border-radius: 10rpx;
     margin: 0 20rpx 20rpx 0;
-    background-color: #f8f8f8;
     border: 1px solid #f8f8f8;
+    font-weight: 300;
+    background-color: white;
   }
 
   .nogoods{
