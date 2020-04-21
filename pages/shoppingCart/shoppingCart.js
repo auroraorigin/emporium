@@ -17,7 +17,7 @@ Page({
   //获取缓存中的购物车信息
   getProduct() {
     let that = this
-    const cart = wx.getStorageSync("cart") || [];
+    var cart = wx.getStorageSync("cart") || [];
     wx.request({
       url: common.apiHost+'wx/cart',
       method: 'GET',
@@ -26,7 +26,7 @@ Page({
         that.setData({
           cart:res.data.data
         },function(){
-          that.setCart(cart)
+          that.setCart(res.data.data)
           wx.setStorageSync('cart', res.data.data)
         })
       },

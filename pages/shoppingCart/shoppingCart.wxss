@@ -196,7 +196,7 @@ image{
 /* 商品 */
 .wrap {
     height: calc(100vh - 220rpx);
-    background-color: #f8f8f8;
+    background-color: #f3f3f3;
     position: relative;
     z-index: 1;
 }
@@ -253,6 +253,7 @@ image{
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+    font-weight: 300;
 }
 
 .wrap .product .mid .info .size {
@@ -289,6 +290,7 @@ image{
 .wrap .product .mid .info .price {
     font-size: 28rpx;
     color: #db7012;
+    font-weight: bold;
 }
 
 .wrap .product .right {
@@ -443,6 +445,7 @@ image{
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+    font-weight: 300;
 }
 
 
@@ -526,6 +529,7 @@ image{
     color: white;
     background-color: #db7012;
     border-radius: 16rpx;
+    font-weight: bold;
 }
 
 .divLine1 {

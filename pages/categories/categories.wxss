@@ -11,6 +11,7 @@ page{
   --themeColorLight:#eaf1f7;
   /*字体大小*/
   font-size: 28rpx;
+  background-color: #f3f3f3;
 }
 
 image{
@@ -39,6 +40,7 @@ image{
     border-radius: 16rpx;
     border-width: 5rpx;
     box-shadow: 0px 0px 7px #ededed;
+    background-color: white;
 }
 
 .searchInput image {
@@ -94,8 +96,9 @@ image{
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin-left: 1rpx;
-    margin-right: 5rpx;
+    /* margin-left: 1rpx; */
+    /* margin-right: 5rpx; */
+    background-color: white;
 }
 
 .group .top {
@@ -109,7 +112,7 @@ image{
 
 .group .cname {
     font-weight: bold;
-    margin-left: 10rpx;
+    margin-left: 20rpx;
     width: 100%;
     height: 100%;
     display: flex;
@@ -153,7 +156,7 @@ image{
 .group .product .productImage {
     height: 170rpx;
     width: 200rpx;
-    margin-left: 10rpx;
+    margin-left: 20rpx;
 }
 
 .group .product image {
@@ -173,6 +176,7 @@ image{
     display: flex;
     flex-direction: column;
     margin-left: 10rpx;
+    margin-right: 20rpx;
 }
 
 .group .product .info .name {
@@ -183,6 +187,7 @@ image{
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     overflow: hidden;
+    font-weight: 300;
 }
 
 .group .product .info .trade {
@@ -207,6 +212,7 @@ image{
     font-size: 28rpx;
     color: #db7012;
     margin-right: 5rpx;
+    font-weight: bold;
 }
 
 .group .product .info .trade .right {
@@ -293,6 +299,7 @@ image{
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+    font-weight: 300;
   }
   
   
@@ -459,6 +466,7 @@ image{
     background-color: #2b4c7f;
     border-bottom-left-radius: 16rpx;
     border-top-left-radius: 16rpx;
+    font-weight: bold;
   }
   
   .content .bot .selectBuy {
@@ -471,6 +479,7 @@ image{
     background-color: #db7012;
     border-bottom-right-radius: 16rpx;
     border-top-right-radius: 16rpx;
+    font-weight: bold;
   }
 
   .divLine1 {
@@ -540,14 +549,17 @@ image{
     position:absolute;
     height: 170rpx;
     width: 200rpx;
-    margin-left: 10rpx;
+    margin-left: 20rpx;
     background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 6rpx;
     
   }
 
   .nogoodsImg{
-    width: 170rpx;
-    height: 170rpx;
+    width: 55%;
+    height: 60%;
+    left:22.5%;
+    top: 19%;
     position:absolute;
     margin-left: 10rpx;
     z-index: 1;

@@ -467,6 +467,7 @@ image{
     background-color: #2b4c7f;
     border-bottom-left-radius: 16rpx;
     border-top-left-radius: 16rpx;
+    font-weight: bold;
   }
   
   .content .bot .selectBuy {
@@ -479,6 +480,7 @@ image{
     background-color: #db7012;
     border-bottom-right-radius: 16rpx;
     border-top-right-radius: 16rpx;
+    font-weight: bold;
   }
 
   .divLine1 {
@@ -537,15 +539,18 @@ image{
 
   .nogoods{
     position:absolute;
-    height: 170rpx;
-    width: 200rpx;
+    height: 167rpx;
+    width: 198rpx;
     background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 6rpx;
     
   }
 
   .nogoodsImg{
-    width: 170rpx;
-    height: 170rpx;
+    width: 55%;
+    height: 60%;
+    left:22.5%;
+    top: 19%;
     position:absolute;
     z-index: 1;
   }
