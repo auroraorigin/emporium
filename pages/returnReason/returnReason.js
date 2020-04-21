@@ -20,6 +20,7 @@ Page({
     selectReason: "",//选择的原因
     value: "",//输入内容
     orderId: "",//申请退款的订单ID
+    type: ""//进入前的页面参数
   },
 
   //原因选择器
@@ -41,7 +42,7 @@ Page({
   saveReason(e) {
     let value = this.data.value;
     let selectReason = this.data.selectReason;
-    var orderState=this.data.orderState;
+    var orderState = this.data.orderState;
     //如果没有选择退款原因
     if (!selectReason) {
       wx.showToast({
@@ -67,7 +68,7 @@ Page({
         var returnReason = value
       }
       wx.request({
-        url: common.apiHost+'wx/changeOrderState',
+        url: common.apiHost + 'wx/changeOrderState',
         method: 'POST',
         header: { //请求头
           "Content-Type": "application/x-www-form-urlencoded",
@@ -80,9 +81,9 @@ Page({
         },
         success(res) {
           wx.reLaunch({
-            url: '/pages/havedReturn/havedReturn?orderId='+that.data.orderId,
+            url: '/pages/havedReturn/havedReturn?orderId=' + that.data.orderId,
           })
-         },
+        },
         fail() { }
       })
     }
@@ -95,9 +96,16 @@ Page({
     let currentPage = pages[pages.length - 1];
     //3.获取url上的type参数
     var orderId = currentPage.options.orderId;
+    var type = currentPage.options.type;
     //渲染
     this.setData({
       orderId: orderId,
+      type: type
     })
+  },
+
+  onUnload() {
+    var type = this.data.type;
+    wx.setStorageSync('type', type)
   }
 })

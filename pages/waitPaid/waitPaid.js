@@ -14,14 +14,14 @@ Page({
     freight: "", //运费
     coupon: {},//优惠卷
     createDate: "",//订单创建日期
-    waitToPaid:""//待付款
+    waitToPaid: ""//待付款
   },
 
   //根据orderId加载订单详情
   getOrderDetail() {
     var that = this;
     wx.request({
-      url: common.apiHost+'wx/getOrderDetail',
+      url: common.apiHost + 'wx/getOrderDetail',
       method: 'POST',
       header: { //请求头
         "Content-Type": "application/x-www-form-urlencoded",
@@ -39,7 +39,7 @@ Page({
           timestamp: res.data.order.timestamp,
           coupon: res.data.order.coupon,
           createDate: res.data.order.createDate,
-          waitToPaid:res.data.order.havedPaid
+          waitToPaid: res.data.order.havedPaid
         });
         var timestamp = that.data.timestamp;
         //加一天的时间：  
@@ -69,7 +69,7 @@ Page({
             });
             //订单超时自动转为交易失败订单
             wx.request({
-              url: common.apiHost+'wx/changeOrderState',
+              url: common.apiHost + 'wx/changeOrderState',
               method: 'POST',
               header: { //请求头
                 "Content-Type": "application/x-www-form-urlencoded",
@@ -101,7 +101,7 @@ Page({
           //获取订单id
           var id = that.data.orderId;
           wx.request({
-            url: common.apiHost+'wx/deleteOrder',
+            url: common.apiHost + 'wx/deleteOrder',
             method: 'POST',
             header: { //请求头
               "Content-Type": "application/x-www-form-urlencoded",
@@ -112,7 +112,7 @@ Page({
             },
             success(res) {
               var tip = wx.getStorageSync("tip");
-              var aShow=wx.getStorageSync("aShow")
+              var aShow = wx.getStorageSync("aShow")
               //如果从生产订单跳转过来
               if (tip) {
                 wx.reLaunch({
@@ -121,14 +121,14 @@ Page({
               } else {
                 let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
                 let prevPage = pages[pages.length - 2];
-                var tabs=prevPage.data.tabs;
-                if(aShow="待付款")
-                tabs[1].isActive=true;
-                if(aShow="全部")
-                tabs[0].isActive=true;
+                var tabs = prevPage.data.tabs;
+                if (aShow = "待付款")
+                  tabs[1].isActive = true;
+                if (aShow = "全部")
+                  tabs[0].isActive = true;
                 //prevPage 是获取上一个页面的js里面的pages的所有信息。 -2 是上一个页面，-3是上上个页面以此类推。
                 prevPage.setData({  // 将我们想要传递的参数在这里直接setData。上个页面就会执行这里的操作。
-                  tabs:tabs
+                  tabs: tabs
                 })
                 wx.navigateBack({
                   delta: 1
@@ -137,6 +137,144 @@ Page({
             },
             fail() { }
           });
+        } else
+          return;
+      }
+    })
+  },
+
+  //确认付款
+  toPaid() {
+    var that = this;
+    //显示是否确认付款弹窗
+    wx.showModal({
+      title: '提示',
+      content: '您确定要付款吗？',
+      success: (result) => {
+        if (result.confirm) {
+          //待付款订单转待发货订单
+          wx.request({
+            url: common.apiHost + 'wx/changeOrderState',
+            method: 'POST',
+            header: { //请求头
+              "Content-Type": "application/x-www-form-urlencoded",
+              "Authorization": wx.getStorageSync('LocalToken')
+            },
+            data: {
+              _id: that.data.orderId,
+              state: "待付款转待发货"
+            },
+            success(res) {
+              var stockMessage = res.data.stockMessage;
+              var stateMessage = res.data.stateMessage;
+              if (stockMessage == "库存减少成功" && stateMessage == "商品上架中") {
+                //获取状态转换后的待发货orderId
+                var orderId = that.data.orderId;
+                wx.reLaunch({
+                  url: '/pages/waitSent/waitSent?orderId=' + orderId,
+                })
+              } else if (stockMessage == "库存不足") {
+                //显示是否退出登录弹窗
+                wx.showModal({
+                  title: '提示',
+                  content: '存在商品库存不足，已为您自动关闭订单',
+                  success: (result) => {
+                    if (result.confirm) {
+                      wx.request({
+                        url: common.apiHost + 'wx/changeOrderState',
+                        method: 'POST',
+                        header: { //请求头
+                          "Content-Type": "application/x-www-form-urlencoded",
+                          "Authorization": wx.getStorageSync('LocalToken')
+                        },
+                        data: {
+                          _id: that.data.orderId,
+                          state: "待付款转交易关闭"
+                        },
+                        success(res) {
+                          var orderId = that.data.orderId;
+                          wx.reLaunch({
+                            url: '/pages/overOrder/overOrder?orderId=' + orderId,
+                          })
+                        },
+                        fail() { }
+                      })
+                    } else {
+                      wx.request({
+                        url: common.apiHost + 'wx/changeOrderState',
+                        method: 'POST',
+                        header: { //请求头
+                          "Content-Type": "application/x-www-form-urlencoded",
+                          "Authorization": wx.getStorageSync('LocalToken')
+                        },
+                        data: {
+                          _id: that.data.orderId,
+                          state: "待付款转交易关闭"
+                        },
+                        success(res) {
+                          var orderId = that.data.orderId;
+                          wx.reLaunch({
+                            url: '/pages/overOrder/overOrder?orderId=' + orderId,
+                          })
+                        },
+                        fail() { }
+                      })
+                    }
+                  }
+                })
+              } else if (stateMessage == "商品已下架") {
+                //显示是否退出登录弹窗
+                wx.showModal({
+                  title: '提示',
+                  content: '存在商品已下架，已为您自动关闭订单',
+                  success: (result) => {
+                    if (result.confirm) {
+                      wx.request({
+                        url: common.apiHost + 'wx/changeOrderState',
+                        method: 'POST',
+                        header: { //请求头
+                          "Content-Type": "application/x-www-form-urlencoded",
+                          "Authorization": wx.getStorageSync('LocalToken')
+                        },
+                        data: {
+                          _id: that.data.orderId,
+                          state: "待付款转交易关闭"
+                        },
+                        success(res) {
+                          var orderId = that.data.orderId;
+                          wx.reLaunch({
+                            url: '/pages/overOrder/overOrder?orderId=' + orderId,
+                          })
+                        },
+                        fail() { }
+                      })
+                    } else {
+                      wx.request({
+                        url: common.apiHost + 'wx/changeOrderState',
+                        method: 'POST',
+                        header: { //请求头
+                          "Content-Type": "application/x-www-form-urlencoded",
+                          "Authorization": wx.getStorageSync('LocalToken')
+                        },
+                        data: {
+                          _id: that.data.orderId,
+                          state: "待付款转交易关闭"
+                        },
+                        success(res) {
+                          var orderId = that.data.orderId;
+                          wx.reLaunch({
+                            url: '/pages/overOrder/overOrder?orderId=' + orderId,
+                          })
+                        },
+                        fail() { }
+                      })
+                    }
+                  }
+                })
+              }
+            },
+            fail() { }
+          })
         } else
           return;
       }
@@ -171,7 +309,7 @@ Page({
           timestamp: timestamp,
           coupon: waitPaidOrder.coupon,
           createDate: waitPaidOrder.createDate,
-          orderId:waitPaidOrder._id
+          orderId: waitPaidOrder._id
         });
       else {
         this.setData({
@@ -181,7 +319,7 @@ Page({
           freight: Number(waitPaidOrder.freight),
           timestamp: timestamp,
           createDate: waitPaidOrder.createDate,
-          orderId:waitPaidOrder._id
+          orderId: waitPaidOrder._id
         });
       };
       //加一天的时间：  
@@ -211,7 +349,7 @@ Page({
           });
           //订单超时自动转为交易失败订单 
           wx.request({
-            url: common.apiHost+'wx/changeOrderState',
+            url: common.apiHost + 'wx/changeOrderState',
             method: 'POST',
             header: { //请求头
               "Content-Type": "application/x-www-form-urlencoded",
@@ -219,7 +357,7 @@ Page({
             },
             data: {
               _id: _id,
-              state: "待付款"
+              state: "待付款转交易关闭"
             },
             success(res) { },
             fail() { }

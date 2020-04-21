@@ -76,7 +76,7 @@ Page({
   getOrder() {
     var that = this;
     wx.request({
-      url: common.apiHost+'wx/getOrder',
+      url: common.apiHost + 'wx/getOrder',
       method: 'POST',
       header: { //请求头
         "Content-Type": "application/x-www-form-urlencoded",
@@ -192,7 +192,7 @@ Page({
           //获取订单id
           var id = e.currentTarget.dataset.id;
           wx.request({
-            url: common.apiHost+'wx/deleteOrder',
+            url: common.apiHost + 'wx/deleteOrder',
             method: 'POST',
             header: { //请求头
               "Content-Type": "application/x-www-form-urlencoded",
@@ -286,8 +286,10 @@ Page({
       success: (result) => {
         if (result.confirm) {
           var _id = e.currentTarget.dataset.id;
+          //获取页面参数
+          var type = e.currentTarget.dataset.index;
           wx.navigateTo({
-            url: '/pages/returnReason/returnReason?orderId=' + _id
+            url: '/pages/returnReason/returnReason?orderId=' + _id + '&type=' + type
           })
         } else
           return;
@@ -314,7 +316,7 @@ Page({
             var toState = "待发货"
           }
           wx.request({
-            url: common.apiHost+'wx/changeOrderState',
+            url: common.apiHost + 'wx/changeOrderState',
             method: 'POST',
             header: { //请求头
               "Content-Type": "application/x-www-form-urlencoded",
@@ -344,7 +346,7 @@ Page({
 
   //确认收货
   toReceive(e) {
-    var that=this;
+    var that = this;
     //显示是否确认收货弹窗
     wx.showModal({
       title: '提示',
@@ -353,7 +355,7 @@ Page({
         if (result.confirm) {
           var _id = e.currentTarget.dataset.id;
           wx.request({
-            url: common.apiHost+'wx/changeOrderState',
+            url: common.apiHost + 'wx/changeOrderState',
             method: 'POST',
             header: { //请求头
               "Content-Type": "application/x-www-form-urlencoded",
@@ -361,10 +363,133 @@ Page({
             },
             data: {
               _id: _id,
-              state: "待收货"
+              state: "待收货转交易成功"
             },
-            success(res) { 
+            success(res) {
               that.getOrder()
+            },
+            fail() { }
+          })
+        } else
+          return;
+      }
+    })
+  },
+
+  //确认付款
+  toPaid(e) {
+    var that = this;
+    //显示是否确认付款弹窗
+    wx.showModal({
+      title: '提示',
+      content: '您确定要付款吗？',
+      success: (result) => {
+        if (result.confirm) {
+          var _id = e.currentTarget.dataset.id;
+          //待付款订单转待发货订单
+          wx.request({
+            url: common.apiHost + 'wx/changeOrderState',
+            method: 'POST',
+            header: { //请求头
+              "Content-Type": "application/x-www-form-urlencoded",
+              "Authorization": wx.getStorageSync('LocalToken')
+            },
+            data: {
+              _id: _id,
+              state: "待付款转待发货"
+            },
+            success(res) {
+              var stockMessage = res.data.stockMessage;
+              var stateMessage = res.data.stateMessage;
+              if (stockMessage == "库存减少成功" && stateMessage == "商品上架中") {
+                that.getOrder()
+              } else if (stockMessage == "库存不足") {
+                //显示是否退出登录弹窗
+                wx.showModal({
+                  title: '提示',
+                  content: '存在商品库存不足，已为您自动关闭订单',
+                  success: (result) => {
+                    if (result.confirm) {
+                      wx.request({
+                        url: common.apiHost + 'wx/changeOrderState',
+                        method: 'POST',
+                        header: { //请求头
+                          "Content-Type": "application/x-www-form-urlencoded",
+                          "Authorization": wx.getStorageSync('LocalToken')
+                        },
+                        data: {
+                          _id: _id,
+                          state: "待付款转交易关闭"
+                        },
+                        success(res) {
+                          that.getOrder();
+                        },
+                        fail() { }
+                      })
+                    } else {
+                      wx.request({
+                        url: common.apiHost + 'wx/changeOrderState',
+                        method: 'POST',
+                        header: { //请求头
+                          "Content-Type": "application/x-www-form-urlencoded",
+                          "Authorization": wx.getStorageSync('LocalToken')
+                        },
+                        data: {
+                          _id: _id,
+                          state: "待付款转交易关闭"
+                        },
+                        success(res) {
+                          that.getOrder();
+                        },
+                        fail() { }
+                      })
+                    }
+                  }
+                })
+              }else if (stateMessage == "商品已下架") {
+                //显示是否退出登录弹窗
+                wx.showModal({
+                  title: '提示',
+                  content: '存在商品已下架，已为您自动关闭订单',
+                  success: (result) => {
+                    if (result.confirm) {
+                      wx.request({
+                        url: common.apiHost + 'wx/changeOrderState',
+                        method: 'POST',
+                        header: { //请求头
+                          "Content-Type": "application/x-www-form-urlencoded",
+                          "Authorization": wx.getStorageSync('LocalToken')
+                        },
+                        data: {
+                          _id: _id,
+                          state: "待付款转交易关闭"
+                        },
+                        success(res) {
+                          that.getOrder();
+                        },
+                        fail() { }
+                      })
+                    } else {
+                      wx.request({
+                        url: common.apiHost + 'wx/changeOrderState',
+                        method: 'POST',
+                        header: { //请求头
+                          "Content-Type": "application/x-www-form-urlencoded",
+                          "Authorization": wx.getStorageSync('LocalToken')
+                        },
+                        data: {
+                          _id: _id,
+                          state: "待付款转交易关闭"
+                        },
+                        success(res) {
+                          that.getOrder();
+                        },
+                        fail() { }
+                      })
+                    }
+                  }
+                })
+              }
             },
             fail() { }
           })

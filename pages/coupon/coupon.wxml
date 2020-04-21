@@ -1,72 +1,73 @@
 <view class='container'>
-  <view class='coupon-tab'>
-    <view>
-      <view class="{{tabIndex == 1?'active':''}}" bindtap='tabFun' data-index='1'>可用优惠券</view>
-    </view>
-    <view>
-      <view class="{{tabIndex == 2?'active':''}}" bindtap='tabFun' data-index='2'>不可用优惠券</view>
-    </view>
-  </view>
-  <scroll-view scroll-y class='list'>
-    <!--可用优惠卷-->
-    <view wx:if="{{tabIndex==1}}">
-      <view wx:if="{{!list[0]}}" class="noCoupon">
-        <image src="/images/personal_center/noCoupon.png" mode="widthFix"></image>
-        <text>暂时没有可用优惠卷哦</text>
-      </view>
-      <view class='item' wx:for="{{list}}" wx:key="index">
-        <view class='list_item'>
-          <view class='top'>
-            满{{item.money[0]}}元减{{item.money[1]}}元
-            <view class="top_bottom">
-              <view>
-                {{item.effective[0]}}-{{item.effective[1]}}
-              </view>
-            </view>
-          </view>
-          <view>
-            <image class='state' src='/images/personal_center/can_use.png' mode="widthFix"></image>
-          </view>
-        </view>
-        <view class="bottom">
-          <view class="volume_name">
-            {{item.name}}: 满{{item.money[0]}}元减{{item.money[1]}}元
-          </view>
-          <view class="button_type" bindtap="toUse">
-            <text>立即使用</text>
-          </view>
-        </view>
-      </view>
-    </view>
-    <!--不可用优惠卷-->
-    <view wx:if="{{tabIndex==2}}">
-      <view wx:if="{{!overList[0]}}" class="noCoupon">
-        <image src="/images/personal_center/noCoupon.png" mode="widthFix"></image>
-        <text>暂时没有不可用优惠卷哦</text>
-      </view>
-      <view class='item' wx:for="{{overList}}" wx:key="index">
-        <view class='list_item'>
-          <view class='top'>
-            满{{item.money[0]}}元减{{item.money[1]}}元
-            <view class="top_bottom">
-              <view>
-                {{item.effective[0]}}-{{item.effective[1]}}
-              </view>
-            </view>
-          </view>
-          <view>
-            <image class='state' src='/images/personal_center/overdue.png' mode="widthFix"></image>
-          </view>
-        </view>
-        <view class="bottom">
-          <view class="volume_name">
-            {{item.name}}: 满{{item.money[0]}}元减{{item.money[1]}}元
-          </view>
-          <view class="button_type1">
-            <text>不可使用</text>
-          </view>
-        </view>
-      </view>
-    </view>
-  </scroll-view>
+	<view class='coupon-tab'>
+		<view>
+			<view class="{{tabIndex == 1?'active':''}}" bindtap='tabFun' data-index='1'>可用优惠券</view>
+		</view>
+		<view>
+			<view class="{{tabIndex == 2?'active':''}}" bindtap='tabFun' data-index='2'>不可用优惠券</view>
+		</view>
+	</view>
+	<scroll-view scroll-y class='list'>
+		<!--可用优惠卷-->
+		<view wx:if="{{tabIndex==1}}">
+			<view wx:if="{{!list[0]}}" class="noCoupon">
+				<image src="/images/personal_center/noCoupon.png" mode="widthFix"></image>
+				<text>暂时没有可用优惠卷哦</text>
+			</view>
+			<view class='item' wx:for="{{list}}" wx:key="index">
+				<view class='list_item'>
+					<view class='top'>
+						满{{item.money[0]}}元减{{item.money[1]}}元
+						<view class="top_bottom">
+							<view>
+								{{item.effective[0]}}-{{item.effective[1]}}
+							</view>
+						</view>
+					</view>
+					<view>
+						<image class='state' src='/images/personal_center/can_use.png' mode="widthFix"></image>
+					</view>
+				</view>
+				<view class="bottom">
+					<view class="volume_name">
+						{{item.name}}: 满{{item.money[0]}}元减{{item.money[1]}}元
+					</view>
+					<view class="button_type" bindtap="toUse">
+						<text>立即使用</text>
+					</view>
+				</view>
+			</view>
+		</view>
+		<!--不可用优惠卷-->
+		<view wx:if="{{tabIndex==2}}">
+			<view wx:if="{{!overList[0]}}" class="noCoupon">
+				<image src="/images/personal_center/noCoupon.png" mode="widthFix"></image>
+				<text>暂时没有不可用优惠卷哦</text>
+			</view>
+			<view class='item' wx:for="{{overList}}" wx:key="index">
+				<view class='list_item'>
+					<view class='top'>
+						满{{item.money[0]}}元减{{item.money[1]}}元
+						<view class="top_bottom">
+							<view>
+								{{item.effective[0]}}-{{item.effective[1]}}
+							</view>
+						</view>
+					</view>
+					<view>
+						<image class='state' src='/images/personal_center/overdue.png' mode="widthFix"></image>
+					</view>
+				</view>
+				<view class="bottom">
+					<view class="volume_name">
+						{{item.name}}: 满{{item.money[0]}}元减{{item.money[1]}}元
+					</view>
+					<view class="button_type1">
+						<text>不可使用</text>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="space"></view>
+	</scroll-view>
 </view>

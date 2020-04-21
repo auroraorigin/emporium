@@ -92,7 +92,7 @@
 				<view class="outside" bindtap="cancelOrder">
 					<text class="inside">取消订单</text> 
 				</view>
-				<view class="outside">
+				<view class="outside" bindtap="toPaid">
 					<text class="inside">确认付款</text>
 				</view>
 			</view>

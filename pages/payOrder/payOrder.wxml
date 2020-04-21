@@ -2,9 +2,9 @@
 	<scroll-view scroll-y="true" class="SV">
 
 		<!-- 地址信息 -->
-		<view class="address_border1">
+		<view class="address_border1" bindtap="change_address">
 			<view wx:if="{{addressList.consignee}}">
-				<view class="address_border2" bindtap="change_address">
+				<view class="address_border2">
 					<view class="left_side">
 						<image class="address_icon" src="/images/personal_center/location.png"></image>
 					</view>

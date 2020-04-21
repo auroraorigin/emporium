@@ -5,9 +5,9 @@
 	<!-- 轮播图 -->
 	<swiper class="homePageSwiper" indicator-dots autoplay circular indicator-color="#eaf1f7" indicator-active-color="#2b4c7f">
 		<swiper-item wx:for="{{swiperList}}" wx:key="index">
-			<navigator hover-class="none">
+			<view>
 				<image src="{{item}}" mode="widthFix"></image>
-			</navigator>
+			</view>
 		</swiper-item>
 	</swiper>
 	<!-- 公告 -->

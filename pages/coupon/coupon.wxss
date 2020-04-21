@@ -160,3 +160,8 @@ page {
   right: 25rpx;
   top:8rpx
 }
+
+.space {
+  height: 150rpx;
+  background-color: #f8f8f8;
+}

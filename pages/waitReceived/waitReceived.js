@@ -70,7 +70,7 @@ Page({
             that.setData({
               timeLeft: "订单关闭"
             });
-            //订单超时自动转为交易失败订单
+            //订单超时自动转为交易成功订单
             wx.request({
               url: common.apiHost+'wx/changeOrderState',
               method: 'POST',
@@ -80,7 +80,7 @@ Page({
               },
               data: {
                 _id: that.data.orderId,
-                state: "待收货"
+                state: "待收货转交易成功"
               },
               success(res) { },
               fail() { }
@@ -111,7 +111,7 @@ Page({
             },
             data: {
               _id: _id,
-              state: "待收货"
+              state: "待收货转交易成功"
             },
             success(res) {
               var aShow = wx.getStorageSync('aShow');

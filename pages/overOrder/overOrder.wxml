@@ -78,7 +78,7 @@
 	<!-- 总金额 -->
 	<view class="bottom_border">
 		<view class="border_content">
-			<view class="border_left" wx:if="{{state=='交易失败'}}">
+			<view class="border_left" wx:if="{{state=='交易关闭'}}">
 				<text class="C">
          <text class="L"> 
          </text>未付款:<text class="R"> ¥{{havedPaid}}</text>

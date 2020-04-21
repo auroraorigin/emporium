@@ -65,7 +65,7 @@ Page({
     var now_time = Y + "/" + M + "/" + D + " " + h + ": " + m + ":" + s + " GMT+0800";
 
     //加一天的时间戳：  
-    var tomorrow_timetamp = timestamp + 20 * 60 * 60;
+    var tomorrow_timetamp = timestamp + 24*60*60;
     this.setData({
       timestamp: tomorrow_timetamp,
     })
@@ -77,7 +77,7 @@ Page({
     that.getTime();
     var timestamp = that.data.timestamp;
     //判断地址是否有重新选择
-    if (!that.data.select_address.cosignee) {
+    if (!that.data.select_address.consignee) {
       var address = that.data.addressList
     } else {
       var address = that.data.select_address
@@ -190,7 +190,8 @@ Page({
               freight: that.data.freight
             },
             success(res) {
-              if (res.data.stockMessage == "库存减少成功") {
+              console.log(res.data)
+              if (res.data.stockMessage == "库存足够") {
                 //将数据渲染给本地appData
                 that.setData({
                   waitPaidOrder: res.data.order,
