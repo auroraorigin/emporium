@@ -6,7 +6,7 @@
     z-index: 1;
 }
 
-.searchInput navigator {
+.searchInput .nav {
     height: 100%;
     display: flex;
     flex-direction: row;
@@ -19,10 +19,10 @@
     background-color: #ededed;
 }
 
-.searchInput image {
+.searchInput .img {
     width: 8%;
 }
 
-.searchInput text{
+.searchInput .text{
     color: #666;
 }

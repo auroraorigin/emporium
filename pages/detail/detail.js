@@ -418,15 +418,21 @@ Page({
       });
       return;
     }
-
-    let cart = []
-    cart.push(this.data.detail.goods)
-    cart[0].specificationIndex = lableCurrentIndex
-    cart[0].buyNumber = buyNumber
-    let data = JSON.stringify({ cart: cart, isCart: false })
-    wx.navigateTo({
-      url: `/pages/payOrder/payOrder?cart=${data}`,
-    })
+    if (!wx.getStorageSync('LocalToken')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    }
+    else{
+      let cart = []
+      cart.push(this.data.detail.goods)
+      cart[0].specificationIndex = lableCurrentIndex
+      cart[0].buyNumber = buyNumber
+      let data = JSON.stringify({ cart: cart, isCart: false })
+      wx.navigateTo({
+        url: `/pages/payOrder/payOrder?cart=${data}`,
+       })
+    }
   },
   onLoad: function (_id) {
     this.getGoodsDetail(_id)

@@ -6,12 +6,12 @@
         </navigator>
     </view>
     <view class="cateContainer" bindtouchend="handletouchend" bindtouchstart="handletouchstart">
-        <scroll-view scroll-y class="leftMenu">
+        <scroll-view scroll-y class="leftMenu" enable-flex="true">
             <view class=" {{index===currentIndex?'active':'cateName'}}" wx:for="{{cateList}}" wx:key="index" bindtap="handleItemTap" data-index="{{index}}">
                 {{item.name}} 
             </view>
         </scroll-view>
-        <scroll-view scroll-y class="rightContent" scroll-into-view="{{toView}}" bindscroll="scroll">
+        <scroll-view scroll-y class="rightContent" scroll-into-view="{{toView}}" bindscroll="scroll" enable-flex="true">
             <view id="group{{index1}}" class="group" wx:for="{{cateList}}" wx:for-index="index1" wx:for-item="item1" wx:key="index1">
                 <view class=" {{index1===currentIndex?'topActive':'top'}}" id="index{{index1}}">
                     <view class="cname">{{item1.name}}</view>

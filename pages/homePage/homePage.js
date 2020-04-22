@@ -379,14 +379,21 @@ Page({
       return;
     }
 
-    let cart = []
-    cart.push(this.data.floorList[index1].goods[index2])
-    cart[0].specificationIndex=lableCurrentIndex
-    let data = JSON.stringify({cart:cart,isCart:false})
-    
-    wx.navigateTo({
-      url: `/pages/payOrder/payOrder?cart=${data}`,
-    })
+     if (!wx.getStorageSync('LocalToken')) {
+            wx.navigateTo({
+              url: '/pages/login/login',
+            })
+    }
+    else{
+      let cart = []
+      cart.push(this.data.floorList[index1].goods[index2])
+      cart[0].specificationIndex=lableCurrentIndex
+      let data = JSON.stringify({cart:cart,isCart:false})
+      
+      wx.navigateTo({
+        url: `/pages/payOrder/payOrder?cart=${data}`,
+      })
+    }
   },
   onReady: function () {
     this.initialization()

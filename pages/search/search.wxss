@@ -548,9 +548,10 @@ image{
 
   .nogoodsImg{
     width: 55%;
-    height: 60%;
+    height: 65%;
     left:22.5%;
-    top: 19%;
+    top: 15%;
     position:absolute;
     z-index: 1;
   }
+  

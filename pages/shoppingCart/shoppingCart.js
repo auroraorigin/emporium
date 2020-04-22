@@ -51,7 +51,7 @@ Page({
     cart.forEach(v => {
       if (v.checked) {
         sum += v.specification[v.specificationIndex].price * v.buyNumber;
-        select += v.buyNumber;
+        select += Number(v.buyNumber);
         count++;
       } else
         isAll = false;
@@ -329,10 +329,18 @@ Page({
         });
         return 
       }
-    let data = JSON.stringify({cart:cart,isCart:true})
-    wx.navigateTo({
-      url: `/pages/payOrder/payOrder?cart=${data}`,
-    })
+
+    if (!wx.getStorageSync('LocalToken')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    }
+    else{
+      let data = JSON.stringify({cart:cart,isCart:true})
+      wx.navigateTo({
+        url: `/pages/payOrder/payOrder?cart=${data}`,
+      })
+    }
   },
   onLoad: function (options) {
 
