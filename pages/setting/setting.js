@@ -16,8 +16,11 @@ Page({
       content: '您确定要退出登录吗？',
       success: (result) => {
         if (result.confirm) {
+          let cart=wx.getStorageSync('cart');
           //将缓存全部清空
-          wx.clearStorage()
+          wx.clearStorage();
+          //将购物车缓存重新存入缓存
+          wx.setStorageSync('cart', cart);
           //回到上一级页面
           wx.navigateBack({
             delta: 1

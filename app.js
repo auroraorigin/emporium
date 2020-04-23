@@ -45,7 +45,21 @@ App({
                   key: 'LocalToken',
                   data: res.data.token,
                 });
-                var localToken = res.data.token;
+                //授权的同时获取用户的默认收货地址，没有则表示还为添加地址
+                var that = this;
+                wx.request({
+                  url: 'http://localhost:8888/wx/getDefaultAddress',
+                  method: 'GET',
+                  header: { //请求头
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "Authorization": res.data.token
+                  },
+                  data: {},
+                  success(res) {
+                    wx.setStorageSync('defaultAddress', res.data.defaultAddress)
+                  },
+                  fail() { }
+                })
                 resolve()
               },
               fail() {

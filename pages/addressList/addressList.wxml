@@ -29,7 +29,7 @@
 									</view>
 									<text class="ad">收货地址: {{item.region_name}}{{item.detail_address}}</text>
 								</view>
-								<view class="Edit" catchtap="selectRef" data-index="{{index}}">
+								<view class="Edit" catchtap="ref" data-index="{{index}}">
 									<image src="/images/personal_center/edit.jpg" mode="widthFix"></image>
 								</view>
 							</view>
@@ -55,7 +55,7 @@
 									</view>
 									<text class="ad">收货地址: {{item.region_name}}{{item.detail_address}}</text>
 								</view>
-								<view class="Edit1" catchtap="ref" data-index="{{index}}">
+								<view class="Edit1" catchtap="selectRef" data-index="{{index}}">
 									<image src="/images/personal_center/edit.jpg" mode="widthFix"></image>
 								</view>
 							</view>

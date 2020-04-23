@@ -91,30 +91,40 @@ Page({
 
   //删除
   delItem: function (e) {
-    //获取列表中要删除项的下标
-    var index = e.currentTarget.dataset.index;
-    //获取地址列表
-    var list = this.data.addressList;
-    var defaultAddress = wx.getStorageSync('defaultAddress');
-    //如果要删除的地址是默认地址
-    if (defaultAddress.consignee == list[index].consignee && defaultAddress.mobile == list[index].mobile && defaultAddress.region_name == list[index].region_name && defaultAddress.detail_address == list[index].detail_address) {
-      //如果地址列表中只有一个地址，则将默认地址缓存清空
-      if (list.length == 1) {
-        wx.removeStorageSync('defaultAddress')
+    //显示是否删除该地址弹窗
+    wx.showModal({
+      title: '提示',
+      content: '您确定要退出登录吗？',
+      success: (result) => {
+        if (result.confirm) {
+          //获取列表中要删除项的下标
+          var index = e.currentTarget.dataset.index;
+          //获取地址列表
+          var list = this.data.addressList;
+          var defaultAddress = wx.getStorageSync('defaultAddress');
+          //如果要删除的地址是默认地址
+          if (defaultAddress.consignee == list[index].consignee && defaultAddress.mobile == list[index].mobile && defaultAddress.region_name == list[index].region_name && defaultAddress.detail_address == list[index].detail_address) {
+            //如果地址列表中只有一个地址，则将默认地址缓存清空
+            if (list.length == 1) {
+              wx.removeStorageSync('defaultAddress')
+            }
+            //如果地址列表中有多个地址，则将下一个地址标记为默认地址
+            if (list.length > 1) {
+              list[1].isActive = true;
+              wx.setStorageSync('defaultAddress', list[1]);
+            }
+          }
+          //移除列表中下标为index的项
+          list.splice(index, 1);
+          wx.setStorageSync("addressList", list);
+          //更新列表的状态
+          this.setData({
+            addressList: list
+          });
+        } else
+          return;
       }
-      //如果地址列表中有多个地址，则将下一个地址标记为默认地址
-      if (list.length > 1) {
-        list[1].isActive = true;
-        wx.setStorageSync('defaultAddress', list[1]);
-      }
-    }
-    //移除列表中下标为index的项
-    list.splice(index, 1);
-    wx.setStorageSync("addressList", list);
-    //更新列表的状态
-    this.setData({
-      addressList: list
-    });
+    })
   },
 
   //编辑地址
@@ -134,7 +144,7 @@ Page({
   },
 
   //选择收货地址中的编辑地址
-  ref: function (e) {
+  selectRef: function (e) {
     //获取要编辑的地址所在地址列表的位置
     var index = e.currentTarget.dataset.index;
     this.data.addressList[index].id = index;
@@ -305,8 +315,33 @@ Page({
   },
 
   //进入页面
-  onLoad() {
-    this.getAddressList();
+  onLoad(options) {
+    var that = this;
+    wx.request({
+      url: common.apiHost + 'wx/getAddressList',
+      method: 'GET',
+      header: { //请求头
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": wx.getStorageSync('LocalToken')
+      },
+      data: {},
+      success(res) {
+        if (res.data.status == "ok") {
+          //将获取到的地址分别存入缓存
+          wx.setStorageSync('addressList', res.data.address.addressList);
+          wx.setStorageSync('defaultAddress', res.data.address.defaultAddress);
+          //本地appData赋值
+          that.setData({
+            addressList: res.data.address.addressList
+          }, function () {
+            this.onShow(options)
+          })
+        }
+      },
+      fail(res) {
+
+      }
+    })
   },
 
   //退出页面

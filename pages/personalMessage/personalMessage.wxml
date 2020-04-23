@@ -80,7 +80,7 @@
     </view>
   </view>
   <view>
-    <modal wx:for="{{ch}}" title="{{item.title}}" hidden="{{modalHidden}}" confirm-text="确定" cancel-text="取消" bindconfirm="modalBindconfirm" bindcancel="modalBindcancel" class="model-type">
+    <modal wx:for="{{ch}}" wx:key="index" title="{{item.title}}" hidden="{{modalHidden}}" confirm-text="确定" cancel-text="取消" bindconfirm="modalBindconfirm" bindcancel="modalBindcancel" class="model-type">
       <input value="{{textmess}}" bindinput="settext" class="input_radius" type="number"></input>
     </modal>
   </view>

@@ -1,5 +1,0 @@
-<view class="search_input">
- <navigator url="/pages/searchpage/searchpage" open-type="navigateTo" hover-class="none">
-  <image src="/images/personal center/magnifier.jpg" mode="widthFix"></image><text>搜索</text>
- </navigator>
-</view>

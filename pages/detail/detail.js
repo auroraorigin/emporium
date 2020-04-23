@@ -57,7 +57,7 @@ Page({
 
         let detail = {
           goods,
-          discount: [`部分地区满${discount}包邮`],
+          discount: [`广东省内满${discount}包邮`],
           delivery: ["快递", "送货上门 (仅限博贺镇内)"]
         }
         that.setData({
