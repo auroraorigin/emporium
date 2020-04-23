@@ -15,7 +15,7 @@ Page({
   getCouponCenter() {
     var that = this;
     wx.request({
-      url: common.apiHost+'wx/getCouponCenter',
+      url: common.apiHost + 'wx/getCouponCenter',
       method: "GET",
       data: {},
       header: {
@@ -29,7 +29,7 @@ Page({
           })
         }
       },
-      fail() {}
+      fail() { }
     })
   },
 
@@ -39,14 +39,14 @@ Page({
     //弹框提示是否获取优惠卷
     wx.showModal({
       title: '提示',
-      content: '您确定要获取该优惠卷吗？', 
+      content: '您确定要获取该优惠卷吗？',
       success: (result) => {
         //确定则执行以下内容
         if (result.confirm) {
           //获取data-id
           var index = e.currentTarget.dataset.id;
           wx.request({
-            url: common.apiHost+'wx/getCoupon',
+            url: common.apiHost + 'wx/getCoupon',
             method: "POST",
             header: { //请求头
               "Content-Type": "application/x-www-form-urlencoded",
@@ -71,18 +71,27 @@ Page({
                   duration: 1000,
                   mask: true,
                   icon: 'success',
-                  success: function() {},
-                  fail: function() {},
-                  complete: function() {}
+                  success: function () { },
+                  fail: function () { },
+                  complete: function () { }
                 })
               }
             },
-            fail() {}
+            fail() { }
           })
         } else
           return;
       }
     })
+  },
+
+  onShow() {
+    //每次进入前判断缓存是否有token，没有表示未登录，强制进入登录授权页面
+    if (!wx.getStorageSync('LocalToken')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    }
   },
 
   onLoad() {

@@ -6,7 +6,6 @@
     "pages/waitSent/waitSent",
     "pages/waitPaid/waitPaid",
     "pages/overOrder/overOrder",
-    "pages/myaddress/myaddress",
     "pages/payOrder/payOrder",
     "pages/categories/categories",
     "pages/shoppingCart/shoppingCart",

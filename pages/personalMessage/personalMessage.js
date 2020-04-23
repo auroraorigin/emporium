@@ -23,14 +23,14 @@ Page({
     ch: [{
       id: 0,
       title: ""
-    }, ], //编辑框title，默认为空
+    },], //编辑框title，默认为空
     Id: [{
       id: ""
-    }, ]
+    },]
   },
 
   //弹框功能
-  ShowModal: function(e) {
+  ShowModal: function (e) {
     //获取设置id属性
     var ID = e.currentTarget.dataset.id;
     var da = this.data.Id;
@@ -81,7 +81,7 @@ Page({
   },
 
   //确定model
-  modalBindconfirm: function(e) {
+  modalBindconfirm: function (e) {
     var da = this.data.Id;
     //确定后修改本地内容为编辑内容
     switch (da.id) {
@@ -116,14 +116,14 @@ Page({
       duration: 1000,
       mask: true,
       icon: 'success',
-      success: function() {},
-      fail: function() {},
-      complete: function() {}
+      success: function () { },
+      fail: function () { },
+      complete: function () { }
     })
   },
 
   //取消model
-  modalBindcancel: function(e) {
+  modalBindcancel: function (e) {
     var da = this.data.Id;
     //取消修改则本地内容不变，不与编辑框同步
     switch (da.id) {
@@ -155,59 +155,59 @@ Page({
   },
 
   //性别选择器
-  bindPickerChange: function(e) {
+  bindPickerChange: function (e) {
     //将选择的性别赋值进显示的变量中
     this.setData({
-        _sex: this.data.sex[e.detail.value]
-      }),
+      _sex: this.data.sex[e.detail.value]
+    }),
       //弹框修改成功model
       wx.showToast({
         title: '修改成功',
         duration: 1000,
         mask: true,
         icon: 'success',
-        success: function() {},
-        fail: function() {},
-        complete: function() {}
+        success: function () { },
+        fail: function () { },
+        complete: function () { }
       })
   },
 
   //日期选择器
-  bindDateChange: function(e) {
+  bindDateChange: function (e) {
     //将选择的日期赋值进显示的变量中
     this.setData({
-        date: e.detail.value
-      }),
+      date: e.detail.value
+    }),
       wx.showToast({
         title: '修改成功',
         duration: 1000,
         mask: true,
         icon: 'success',
-        success: function() {},
-        fail: function() {},
-        complete: function() {}
+        success: function () { },
+        fail: function () { },
+        complete: function () { }
       })
   },
 
   //地区选择器
-  bindRegionChange: function(e) {
+  bindRegionChange: function (e) {
     //将选择的地区赋值进显示的变量中
     this.setData({
-        _region: e.detail.value[0] + ' ' + e.detail.value[1] + ' ' + e.detail.value[2]
-      }),
+      _region: e.detail.value[0] + ' ' + e.detail.value[1] + ' ' + e.detail.value[2]
+    }),
       wx.showToast({
         title: '修改成功',
         duration: 1000,
         mask: true,
         icon: 'success',
-        success: function() {},
-        fail: function() {},
-        complete: function() {}
+        success: function () { },
+        fail: function () { },
+        complete: function () { }
       })
   },
 
   //跳转到收货地址
-  jumpToHarvestAddress: function(e) {
+  jumpToHarvestAddress: function (e) {
     wx.navigateTo({
       url: '/pages/addressList/addressList',
     })
@@ -217,14 +217,14 @@ Page({
   getMessage() {
     var that = this; // 重置data{}里数据时候setData方法的this应为函数的this, 如果在下方的sucess直接写this就变成了wx.request()的this了
     wx.request({
-      url: common.apiHost+'wx/getUserMessage',
+      url: common.apiHost + 'wx/getUserMessage',
       method: 'GET',
       header: { //请求头
         "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": wx.getStorageSync('LocalToken')
       },
       data: {},
-      success: function(res) {
+      success: function (res) {
         //判断返回状态
         if (res.data.status == "ok")
         //将收到的数据赋值给appData
@@ -240,14 +240,14 @@ Page({
           })
         }
       },
-      fail: function(res) {}
+      fail: function (res) { }
     })
   },
 
   //更新个人信息
   messageUpdata() {
     wx.request({
-      url: common.apiHost+'wx/userMessageUpdata',
+      url: common.apiHost + 'wx/userMessageUpdata',
       method: 'PUT',
       header: { //请求头
         "Content-Type": "application/x-www-form-urlencoded",
@@ -263,18 +263,25 @@ Page({
         wxNumber: this.data.wxNumber,
         detailAddress: this.data.detailAddress
       },
-      success: function(res) {},
-      fail: function(res) {}
+      success: function (res) { },
+      fail: function (res) { }
     })
   },
 
   //打开页面显示个人信息
-  onShow: function(options) {
-    this.getMessage();
+  onShow: function (options) {
+    //每次进入前判断缓存是否有token，没有表示未登录，强制进入登录授权页面
+    if (!wx.getStorageSync('LocalToken')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    } else {
+      this.getMessage();
+    }
   },
 
   //关闭页面存储修改后的信息
-  onUnload: function(options) {
+  onUnload: function (options) {
     this.messageUpdata();
   }
 })

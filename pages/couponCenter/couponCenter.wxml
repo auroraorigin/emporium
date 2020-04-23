@@ -1,5 +1,5 @@
 <scroll-view scroll-y="true" class="allPage">
-	<view wx:if="{{!couponList}}" class="noCoupon">
+	<view wx:if="{{!couponList[0]}}" class="noCoupon">
 		<image src="/images/personal_center/noGetCoupon.png" mode="widthFix"></image>
 		<text>抱歉，暂无优惠卷可领取</text>
 	</view>

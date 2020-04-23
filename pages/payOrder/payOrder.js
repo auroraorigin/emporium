@@ -27,8 +27,15 @@ Page({
 
   //修改支付的个人信息
   change_address() {
+    //将现在显示的地址传给地址列表页面
+    if (this.data.select_address.consignee) {
+      var address = this.data.select_address
+    } else {
+      var address = this.data.addressList
+    }
+    var tip = true;
     wx.navigateTo({
-      url: '/pages/myaddress/myaddress',
+      url: '/pages/addressList/addressList?tip=' + tip + '&address=' + JSON.stringify(address),
     })
   },
 
@@ -65,7 +72,7 @@ Page({
     var now_time = Y + "/" + M + "/" + D + " " + h + ": " + m + ":" + s + " GMT+0800";
 
     //加一天的时间戳：  
-    var tomorrow_timetamp = timestamp + 24*60*60;
+    var tomorrow_timetamp = timestamp + 24 * 60 * 60;
     this.setData({
       timestamp: tomorrow_timetamp,
     })
@@ -328,6 +335,15 @@ Page({
       })
     }
   },
+  //将价钱转为2位小数
+  toDecimal(x) {
+    var f = parseFloat(x);
+    if (isNaN(f)) {
+      return;
+    }
+    f = Math.round(x * 100) / 100;
+    return f;
+  },
 
   /**
    * 生命周期函数--监听页面显示
@@ -379,8 +395,8 @@ Page({
             var freight = 0;
             //计算每个商品的价格和总商品的价格
             for (var i = 0; i < cart.length; i++) {
-              cart[i].all_money = cart[i].buyNumber * Number(cart[i].specification[cart[i].specificationIndex].price);
-              total = total + cart[i].all_money;
+              cart[i].all_money = that.toDecimal(cart[i].buyNumber * Number(cart[i].specification[cart[i].specificationIndex].price));
+              total = that.toDecimal(total + cart[i].all_money);
               //将商品显示的数据存入order数组
               order[i] = {
                 name: cart[i].name,
@@ -401,7 +417,7 @@ Page({
             else {
               for (var i = 0; i < cart.length; i++) {
                 //计算总运费
-                freight = freight + cart[i].specification[cart[i].specificationIndex].freight * cart[i].buyNumber
+                freight = that.toDecimal(freight + cart[i].specification[cart[i].specificationIndex].freight * cart[i].buyNumber)
               }
             }
             that.setData({

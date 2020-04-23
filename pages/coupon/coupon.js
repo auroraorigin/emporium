@@ -56,6 +56,15 @@ Page({
     })
   },
 
+  onShow(){
+    //每次进入前判断缓存是否有token，没有表示未登录，强制进入登录授权页面
+    if(!wx.getStorageSync('LocalToken')){
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    }
+  },
+
   //进入页面就发送请求获取数据
   onLoad() {
     this.getCouponList();

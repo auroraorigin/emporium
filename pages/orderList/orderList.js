@@ -446,7 +446,7 @@ Page({
                     }
                   }
                 })
-              }else if (stateMessage == "商品已下架") {
+              } else if (stateMessage == "商品已下架") {
                 //显示是否退出登录弹窗
                 wx.showModal({
                   title: '提示',
@@ -503,29 +503,36 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function (options) {
-    //清除所有跳转标志缓存
-    if (wx.getStorageInfoSync("aShow"))
-      wx.removeStorageSync('aShow')
-    if (wx.getStorageInfoSync("tip"))
-      wx.removeStorageSync('tip')
-    //1.获取当前小程序的页面栈-数组 最大长度为10页面
-    let pages = getCurrentPages();
-    //2.数组中索引最大的页面就是当前页面
-    let currentPage = pages[pages.length - 1];
-    //3.获取url上的type参数
-    var {
-      type
-    } = currentPage.options;
-    var t = wx.getStorageSync("type");
-    if (t) {
-      var type = wx.getStorageSync("type");
-      wx.removeStorageSync("type");
+    //每次进入前判断缓存是否有token，没有表示未登录，强制进入登录授权页面
+    if (!wx.getStorageSync('LocalToken')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    } else {
+      //清除所有跳转标志缓存
+      if (wx.getStorageInfoSync("aShow"))
+        wx.removeStorageSync('aShow')
+      if (wx.getStorageInfoSync("tip"))
+        wx.removeStorageSync('tip')
+      //1.获取当前小程序的页面栈-数组 最大长度为10页面
+      let pages = getCurrentPages();
+      //2.数组中索引最大的页面就是当前页面
+      let currentPage = pages[pages.length - 1];
+      //3.获取url上的type参数
+      var {
+        type
+      } = currentPage.options;
+      var t = wx.getStorageSync("type");
+      if (t) {
+        var type = wx.getStorageSync("type");
+        wx.removeStorageSync("type");
+      }
+      this.setData({
+        presentType: type
+      })
+      //4.激活选中页面标题 当type=1时，index=0 
+      this.changeTitleByIndex(type - 1);
+      this.getOrder();
     }
-    this.setData({
-      presentType: type
-    })
-    //4.激活选中页面标题 当type=1时，index=0 
-    this.changeTitleByIndex(type - 1);
-    this.getOrder();
   },
 })

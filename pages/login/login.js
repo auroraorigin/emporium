@@ -3,14 +3,17 @@ import regeneratorRuntime from '../../lib/runtime/runtime.js';
 import { login } from "../../utils/asyncWx.js";
 const app = getApp();
 Page({
+  data:{
+    
+  },
   async handleGetUserInfo(e) {
    ///如果用户按了允许按钮
     if (e.detail.rawData) {
       const { userInfo } = e.detail;
       wx.setStorageSync("userinfo", userInfo);
       app.getToken();
-      wx.reLaunch({
-        url: '/pages/homePage/homePage',
+      wx.navigateBack({
+        delta:2
       })
     }else{
       wx.showToast({

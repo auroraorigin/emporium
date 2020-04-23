@@ -28,6 +28,10 @@
   top: -5rpx;
 }
 
+.user_info1 {
+  width: 200rpx;
+}
+
 .user_name {
   position: relative;
   padding: 65rpx 150rpx;

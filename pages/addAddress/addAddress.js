@@ -12,10 +12,12 @@ Page({
     detail_address: '', //详细地址
     consignee_name: '', //收货人
     mobile_number: '', //手机号码
+    tip:'',//判断是否从选择地址中跳转过来的标志
+    index:Number//选择地中传递过来数组下标
   },
 
   //获取地区选择器
-  bindRegionChange: function(e) {
+  bindRegionChange: function (e) {
     this.setData({
       region: e.detail.value,
     })
@@ -29,7 +31,7 @@ Page({
   getLocation() {
     var _this = this;
     wx.chooseLocation({
-      success: function(res) {
+      success: function (res) {
         var address = res.address
         _this.setData({
           detail_address: address
@@ -84,7 +86,7 @@ Page({
         if (flag == 1) {
           array.push(addressList);
           wx.setStorageSync('addressList', array);
-          setTimeout(function() {
+          setTimeout(function () {
             wx.navigateBack({ //返回
 
             })
@@ -110,12 +112,17 @@ Page({
           defaultAddress.detail_address = e.detail.value.detail_address;
         }
         //将默认地址放进缓存
-        wx.setStorageSync('defaultAddress', defaultAddress)
+        wx.setStorageSync('defaultAddress', defaultAddress);
+        //如果从选择地址跳转修改，则在返回前将修改后的地址放入缓存
+        if(this.data.tip){
+          var addressList=wx.getStorageSync('addressList')
+          wx.setStorageSync('selectToChange',addressList[this.data.index]);
+        }
         //延迟返回
         wx.showToast({
           title: '保存成功！',
         })
-        setTimeout(function() {
+        setTimeout(function () {
           wx.navigateBack({ //返回
 
           })
@@ -192,7 +199,7 @@ Page({
       wx.showToast({
         title: '设置成功！',
       })
-      setTimeout(function() {
+      setTimeout(function () {
         wx.navigateBack({ //返回
 
         })
@@ -208,7 +215,7 @@ Page({
   },
 
   //进入新增地址页面就实现表单验证
-  onLoad: function(options) {
+  onLoad: function (options) {
     this.initValidate();
   },
 
@@ -256,7 +263,7 @@ Page({
     this.WxValidate = new WxValidate(rules, messages)
   },
 
-  onShow() {
+  onShow(options) {
     //页面刷新马上获取编辑缓存
     let changeAddress = wx.getStorageSync('changeAddress')
     //如果编辑缓存存在，更新编辑框显示内容
@@ -271,5 +278,21 @@ Page({
     }
     //返回标志，放入缓存，若点击左上角返回，设置为true
     wx.setStorageSync('aShow', true)
+
+    //判断是否从选择地址跳转过来
+    //1.获取当前小程序的页面栈-数组 最大长度为10页面
+    let pages = getCurrentPages();
+    //2.数组中索引最大的页面就是当前页面
+    let currentPage = pages[pages.length - 1];
+    //3.获取页面标志参数tip
+    var tip = currentPage.options.tip;
+    //获取数组下标
+    var index=currentPage.options.index;
+    if(tip){
+      this.setData({
+        tip:true,
+        index:index
+      })
+    }
   }
 })

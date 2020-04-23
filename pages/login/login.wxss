@@ -1,4 +1,74 @@
-button{
-  margin-top: 450rpx;
-  width:70%
+.allPage {}
+
+.border1 {
+  height: 300rpx;
+  margin-top: 30rpx;
+}
+
+.border1 .border1-top {
+  height: 31%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 20rpx;
+}
+
+.border1 .border1-top image {
+  width: 90rpx;
+}
+
+.border1 .border1-top text {
+  color: #ccc;
+  font-size: 30rpx;
+  margin-left: 15rpx;
+}
+
+.border1 .border1-bottom {
+  width: 68%;
+  margin: 0 16% 0 16%;
+}
+
+.border1 .border1-bottom text {
+  font-size: 45rpx;
+  line-height: 69rpx;
+  letter-spacing: 3rpx;
+}
+
+.border2 {
+  height: 250rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40rpx;
+}
+
+.border2 image {
+  width: 130rpx;
+  margin-bottom: 20rpx;
+}
+
+.border2 text {
+  font-size: 38rpx;
+}
+
+.border3{
+  margin-top: 50rpx;
+  height: 200rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.border3 button {
+  border-radius: 50rpx;
+  width: 70%
+}
+
+.border3 text{
+  color: #ccc;
+  font-size: 30rpx;
+  margin-top: 30rpx;
 }

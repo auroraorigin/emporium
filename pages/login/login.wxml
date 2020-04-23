@@ -1,1 +1,20 @@
-<button type="primary" open-type="getUserInfo" bindgetuserinfo="handleGetUserInfo">微信授权登录</button>
+<navigationBar title="海鲜商城" show-icon='{{true}}'></navigationBar>
+<view class="allPage">
+	<view class="border1">
+		<view class="border1-top">
+			<image src="/images/personal_center/appIcon.png" mode="widthFix"></image>
+			<text>海鲜商城官方</text>
+		</view>
+		<view class="border1-bottom">
+			<text>亲爱的用户，您还未授权登录，请登录后继续操作</text>
+		</view>
+	</view>
+	<view class="border2">
+		<image src="/images/personal_center/appIcon.png" mode="widthFix"></image>
+		<text>黄家泉投资平台~海鲜商城</text>
+	</view>
+	<view class="border3">
+  <button type="primary" open-type="getUserInfo" bindgetuserinfo="handleGetUserInfo">微信授权登录</button>
+  <text class="border3-bottom">huangshi黄家泉·战略投资</text>
+  </view>
+</view>

@@ -57,18 +57,34 @@ page {
   font-size: 28rpx;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   height: 98%;
   position: relative;
   z-index: 5;
 }
 
+.selectType{
+  height: auto;
+  width: 40rpx;
+  margin-left: 20rpx;
+}
+
 .columndisplay {
   display: flex;
   flex-direction: column;
   position: relative;
-  left: 33rpx;
+  left: 36rpx;
+  align-items: flex-start;
+  justify-content: center;
+  height: 100%;
+}
+
+.columndisplay1 {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  left: 20rpx;
   align-items: flex-start;
   justify-content: center;
   height: 100%;
@@ -129,7 +145,14 @@ page {
   width: 33rpx;
   height: 33rpx;
   position: relative;
-  left: -30rpx;
+  left: 40rpx;
+}
+
+.Edit1 image {
+  width: 33rpx;
+  height: 33rpx;
+  position: relative;
+  left: 5rpx;
 }
 
 .border1 {

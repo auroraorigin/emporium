@@ -14,6 +14,12 @@ Page({
     wx.setStorageSync("userinfo", userInfo);
   },*/
 
+  toPersonalMessage(){
+    wx.navigateTo({
+      url: '/pages/personalMessage/personalMessage',
+    })
+  },
+
   onShow() {
     const userinfo = wx.getStorageSync("userinfo");
     this.setData({
