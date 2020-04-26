@@ -1,49 +1,86 @@
 /*登录页面*/
+page{
+  /*主题颜色*/
+  --themeColor:#2b4c7f;
+  --themeColorLight:#eaf1f7;
+  /*字体大小*/
+  font-size: 28rpx;
+  background-color: #f3f3f3;
+}
+
+ .topBgc{
+    position:absolute;
+    width:100%; 
+    top:0;
+    background-color: #2b4c7f;
+    height: 310rpx;
+    border-radius:  0 0 100% 100% / 25% ;
+  }
 
 .myPage {
   height: 250rpx;
-  background-color: #eaf1f7;
   display: flex;
-}
-
-.myPage image {
-  height: 100rpx;
-  width: 100rpx;
-  position: absolute;
-  left: 30rpx;
-  top: 30rpx;
-  border-radius: 50%;
+  
 }
 
 .click-login {
-  position: relative;
-  padding: 65rpx 150rpx;
   font-size: 30rpx;
-  font-weight:550
+  margin-bottom: 20rpx;
+  color: white;
+  font-weight: bold;
 }
 
 .user_info {
-  position: relative;
-  left: -10rpx;
-  top: -5rpx;
+  display: flex;
+  height: 160rpx;
+  align-items: center;
+  width: 100%;
+}
+.user_info image{
+  height: 100rpx;
+  width: 100rpx;
+  border-radius: 50%;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  margin-bottom: 20rpx;
 }
 
 .user_info1 {
-  width: 200rpx;
+  display: flex;
+  height: 160rpx;
+  align-items: center;
+  width: 100%;
 }
 
-.user_name {
-  position: relative;
-  padding: 65rpx 150rpx;
+.user_info1 image{
+  height: 100rpx;
+  width: 100rpx;
+  border-radius: 50%;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.user_info1 .user_name
+{
+  font-size: 30rpx;
+  margin-bottom: 20rpx;
+  color: white;
+  font-weight: bold;
 }
 
 .myPage1 {
-  border: 1rpx solid #ccc;
-  height: 200rpx;
+  /* border: 1rpx solid #ccc; */
+  height: 250rpx;
   border-radius: 10rpx;
-  box-shadow: 0rpx 0rpx 7rpx #ccc;
+  /* box-shadow: 0rpx 0rpx 7rpx #ccc; */
+  border-style: solid;
+  border-color: #ededed;
+  box-shadow: 0px 0px 0px #ededed;
+  border-width: 4rpx;
   margin: -100rpx 20rpx;
   background-color: #fff;
+  position: relative;
 }
 
 .order {
@@ -51,22 +88,24 @@
 }
 
 .order-item {
-  border-bottom: 1rpx solid #ddd;
-  padding: 15rpx 30rpx;
+  border-bottom: 3rpx solid #f3f3f3;
+  padding: 20rpx 30rpx;
 }
 
 .all_order {
   color: rgb(156, 154, 154);
   text-indent: 330rpx;
   font-size: 20rpx;
+  margin-left: 50rpx;
 }
 
 .distribute {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
   position: relative;
-  top: 20rpx;
+  top: 30rpx;
 }
 .distributecolumn {
   width: 20%;
@@ -77,16 +116,21 @@
 }
 
 .wait_item {
-  width: 50%;
-  height: auto;
+  width: 60%;
 }
 
 .myPage2 {
-  border: 1rpx solid #ccc;
+  position: relative;
+  /* border: 1rpx solid #ccc; */
   height: auto;
   border-radius: 10rpx;
-  box-shadow: 0rpx 0rpx 7rpx #ccc;
+  /* box-shadow: 0rpx 0rpx 7rpx #ccc; */
   margin: 120rpx 20rpx;
+  background-color: white;
+  border-style: solid;
+  border-color: #ededed;
+  box-shadow: 0px 0px 0px #ededed;
+  border-width: 4rpx;
 }
 
 .list {
@@ -94,25 +138,39 @@
 }
 
 .list-item {
-  border-bottom: 1rpx solid #ddd;
+  border-bottom: 3rpx solid #f3f3f3;
   padding: 17rpx 30rpx;
-  height: 39rpx;
+  height: 50rpx;
 }
 
 .myPage3 {
-  border: 1rpx solid #ccc;
+  /* border: 1rpx solid #ccc; */
   height: auto;
   border-radius: 10rpx;
-  box-shadow: 0rpx 0rpx 7rpx #ccc;
+  /* box-shadow: 0rpx 0rpx 7rpx #ccc; */
   margin: -100rpx 20rpx;
+  background-color: white;
+  border-style: solid;
+  border-color: #ededed;
+  box-shadow: 0px 0px 0px #ededed;
+  border-width: 4rpx;
 }
 
 .list-item1 {
-  border-bottom: 1rpx solid #ddd;
+  border-bottom: 3rpx solid #f3f3f3;
   padding: 28rpx 30rpx;
-  height: 33rpx;
+  height: 40rpx;
 }
 
+.contacButton {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+ 
 .function_image {
   width: 40rpx;
   height: auto;

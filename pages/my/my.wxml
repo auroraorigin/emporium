@@ -1,9 +1,10 @@
 <!--登录页面-->
-<view>
+<view style="">
+<view class="topBgc"></view>
 <!--登录获取头像和昵称-->
-  <view class="myPage">
+  <view class="myPage" style="position:relative;">
     <view wx:if="{{!userinfo.avatarUrl}}" class="user_info">
-      <image src="/images/personal_center/default_avatar.jpg"></image>
+      <image src="/images/personal_center/default_avatar.png"></image>
       <navigator url="/pages/login/login" class="click-login" hover-class="none">点击登录账户 >></navigator>
     </view>
     <view wx:else bindtap="toPersonalMessage" class="user_info1">
@@ -14,7 +15,7 @@
 <!--订单框-->
   <view class="myPage1">
     <view class="order">
-      <navigator class="order-item arrow" url="/pages/orderList/orderList?type=1" open-type="navigate">
+      <navigator class="order-item arrow" url="/pages/orderList/orderList?type=1" open-type="navigate" hover-class="none">
         <text>我的订单</text>
         <text class="all_order">查看全部订单</text>
       </navigator>
@@ -41,34 +42,40 @@
 <!--拼团框-->
   <view class="myPage2">
     <view class="list">
-      <navigator class="list-item arrow">
+      <view class="list-item arrow" hover-class="none" bindtap="tap">
         <text>我的拼团</text>
-      </navigator>
-      <navigator class="list-item arrow">
+      </view>
+      <view class="list-item arrow" hover-class="none" bindtap="tap">
         <text>拼团收益</text>
-      </navigator>
+      </view>
     </view>
   </view>
 <!--个人信息、收货地址、优惠卷框-->
   <view class="myPage3">
     <view class="list">
-      <navigator class="list-item1 arrow" url="/pages/personalMessage/personalMessage">
+      <navigator class="list-item1 arrow" url="/pages/personalMessage/personalMessage" hover-class="none">
         <image class="function_image" src="/images/personal_center/personalMessage.png" mode="widthFix"></image>
         <text class="function_text">个人信息</text>
       </navigator>
-      <navigator class="list-item1 arrow" url='/pages/addressList/addressList'>
+      <navigator class="list-item1 arrow" url='/pages/addressList/addressList' hover-class="none">
         <image class="function_image" src="/images/personal_center/address.png" mode="widthFix"></image>
         <text class="function_text">收货地址</text>
       </navigator>
-      <navigator class="list-item1 arrow" url='/pages/coupon/coupon'>
+      <navigator class="list-item1 arrow" url='/pages/coupon/coupon' hover-class="none">
         <image class="function_image1" src="/images/personal_center/coupon.png" mode="widthFix"></image>
         <text class="function_text">优惠卷</text>
       </navigator>
-      <navigator class="list-item1 arrow" url='/pages/couponCenter/couponCenter'>
+      <navigator class="list-item1 arrow" url='/pages/couponCenter/couponCenter' hover-class="none">
         <image class="function_image" src="/images/personal_center/getCoupon.png" mode="widthFix"></image>
         <text class="function_text">领卷中心</text>
       </navigator>
-      <navigator class="list-item1 arrow" url='/pages/setting/setting'>
+      
+      <view class="list-item1 arrow" style="position:relative">
+        <image class="function_image" src="/images/personal_center/server.png" mode="widthFix"></image>
+        <text class="function_text">客服</text>
+        <button open-type="contact" class='contacButton'></button>
+      </view>
+      <navigator class="list-item1 arrow" url='/pages/setting/setting' hover-class="none">
         <image class="function_image" src="/images/personal_center/setting.png" mode="widthFix"></image>
         <text class="function_text">设置</text>
       </navigator>

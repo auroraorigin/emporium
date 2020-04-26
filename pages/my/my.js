@@ -14,6 +14,14 @@ Page({
     wx.setStorageSync("userinfo", userInfo);
   },*/
 
+  tap()
+  {
+    wx.showToast({
+      title: '该功能尚未开放',
+      icon: 'none',
+      duration: 1500
+    })
+  },
   toPersonalMessage(){
     wx.navigateTo({
       url: '/pages/personalMessage/personalMessage',
