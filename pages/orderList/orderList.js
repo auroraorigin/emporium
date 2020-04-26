@@ -499,6 +499,26 @@ Page({
     })
   },
 
+  //查看物流
+  logisticsInformation(e) {
+    var expressNumber = e.currentTarget.dataset.expressnumber;
+    var createDate = e.currentTarget.dataset.createdate;
+    var that = this;
+    wx.request({
+      url: common.apiHost + `wx/kuaidi/${expressNumber}`,
+      method: 'GET',
+      header: { //请求头
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      data: {},
+      success(res) {
+        wx.navigateTo({
+          url: '/pages/logisticsInformation/logisticsInformation?data=' + JSON.stringify(res.data.data) + '&expressNumber=' + expressNumber + '&createDate=' + createDate,
+        })
+      },
+      fail() { }
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */

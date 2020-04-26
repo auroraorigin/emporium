@@ -1,0 +1,45 @@
+<view class="allPage">
+	<view class="border1">
+		<view class="border1-left">
+			<image src="/images/personal_center/waitReceived.png" mode="widthFix"></image>
+		</view>
+		<view class="border1-right">
+			<view class="border1-right-top">快递公司：顺丰快递</view>
+			<view class="border1-right-center">快递编号：{{expressNumber}}</view>
+			<view class="border1-right-bottom">下单时间：{{createDate}}</view>
+		</view>
+	</view>
+	<view class="border2">
+		<view class="border2-top">
+			<view class="border2-top-content">物流信息</view>
+		</view>
+		<scroll-view scroll-y="true" class="slidingHeight">
+			<view class="border2-bottom" wx:for="{{logisticsInformation}}" wx:key="index">
+				<view wx:if="{{item.isActive=='top'}}" class="border2-bottom-left">
+					<view class="border-top1"></view>
+					<image src="/images/personal_center/LogisticsProgressSelect.png" mode="widthFix"></image>
+					<view class="border-bottom"></view>
+				</view>
+				<view wx:if="{{item.isActive=='bottom'}}" class="border2-bottom-left">
+					<view class="border-top"></view>
+					<image src="/images/personal_center/LogisticsProgress.png" mode="widthFix"></image>
+					<view class="border-bottom2"></view>
+				</view>
+				<view wx:if="{{item.isActive=='center'}}" class="border2-bottom-left">
+					<view class="border-top1"></view>
+					<image src="/images/personal_center/LogisticsProgressSelect.png" mode="widthFix"></image>
+					<view class="border-bottom2"></view>
+				</view>
+				<view wx:if="{{!item.isActive}}" class="border2-bottom-left">
+					<view class="border-top"></view>
+					<image src="/images/personal_center/LogisticsProgress.png" mode="widthFix"></image>
+					<view class="border-bottom"></view>
+				</view>
+				<view class="border2-bottom-right">
+					<view class="border-top">{{item.context}}</view>
+					<view class="border-bottom">{{item.time}}</view>
+				</view>
+			</view>
+		</scroll-view>
+	</view>
+</view>

@@ -187,6 +187,7 @@ image{
 .bottom .info .amount .money {
     font-size: 30rpx;
     color: #db7012;
+    font-weight: bold;
 }
 
 .bottom .info .explain {

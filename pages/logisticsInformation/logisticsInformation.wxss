@@ -1,0 +1,139 @@
+page {
+  background-color: #f8f8f8;
+}
+
+.allPage {}
+
+.border1 {
+  margin-top: 40rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 170rpx;
+  background-color: white;
+}
+
+.border1 .border1-left {
+  width: 15%;
+  margin-left: 20rpx;
+}
+
+.border1 .border1-left image {
+  width: 100rpx;
+  height: auto;
+}
+
+.border1 .border1-right {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 20rpx;
+}
+
+.border1 .border1-right .border1-right-top {
+  font-size: 30rpx;
+  color: #3f3f3f;
+  margin: 5rpx 0 5rpx 0;
+}
+
+.border1 .border1-right .border1-right-center {
+  font-size: 30rpx;
+  color: #3f3f3f;
+  margin: 4rpx 0 4rpx 0;
+}
+
+.border1 .border1-right .border1-right-bottom {
+  font-size: 30rpx;
+  color: #3f3f3f;
+  margin: 4rpx 0 4rpx 0;
+}
+
+.border2 {
+  margin-top: 30rpx;
+  background-color: white;
+  height: auto;
+}
+
+.border2 .border2-top {
+  width: 90%;
+  height: 100rpx;
+  border-bottom: 1rpx solid #ccc;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 5% 0 5%;
+}
+
+.border2 .border2-top .border2-top-content {
+  font-size: 30rpx;
+}
+
+.border2 .slidingHeight {
+  height: calc(100vh - 340rpx);
+}
+
+.border2 .border2-bottom {
+  width: 90%;
+  margin: 0 15% 0 5%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.border2 .border2-bottom .border2-bottom-left {
+  margin: 0 5% 0 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.border2 .border2-bottom .border2-bottom-left .border-top {
+  border-left: 1rpx solid #ccc;
+  height: 70rpx;
+}
+
+.border2 .border2-bottom .border2-bottom-left .border-top1 {
+  border-left: 1rpx solid white;
+  height: 70rpx;
+}
+
+.border2 .border2-bottom .border2-bottom-left .border-bottom {
+  border-left: 1rpx solid #ccc;
+  height: 70rpx;
+}
+
+.border2 .border2-bottom .border2-bottom-left .border-bottom2 {
+  border-left: 1rpx solid white;
+  height: 70rpx;
+}
+
+.border2 .border2-bottom .border2-bottom-left image {
+  width: 30rpx;
+  height: auto;
+}
+
+.border2 .border2-bottom .border2-bottom-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.border2 .border2-bottom .border-top {
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  font-size: 30rpx;
+}
+
+.border2 .border2-bottom .border-bottom {
+  font-size: 30rpx;
+}

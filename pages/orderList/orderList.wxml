@@ -55,11 +55,14 @@
 							<view class="button_type" catchtap="toReturn" data-id="{{item._id}}" data-index="1">
 								<text>申请退款</text>
 							</view>
-							<!--<view class="button_type">
+							<!--<view class="button_type"> 
 								<text>提醒发货</text>
 							</view>-->
 						</view>
 						<view class="buttonFlex" wx:if="{{item.state=='待收货'}}">
+							<view class="button_type" catchtap="logisticsInformation" data-expressNumber="{{item.expressNumber}}" data-createDate="{{item.createDate}}">
+								<text>查看物流</text>
+							</view>
 							<view class="button_type" catchtap="toReturn" data-id="{{item._id}}" data-index="1">
 								<text>申请退款</text>
 							</view>
@@ -212,6 +215,9 @@
 					<view class="total">
 						<text class="priceText">共{{item.goods.length}}件商品 合计:¥ {{item.havedPaid}}</text>
 						<view class="buttonFlex">
+							<view class="button_type" catchtap="logisticsInformation" data-expressNumber="{{item.expressNumber}}" data-createDate="{{item.createDate}}">
+								<text>查看物流</text>
+							</view>
 							<view class="button_type" catchtap="toReturn" data-id="{{item._id}}" data-index="4">
 								<text>申请退款</text>
 							</view>

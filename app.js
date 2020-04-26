@@ -48,7 +48,7 @@ App({
                 //授权的同时获取用户的默认收货地址，没有则表示还为添加地址
                 var that = this;
                 wx.request({
-                  url: common + 'wx/getDefaultAddress',
+                  url: common.apiHost+'wx/getDefaultAddress',
                   method: 'GET',
                   header: { //请求头
                     "Content-Type": "application/x-www-form-urlencoded",

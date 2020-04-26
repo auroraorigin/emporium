@@ -75,6 +75,10 @@
 					<view class="borderLeft"> 配送方式</view>
 					<view class="borderRight">快递 ¥{{freight}}</view>
 				</view>
+				<view class="Border2_1">
+					<view class="borderLeft"> 满减包邮</view>
+					<view class="borderRight">满{{discount}}包邮</view>
+				</view>
 				<view class="Border2_2">
 					<view class="borderLeft">买家留言</view>
 					<input type="text" placeholder="留言建议提前协商(50字以内)" maxlength="50" bindinput="getUserWord"></input>

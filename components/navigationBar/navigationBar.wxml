@@ -1,9 +1,9 @@
 <view style="height:{{titleBarHeight}}px;padding-top:{{statusBarHeight}}px">
   <view class="header" style="height:{{titleBarHeight}}px;padding-top:{{statusBarHeight}}px">
     <view wx:if="{{showIcon}}" class="title-bar">
-      <view class="back" bindtap="headerBack"><image src="/images/personal_center/back.png"></image></view>
+      <view class="back" bindtap="headerBack"><image src="/images/personal_center/back.png" class="backImg"></image></view>
       <view class="line"></view>
-      <view class="home" bindtap="headerHome"><image src="/images/personal_center/home.png"></image></view>
+      <view class="home" bindtap="headerHome"><image src="/images/personal_center/home.png" class="homeImg"></image></view>
     </view>
     <view class="header-title">{{title}}</view>
   </view>

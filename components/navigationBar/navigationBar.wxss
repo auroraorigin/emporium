@@ -10,7 +10,7 @@
   align-items: center;
   margin-bottom: 20rpx;
   }
-.loading-wrap image {
+.loading-wrap .loading-gif {
   background-color: transparent;
 }
 .header {
@@ -19,14 +19,14 @@
   top: 0;
   position: fixed;
   width: 100%;
-  background-color: #FFF;
+  background-color: #fff;
   z-index: 99999;
 }
 .header .line {
   border-left: 1rpx solid #D7D7D7;
   height: 36rpx;
 }
-.header .back, .header .home {
+.header .back .header .home {
   height: 32rpx;
   width: 40%;
   height: 100%;
@@ -45,7 +45,15 @@
   margin-left: 14rpx;
   padding: 0 14rpx;
 }
-.header .title-bar  image {
+
+.header .title-bar .backImg {
+  width: 32rpx;
+  height: 32rpx;
+  background: transparent;
+  vertical-align: top;
+}
+
+.header .title-bar .homeImg {
   width: 32rpx;
   height: 32rpx;
   background: transparent;

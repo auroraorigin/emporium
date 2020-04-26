@@ -182,7 +182,7 @@ page {
 
 .buttonFlex {
   height: 70rpx;
-  width: 300rpx;
+  width: 450rpx;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;

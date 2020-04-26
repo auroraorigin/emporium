@@ -87,7 +87,7 @@
 				</text>
 			</view>
 			<view class="border_right">
-				<view class="outside">
+				<view class="outside" bindtap="viewLogistics">
 					<text class="inside">查看物流</text>
 				</view>
 				<view class="outside" bindtap="toReceive">
