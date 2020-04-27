@@ -26,39 +26,42 @@
 		</view>
 		<view class="bottom">
 			<view class="bottom_left">交易开始时间</view>
-			<view class="bottom_right">{{createDate}}</view> 
+			<view class="bottom_right">{{createDate}}</view>
 		</view>
 
 		<!-- 商品列表 -->
-		<view class="item" wx:for="{{all_Order}}" wx:key="index">
-			<view class="list_item">
-				<view class="product_top">
-					<text class="text1">海鲜商城</text>
-					<text class="text2">已选择</text>
-				</view>
-				<view class="product_bottom">
-					<image src="{{item.url}}" class="product_image"></image>
-					<view class="detail">
-						<view class="product_name">
-							<text>{{item.name}}</text>
-						</view>
-						<view class="standard">
-							<text>规格：{{item.specification}}</text>
-						</view>
-						<view class="money_Return">
-							<text>{{item.message}}</text>
-						</view>
-					</view>
-					<view class="product_price">
-						<text class="price">¥{{item.unitPrice}}</text>
-						<text class="buyNumber">×{{item.buyNumber}}</text>
-					</view>
-				</view>
+		<view class="item">
+			<view class="product_top">
+				<image src="/images/personal_center/appIcon.png" mode="widthFix"></image>
+				<text class="text1">海鲜商城</text>
+				<text class="text2">已选择</text>
 			</view>
-			<view class="second_bottom">
-				<view class="total">
-					<text class="text_content">共{{item.buyNumber}}条  合计:¥ {{item.goodPrice}}</text>
+			<view wx:for="{{all_Order}}" wx:key="index">
+				<view class="list_item">
+					<view class="product_bottom">
+						<image src="{{item.url}}" class="product_image"></image>
+						<view class="detail">
+							<view class="product_name">
+								<text>{{item.name}}</text>
+							</view>
+							<view class="standard">
+								<text>规格：{{item.specification}}</text>
+							</view>
+							<view class="money_Return">
+								<text>{{item.message}}</text>
+							</view>
+						</view>
+						<view class="product_price">
+							<text class="price">¥{{item.unitPrice}}</text>
+							<text class="buyNumber">×{{item.buyNumber}}</text>
+						</view>
+					</view>
 				</view>
+				<!-- <view class="second_bottom">
+					<view class="total">
+						<text class="text_content">共{{item.buyNumber}}条  合计:<text class="priceText">¥ {{item.goodPrice}}</text></text>
+					</view>
+				</view> -->
 			</view>
 		</view>
 		<view class="goods">

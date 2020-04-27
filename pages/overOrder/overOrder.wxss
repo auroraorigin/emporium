@@ -1,5 +1,5 @@
 page {
-  background-color: #f8f8f8; 
+  background-color: #f8f8f8;  
 }
 
 .content {
@@ -103,7 +103,6 @@ page {
 
 .bottom_right {
   font-size: 30rpx;
-  color: #aaa;
   margin-right: 20rpx;
 }
 
@@ -114,22 +113,30 @@ page {
 }
 
 .list_item {
-  height: 250rpx;
+  height: 200rpx;
 }
 
 .product_top {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   font-size: 25rpx;
-  border-bottom: 1rpx solid #f1f1f1;
-  height: 25%;
+  height: 90rpx;
+  margin-left: 10rpx;
+}
+
+.product_top image{
+  width: 50rpx;
+  height: auto;
 }
 
 .text1 {
-  text-indent: 20rpx;
-  color: #c3b353;
+  text-indent: 10rpx;
+  color: black;
+  font-weight: bold;
+  font-size: 30rpx;
+  line-height: 30rpx;
 }
 
 .text2 {
@@ -150,6 +157,7 @@ page {
   height: 150rpx;
   position: absolute;
   left: 20rpx;
+  border-radius: 10rpx;
 }
 
 .detail {
@@ -170,6 +178,7 @@ page {
   -webkit-box-orient: vertical;
   margin-left: 270rpx;
   margin-top: -65rpx;
+  font-weight: 300;
 }
 
 .standard {
@@ -188,8 +197,8 @@ page {
 }
 
 .money_Return {
-  width: 50%;
-  color: red;
+  width: 150rpx;
+  color: #d56f27;
   font-size: 20rpx;
   text-overflow: -o-ellipsis-lastline;
   overflow: hidden;
@@ -197,8 +206,14 @@ page {
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
-  margin: 0 0 0 270rpx;
+  margin: 5rpx 0 0 265rpx;
   line-height: 35rpx;
+  background-color: #fff0eb;
+  border-radius: 10rpx;
+}
+
+.money_Return text{
+  margin-left: 10rpx;
 }
 
 .product_price {
@@ -207,6 +222,7 @@ page {
   flex-direction: column; 
   position: absolute;
   left: 580rpx;
+  color: #d56f27;
 }
 
 .price {
@@ -227,7 +243,7 @@ page {
 .second_bottom {
   border: 1rpx solid white;
   background-color: white;
-  height: 100rpx;
+  height: 50rpx;
 }
 
 .total {
@@ -246,6 +262,12 @@ page {
   left: -20rpx;
 }
 
+.priceText {
+  color: #db7012;
+  font-weight: bold;
+  margin-left: 15rpx;
+}
+
 .goods {
   margin-top: 20rpx;
   background-color: white;
@@ -253,7 +275,6 @@ page {
   display: flex;
   flex-direction: row;
   align-items: center;
-  color: #aaa;
 }
 
 .title {
@@ -263,6 +284,7 @@ page {
 
 .price1 {
   font-size: 30rpx;
+  color: #db7012;
 }
 
 .freight {
@@ -271,7 +293,6 @@ page {
   display: flex;
   flex-direction: row;
   align-items: center;
-  color: #aaa;
 }
 
 .bottom_border {
@@ -295,6 +316,7 @@ page {
   width: 70%;
   position: relative;
   left: 200rpx;
+  margin-bottom: 10rpx;
 }
 
 .C {
@@ -313,8 +335,9 @@ page {
 }
 
 .R {
-  color: red;
+  color: #db7012;
   font-size: 40rpx;
+  font-weight: bold;
 }
 
 .border_right {
@@ -325,6 +348,7 @@ page {
   align-items: center;
   position: relative;
   left: -20rpx;
+  margin-bottom: 10rpx;
 }
 
 .outside {

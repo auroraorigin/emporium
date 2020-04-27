@@ -4,6 +4,7 @@
         <checkbox-group wx:if="{{cart.length!=0}}" bindchange="selectAll">
             <checkbox class="checkbox" checked="{{isAll}}" value="{{true}}"></checkbox>
         </checkbox-group>
+        <image src="../../images/personal_center/appIcon.png" mode="widthFix" style="width:20%;margin-right:10rpx"></image>
         <view class="title">海鲜商城</view>
     </view>
     <view class="right">

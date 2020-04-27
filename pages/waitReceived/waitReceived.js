@@ -171,13 +171,16 @@ Page({
       orderId: orderId
     })
     this.getOrderDetail();
-    //获取页面标志
-    var aShow = wx.getStorageSync("aShow");
-    if (!aShow) {
-      //将该页面参数放入缓存
-      var type = 4;
-      wx.setStorageSync("type", type);
-    }
-    wx.removeStorageSync("aShow")
   },
+  //页面关闭时执行
+ onUnload() {
+      //获取页面标志
+      var aShow = wx.getStorageSync("aShow");
+      if (aShow == "待收货") {
+        wx.setStorageSync('type', 4)
+      } else if (aShow == "全部") {
+        wx.setStorageSync('type', 1)
+      }
+  }
 });
+

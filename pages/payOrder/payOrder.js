@@ -89,183 +89,193 @@ Page({
     } else {
       var address = that.data.select_address
     }
+    //显示是否退出登录弹窗
     wx.showModal({
       title: '提示',
       content: '您确定要提交订单吗？',
       success: (result) => {
-        //确认支付即为待发货订单
         if (result.confirm) {
-          wx.request({
-            url: common.apiHost + 'wx/createOrder',
-            method: 'POST',
-            header: { //请求头
-              "Content-Type": "application/x-www-form-urlencoded",
-              "Authorization": wx.getStorageSync('LocalToken')
-            },
-            data: {
-              address: JSON.stringify(address),
-              state: "待发货",
-              goods: JSON.stringify(that.data.all_Order),
-              totalPrice: that.data.total_money,
-              coupon: JSON.stringify(that.data.selectCoupon),
-              userWord: that.data.userWord,
-              freight: that.data.freight
-            },
-            success(res) {
-              if (res.data.stockMessage == "库存减少成功") {
-                //将数据渲染给本地appData
-                that.setData({
-                  waitSentOrder: res.data.order,
-                });
-                //跳转时携带参数
-                wx.reLaunch({
-                  url: '/pages/waitSent/waitSent?waitSentOrder=' + JSON.stringify(that.data.waitSentOrder)
-                });
-                //如果数据从购物车传过来的，提交订单成功后情况对应购物车缓存
-                if (that.data.isCart == true) {
-                  //获取缓存中的购物车列表
-                  var cart = wx.getStorageSync('cart');
-                  //假如购物车的商品全选结算
-                  if (cart.length == that.data.all_Order.length)
-                    //提交订单成功后情况购物车
-                    wx.removeStorageSync('cart');
-                  //如果选择的是购物车的某些商品结算
-                  else if (cart.length > that.data.all_Order.length) {
-                    cart.forEach(function (v, i) {
-                      that.data.all_Order.forEach(function (value, index) {
-                        //找到购物车与订单商品相同的，就删除购物车对应商品的数据
-                        if (v._id == value._id) {
-                          cart.splice(i, 1)
+          wx.showModal({
+            title: '提示',
+            content: '您确定要支付订单吗？',
+            success: (result) => {
+              //确认支付即为待发货订单
+              if (result.confirm) {
+                wx.request({
+                  url: common.apiHost + 'wx/createOrder',
+                  method: 'POST',
+                  header: { //请求头
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "Authorization": wx.getStorageSync('LocalToken')
+                  },
+                  data: {
+                    address: JSON.stringify(address),
+                    state: "待发货",
+                    goods: JSON.stringify(that.data.all_Order),
+                    totalPrice: that.data.total_money,
+                    coupon: JSON.stringify(that.data.selectCoupon),
+                    userWord: that.data.userWord,
+                    freight: that.data.freight
+                  },
+                  success(res) {
+                    if (res.data.stockMessage == "库存减少成功") {
+                      //将数据渲染给本地appData
+                      that.setData({
+                        waitSentOrder: res.data.order,
+                      });
+                      //跳转时携带参数
+                      wx.reLaunch({
+                        url: '/pages/waitSent/waitSent?waitSentOrder=' + JSON.stringify(that.data.waitSentOrder)
+                      });
+                      //如果数据从购物车传过来的，提交订单成功后情况对应购物车缓存
+                      if (that.data.isCart == true) {
+                        //获取缓存中的购物车列表
+                        var cart = wx.getStorageSync('cart');
+                        //假如购物车的商品全选结算
+                        if (cart.length == that.data.all_Order.length)
+                          //提交订单成功后情况购物车
+                          wx.removeStorageSync('cart');
+                        //如果选择的是购物车的某些商品结算
+                        else if (cart.length > that.data.all_Order.length) {
+                          cart.forEach(function (v, i) {
+                            that.data.all_Order.forEach(function (value, index) {
+                              //找到购物车与订单商品相同的，就删除购物车对应商品的数据
+                              if (v._id == value._id) {
+                                cart.splice(i, 1)
+                              }
+                            })
+                          });
+                          //将购物车列表重新放入缓存
+                          wx.setStorageSync('cart', cart);
+                        }
+                      }
+                    } else if (res.data.stockMessage == "库存不足") {
+                      //显示提交失败信息
+                      wx.showModal({
+                        title: '提交失败',
+                        content: '存在商品库存不足，请重新添加商品',
+                        success: (result) => {
+                          if (result.confirm) {
+                            //回到上一级页面
+                            wx.navigateBack({
+                              delta: 1
+                            })
+                          } else
+                            return;
                         }
                       })
-                    });
-                    //将购物车列表重新放入缓存
-                    wx.setStorageSync('cart', cart);
-                  }
-                }
-              } else if (res.data.stockMessage == "库存不足") {
-                //显示提交失败信息
-                wx.showModal({
-                  title: '提交失败',
-                  content: '存在商品库存不足，请重新添加商品',
-                  success: (result) => {
-                    if (result.confirm) {
-                      //回到上一级页面
-                      wx.navigateBack({
-                        delta: 1
+                    } else if (res.data.stateMessage = "存在商品下架") {
+                      //显示提交失败信息
+                      wx.showModal({
+                        title: '提交失败',
+                        content: '存在商品已下架，请重新添加商品',
+                        success: (result) => {
+                          if (result.confirm) {
+                            //回到上一级页面
+                            wx.navigateBack({
+                              delta: 1
+                            })
+                          } else
+                            return;
+                        }
                       })
-                    } else
-                      return;
-                  }
+                    }
+                  },
+                  fail() { }
                 })
-              } else if (res.data.stateMessage = "存在商品下架") {
-                //显示提交失败信息
-                wx.showModal({
-                  title: '提交失败',
-                  content: '存在商品已下架，请重新添加商品',
-                  success: (result) => {
-                    if (result.confirm) {
-                      //回到上一级页面
-                      wx.navigateBack({
-                        delta: 1
+              } else {
+                //取消则为待付款订单
+                wx.request({
+                  url: common.apiHost + 'wx/createOrder',
+                  method: 'POST',
+                  header: { //请求头
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "Authorization": wx.getStorageSync('LocalToken')
+                  },
+                  data: {
+                    address: JSON.stringify(address),
+                    state: "待付款",
+                    goods: JSON.stringify(that.data.all_Order),
+                    totalPrice: that.data.total_money,
+                    timestamp: timestamp,
+                    coupon: JSON.stringify(that.data.selectCoupon),
+                    userWord: that.data.userWord,
+                    freight: that.data.freight
+                  },
+                  success(res) {
+                    console.log(res.data)
+                    if (res.data.stockMessage == "库存足够") {
+                      //将数据渲染给本地appData
+                      that.setData({
+                        waitPaidOrder: res.data.order,
+                      });
+                      //跳转时携带参数
+                      wx.reLaunch({
+                        url: '/pages/waitPaid/waitPaid?timestamp=' + timestamp + '&waitPaidOrder=' + JSON.stringify(that.data.waitPaidOrder) + '&_id=' + that.data.waitPaidOrder._id
+                      });
+                      //设置从生产订单页面跳转的标志
+                      wx.setStorageSync('tip', true)
+                      //如果数据从购物车传过来的，提交订单成功后情况对应购物车缓存
+                      if (that.data.isCart == true) {
+                        //获取缓存中的购物车列表
+                        var cart = wx.getStorageSync('cart');
+                        //假如购物车的商品全选结算
+                        if (cart.length == that.data.all_Order.length)
+                          //提交订单成功后情况购物车
+                          wx.removeStorageSync('cart');
+                        //如果选择的是购物车的某些商品结算
+                        else if (cart.length > that.data.all_Order.length) {
+                          cart.forEach(function (v, i) {
+                            that.data.all_Order.forEach(function (value, index) {
+                              //找到购物车与订单商品相同的，就删除购物车对应商品的数据
+                              if (v._id == value._id) {
+                                cart.splice(i, 1)
+                              }
+                            })
+                          });
+                          //将购物车列表重新放入缓存
+                          wx.setStorageSync('cart', cart);
+                        }
+                      }
+                    } else if (res.data.stockMessage == "库存不足") {
+                      //显示提交失败信息
+                      wx.showModal({
+                        title: '提交失败',
+                        content: '存在商品库存不足，请重新添加商品',
+                        success: (result) => {
+                          if (result.confirm) {
+                            //回到上一级页面
+                            wx.navigateBack({
+                              delta: 1
+                            })
+                          } else
+                            return;
+                        }
                       })
-                    } else
-                      return;
-                  }
-                })
+                    } else if (res.data.stateMessage = "存在商品下架") {
+                      //显示提交失败信息
+                      wx.showModal({
+                        title: '提交失败',
+                        content: '存在商品已下架，请重新添加商品',
+                        success: (result) => {
+                          if (result.confirm) {
+                            //回到上一级页面
+                            wx.navigateBack({
+                              delta: 1
+                            })
+                          } else
+                            return;
+                        }
+                      })
+                    }
+                  },
+                  fail() { }
+                });
               }
-            },
-            fail() { }
+            }
           })
-        } else {
-          //取消则为待付款订单
-          wx.request({
-            url: common.apiHost + 'wx/createOrder',
-            method: 'POST',
-            header: { //请求头
-              "Content-Type": "application/x-www-form-urlencoded",
-              "Authorization": wx.getStorageSync('LocalToken')
-            },
-            data: {
-              address: JSON.stringify(address),
-              state: "待付款",
-              goods: JSON.stringify(that.data.all_Order),
-              totalPrice: that.data.total_money,
-              timestamp: timestamp,
-              coupon: JSON.stringify(that.data.selectCoupon),
-              userWord: that.data.userWord,
-              freight: that.data.freight
-            },
-            success(res) {
-              console.log(res.data)
-              if (res.data.stockMessage == "库存足够") {
-                //将数据渲染给本地appData
-                that.setData({
-                  waitPaidOrder: res.data.order,
-                });
-                //跳转时携带参数
-                wx.reLaunch({
-                  url: '/pages/waitPaid/waitPaid?timestamp=' + timestamp + '&waitPaidOrder=' + JSON.stringify(that.data.waitPaidOrder) + '&_id=' + that.data.waitPaidOrder._id
-                });
-                //设置从生产订单页面跳转的标志
-                wx.setStorageSync('tip', true)
-                //如果数据从购物车传过来的，提交订单成功后情况对应购物车缓存
-                if (that.data.isCart == true) {
-                  //获取缓存中的购物车列表
-                  var cart = wx.getStorageSync('cart');
-                  //假如购物车的商品全选结算
-                  if (cart.length == that.data.all_Order.length)
-                    //提交订单成功后情况购物车
-                    wx.removeStorageSync('cart');
-                  //如果选择的是购物车的某些商品结算
-                  else if (cart.length > that.data.all_Order.length) {
-                    cart.forEach(function (v, i) {
-                      that.data.all_Order.forEach(function (value, index) {
-                        //找到购物车与订单商品相同的，就删除购物车对应商品的数据
-                        if (v._id == value._id) {
-                          cart.splice(i, 1)
-                        }
-                      })
-                    });
-                    //将购物车列表重新放入缓存
-                    wx.setStorageSync('cart', cart);
-                  }
-                }
-              } else if (res.data.stockMessage == "库存不足") {
-                //显示提交失败信息
-                wx.showModal({
-                  title: '提交失败',
-                  content: '存在商品库存不足，请重新添加商品',
-                  success: (result) => {
-                    if (result.confirm) {
-                      //回到上一级页面
-                      wx.navigateBack({
-                        delta: 1
-                      })
-                    } else
-                      return;
-                  }
-                })
-              } else if (res.data.stateMessage = "存在商品下架") {
-                //显示提交失败信息
-                wx.showModal({
-                  title: '提交失败',
-                  content: '存在商品已下架，请重新添加商品',
-                  success: (result) => {
-                    if (result.confirm) {
-                      //回到上一级页面
-                      wx.navigateBack({
-                        delta: 1
-                      })
-                    } else
-                      return;
-                  }
-                })
-              }
-            },
-            fail() { }
-          });
-        }
+        } else
+          return;
       }
     })
   },
@@ -403,7 +413,7 @@ Page({
                 url: cart[i].url,
                 specification: cart[i].specification[cart[i].specificationIndex].name,
                 buyNumber: cart[i].buyNumber,
-                message: '三天无理由退款',
+                message: '海鲜商城无忧购',
                 unitPrice: cart[i].specification[cart[i].specificationIndex].price,
                 goodPrice: JSON.stringify(cart[i].all_money),
                 _id: cart[i]._id,

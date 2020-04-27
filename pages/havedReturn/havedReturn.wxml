@@ -13,35 +13,38 @@
 		<view class="returnTitle">
 			<view class="titleContent">退款信息</view>
 		</view>
-		<view class="item" wx:for="{{all_Order}}" wx:key="index">
-			<view class="list_item">
-				<view class="product_top">
-					<text class="text1">海鲜商城</text>
-					<text class="text2">已选择</text>
-				</view>
-				<view class="product_bottom">
-					<image src="{{item.url}}" class="product_image"></image>
-					<view class="detail">
-						<view class="product_name">
-							<text>{{item.name}}</text>
-						</view>
-						<view class="standard">
-							<text>规格：{{item.specification}}</text>
-						</view>
-						<view class="money_Return">
-							<text>{{item.message}}</text>
-						</view>
-					</view>
-					<view class="product_price">
-						<text class="price">¥ {{item.unitPrice}}</text>
-						<text class="buyNumber">×{{item.buyNumber}}</text>
-					</view>
-				</view>
+		<view class="item">
+			<view class="product_top">
+				<image src="/images/personal_center/appIcon.png" mode="widthFix"></image>
+				<text class="text1">海鲜商城</text>
+				<text class="text2">已选择</text>
 			</view>
-			<view class="second_bottom">
-				<view class="total">
-					<text class="text_content">共{{item.buyNumber}}件  合计:¥ {{item.goodPrice}}</text>
+			<view wx:for="{{all_Order}}" wx:key="index">
+				<view class="list_item">
+					<view class="product_bottom">
+						<image src="{{item.url}}" class="product_image"></image>
+						<view class="detail">
+							<view class="product_name">
+								<text>{{item.name}}</text>
+							</view>
+							<view class="standard">
+								<text>规格：{{item.specification}}</text>
+							</view>
+							<view class="money_Return">
+								<text>{{item.message}}</text>
+							</view>
+						</view>
+						<view class="product_price">
+							<text class="price">¥{{item.unitPrice}}</text>
+							<text class="buyNumber">×{{item.buyNumber}}</text>
+						</view>
+					</view>
 				</view>
+				<!-- <view class="second_bottom">
+					<view class="total">
+						<text class="text_content">共{{item.buyNumber}}件  合计:<text class="priceText">¥{{item.goodPrice}}</text></text>
+					</view>
+				</view> -->
 			</view>
 		</view>
 		<view class="returnReason">
@@ -50,15 +53,15 @@
 		</view>
 		<view class="returnMoney">
 			<view class="reasonTitle">运费：</view>
-			<view class="reasonContent">¥{{freight}}</view>
+			<view class="reasonContent" style="color: #db7012;font-weight: bold;">¥{{freight}}</view>
 		</view>
 		<view class="returnMoney" wx:if="{{coupon.name}}">
 			<view class="reasonTitle">优惠价格：</view>
-			<view class="reasonContent">¥{{coupon.money[1]}}</view>
+			<view class="reasonContent" style="color: #db7012;font-weight: bold;">¥{{coupon.money[1]}}</view>
 		</view>
 		<view class="returnMoney">
 			<view class="reasonTitle">退款金额：</view>
-			<view class="reasonContent">¥{{havedPaid}}</view>
+			<view class="reasonContent" style="color: #db7012;font-weight: bold;">¥{{havedPaid}}</view>
 		</view>
 		<view class="returnTime" wx:if="{{expressNumber}}">
 			<view class="reasonTitle">快递单号：</view>

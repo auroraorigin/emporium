@@ -96,22 +96,27 @@ page {
 }
 
 .list_item {
-  height: 250rpx;
+  height: 200rpx;
 }
 
 .product_top {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   font-size: 25rpx;
-  border-bottom: 1rpx solid #f1f1f1;
-  height: 25%;
+  height: 90rpx;
+  margin-left: 10rpx;
+}
+
+.product_top image{
+  width: 40rpx;
 }
 
 .text1 {
-  text-indent: 20rpx;
-  color: #c3b353;
+  text-indent: 10rpx;
+  color: black;
+  font-weight: bold;
 }
 
 .text2 {
@@ -170,8 +175,8 @@ page {
 }
 
 .money_Return {
-  width: 50%;
-  color: red;
+  width: 150rpx;
+  color: #d56f27;
   font-size: 20rpx;
   text-overflow: -o-ellipsis-lastline;
   overflow: hidden;
@@ -179,8 +184,14 @@ page {
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
-  margin: 0 0 0 270rpx;
+  margin: 5rpx 0 0 265rpx;
   line-height: 35rpx;
+  background-color: #fff0eb;
+  border-radius: 10rpx;
+}
+
+.money_Return text{
+  margin-left: 10rpx;
 }
 
 .product_price {
@@ -225,6 +236,12 @@ page {
   position: relative;
   top: -40rpx;
   left: -20rpx;
+}
+
+.priceText {
+  color: #db7012;
+  font-weight: bold;
+  margin-left: 15rpx;
 }
 
 .Border1 {
@@ -369,6 +386,7 @@ page {
 .Border3_3 .borderRight .rightContent {
   color: red;
   font-size: 35rpx;
+  font-weight:bold;
   margin-top: 6rpx;
   display: flex;
   flex-direction: row;
@@ -404,7 +422,7 @@ page {
 }
 
 .C {
-  color: black;
+  color: black; 
   font-size: 30rpx;
 }
 
@@ -414,8 +432,9 @@ page {
 }
 
 .R {
-  color: red;
+  color: #db7012;
   font-size: 40rpx;
+  font-weight:bold;
 }
 
 .border_right {

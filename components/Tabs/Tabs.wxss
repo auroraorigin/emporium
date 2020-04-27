@@ -14,5 +14,5 @@
 
 .active {
   color: #2b4c7f;
-  border-bottom: 4rpx solid currentColor;
+  border-bottom: 6rpx solid currentColor;
 }

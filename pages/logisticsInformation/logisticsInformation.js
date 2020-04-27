@@ -34,4 +34,14 @@ Page({
       createDate: createDate
     })
   },
+  onUnload()
+  {
+    var aShow=wx.getStorageSync('aShow');
+    //如果是从全部订单查看物流，销毁页面时返回全部订单
+    if(aShow=="全部"){
+      wx.setStorageSync('type', 1)
+    }else{
+      wx.setStorageSync('type', 4)
+    }
+  }
 })

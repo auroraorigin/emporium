@@ -28,34 +28,37 @@
 		</view>
 
 		<!-- 商品列表 -->
-		<view class="item" wx:for="{{all_Order}}" wx:key="index">
-			<view class="list_item">
-				<view class="product_top">
-					<text class="text1">海鲜商城</text>
-					<text class="text2">已选择</text>
-				</view>
-				<view class="product_bottom">
-					<image src="{{item.url}}" class="product_image"></image>
-					<view class="detail">
-						<view class="product_name">
-							<text>{{item.name}}</text>
-						</view>
-						<view class="standard">
-							<text>规格：{{item.specification}}</text>
-						</view>
-						<view class="money_Return">
-							<text>{{item.message}}</text>
-						</view>
-					</view>
-					<view class="product_price">
-						<text class="price">¥ {{item.unitPrice}}</text>
-						<text class="buyNumber">×{{item.buyNumber}}</text>
-					</view>
-				</view>
+		<view class="item">
+			<view class="product_top">
+				<image src="/images/personal_center/appIcon.png" mode="widthFix"></image>
+				<text class="text1">海鲜商城</text>
+				<text class="text2">已选择</text>
 			</view>
-			<view class="second_bottom">
-				<view class="total">
-					<text class="text_content">共{{item.buyNumber}}条  合计:¥ {{item.goodPrice}}</text>
+			<view wx:for="{{all_Order}}" wx:key="index">
+				<view class="list_item">
+					<view class="product_bottom">
+						<image src="{{item.url}}" class="product_image"></image>
+						<view class="detail">
+							<view class="product_name">
+								<text>{{item.name}}</text>
+							</view>
+							<view class="standard">
+								<text>规格：{{item.specification}}</text>
+							</view>
+							<view class="money_Return">
+								<text>{{item.message}}</text>
+							</view>
+						</view>
+						<view class="product_price">
+							<text class="price">¥ {{item.unitPrice}}</text>
+							<text class="buyNumber">×{{item.buyNumber}}</text> 
+						</view>
+					</view>
+				</view>
+				<view class="second_bottom">
+					<view class="total">
+						<text class="text_content">共{{item.buyNumber}}条  合计:<text class="priceText">¥ {{item.goodPrice}}</text></text>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -99,16 +102,16 @@
 					<text class="borderRight">- ¥{{selectCoupon.money[1]}}</text>
 				</view>
 				<view wx:if="{{selectCoupon.name}}" class="Border3_3">
-					<view class="borderRight">合计：<view class="rightContent">{{total_money+freight-selectCoupon.money[1]}}</view>
+					<view class="borderRight">合计：<view class="rightContent">¥{{total_money+freight-selectCoupon.money[1]}}</view>
 					</view>
 				</view>
 				<view wx:else class="Border3_3">
-					<view class="borderRight">合计：<view class="rightContent">{{total_money+freight}}</view>
+					<view class="borderRight">合计：<view class="rightContent">¥{{total_money+freight}}</view>
 					</view>
 				</view>
 			</view>
 		</view>
-		<view class="space"></view>
+		<view class="space"></view> 
 	</scroll-view>
 
 	<!-- 总数量和价格 -->

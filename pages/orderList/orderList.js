@@ -515,6 +515,9 @@ Page({
         wx.navigateTo({
           url: '/pages/logisticsInformation/logisticsInformation?data=' + JSON.stringify(res.data.data) + '&expressNumber=' + expressNumber + '&createDate=' + createDate,
         })
+      if(that.data.presentType==1){
+        wx.setStorageSync('aShow', '全部')
+      }
       },
       fail() { }
     })
@@ -523,12 +526,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function (options) {
-    //每次进入前判断缓存是否有token，没有表示未登录，强制进入登录授权页面
-    if (!wx.getStorageSync('LocalToken')) {
-      wx.navigateTo({
-        url: '/pages/login/login',
-      })
-    } else {
       //清除所有跳转标志缓存
       if (wx.getStorageInfoSync("aShow"))
         wx.removeStorageSync('aShow')
@@ -554,5 +551,4 @@ Page({
       this.changeTitleByIndex(type - 1);
       this.getOrder();
     }
-  },
 })

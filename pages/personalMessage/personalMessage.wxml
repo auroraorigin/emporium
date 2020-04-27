@@ -1,5 +1,5 @@
 <view class="content">
-  <text class="basic_message">基本信息</text>
+  <text class="basic_message">基本信息</text> 
   <view class="myPage">
     <view class="list">
 <!--姓名-->
