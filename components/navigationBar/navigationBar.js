@@ -57,7 +57,7 @@ Component({
   methods: {
     headerBack() {
       wx.navigateBack({
-        delta: 2,
+        delta: 1,
         /*fail(e) {
           wx.navigateBack({
             delta: 1

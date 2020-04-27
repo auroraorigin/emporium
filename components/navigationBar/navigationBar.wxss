@@ -50,14 +50,12 @@
   width: 32rpx;
   height: 32rpx;
   background: transparent;
-  vertical-align: top;
 }
 
 .header .title-bar .homeImg {
   width: 32rpx;
   height: 32rpx;
   background: transparent;
-  vertical-align: top;
 }
 
 .header .header-title {

@@ -26,7 +26,7 @@ Page({
   getCouponList() {
     var that = this;
     wx.request({
-      url: common.apiHost+'wx/getCouponList',
+      url: common.apiHost + 'wx/getCouponList',
       method: 'POST',
       header: { //请求头
         "Content-Type": "application/x-www-form-urlencoded",
@@ -46,27 +46,17 @@ Page({
           })
         }
       },
-      fail() {}
+      fail() { }
     })
   },
 
-  toUse(){
+  toUse() {
     wx.switchTab({
       url: '/pages/categories/categories',
     })
   },
 
-  onShow(){
-    //每次进入前判断缓存是否有token，没有表示未登录，强制进入登录授权页面
-    if(!wx.getStorageSync('LocalToken')){
-      wx.navigateTo({
-        url: '/pages/login/login',
-      })
-    }
-  },
-
-  //进入页面就发送请求获取数据
-  onLoad() {
+  onShow() {
     this.getCouponList();
-  }
+  },
 })

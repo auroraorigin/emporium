@@ -242,75 +242,68 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function (options) {
-    //每次进入前判断缓存是否有token，没有表示未登录，强制进入登录授权页面
-    if (!wx.getStorageSync('LocalToken')) {
-      wx.navigateTo({
-        url: '/pages/login/login',
-      })
-    } else {
-      //刷新页面时获取缓存中的地址列表，并赋值给appData
-      var arr = wx.getStorageSync('addressList') || [];
-      //每次刷新,在地址列表不为空的情况下,都设置列表头为默认地址
-      if (arr.length != 0) {
-        arr[0].isActive = true;
-        wx.setStorageSync("defaultAddress", arr[0])
-      };
-      this.setData({
-        addressList: arr
-      });
-      //如果点击左上角返回，获取编辑缓存的标志
-      let aShow = wx.getStorageSync("aShow");
-      if (aShow) {
-        wx.removeStorageSync('changeAddress');
-        wx.removeStorageSync('aShow');
-      }
-      wx.removeStorageSync('array');
+    //刷新页面时获取缓存中的地址列表，并赋值给appData
+    var arr = wx.getStorageSync('addressList') || [];
+    //每次刷新,在地址列表不为空的情况下,都设置列表头为默认地址
+    if (arr.length != 0) {
+      arr[0].isActive = true;
+      wx.setStorageSync("defaultAddress", arr[0])
+    };
+    this.setData({
+      addressList: arr
+    });
+    //如果点击左上角返回，获取编辑缓存的标志
+    let aShow = wx.getStorageSync("aShow");
+    if (aShow) {
+      wx.removeStorageSync('changeAddress');
+      wx.removeStorageSync('aShow');
+    }
+    wx.removeStorageSync('array');
 
-      //判断是否从订单确认跳转过来
-      //1.获取当前小程序的页面栈-数组 最大长度为10页面
-      let pages = getCurrentPages();
-      //2.数组中索引最大的页面就是当前页面
-      let currentPage = pages[pages.length - 1];
-      //3.获取页面标志参数tip
-      var tip = currentPage.options.tip;
-      if (tip) {
-        //获取传过来的地址
-        var address = JSON.parse(currentPage.options.address);
-        this.setData({
-          tip: true,
-          address: address
-        }, function () {
-          var addressList = this.data.addressList;
-          addressList.forEach((v, i) => {
-            if (v.consignee == address.consignee && v.mobile == address.mobile &&
-              v.region_name == address.region_name && v.detail_address == address.detail_address) {
-              v.selectActive = true
-            } else {
-              v.selectActive = false;
-            }
-          })
-          this.setData({
-            addressList: addressList
-          }, function () {
-            var selectToChange = wx.getStorageSync('selectToChange')
-            if (selectToChange) {
-              var addressList = this.data.addressList;
-              wx.removeStorageSync('selectToChange');
-              for (var index = 0; index < addressList.length; index++) {
-                if (addressList[index].consignee == selectToChange.consignee && addressList[index].mobile == selectToChange.mobile &&
-                  addressList[index].region_name == selectToChange.region_name && addressList[index].detail_address == selectToChange.detail_address) {
-                  addressList[index].selectActive = true
-                } else {
-                  addressList[index].selectActive = false;
-                }
-              }
-              this.setData({
-                addressList: addressList
-              })
-            }
-          })
+    //判断是否从订单确认跳转过来
+    //1.获取当前小程序的页面栈-数组 最大长度为10页面
+    let pages = getCurrentPages();
+    //2.数组中索引最大的页面就是当前页面
+    let currentPage = pages[pages.length - 1];
+    //3.获取页面标志参数tip
+    var tip = currentPage.options.tip;
+    if (tip) {
+      //获取传过来的地址
+      var address = JSON.parse(currentPage.options.address);
+      this.setData({
+        tip: true,
+        address: address
+      }, function () {
+        var addressList = this.data.addressList;
+        addressList.forEach((v, i) => {
+          if (v.consignee == address.consignee && v.mobile == address.mobile &&
+            v.region_name == address.region_name && v.detail_address == address.detail_address) {
+            v.selectActive = true
+          } else {
+            v.selectActive = false;
+          }
         })
-      }
+        this.setData({
+          addressList: addressList
+        }, function () {
+          var selectToChange = wx.getStorageSync('selectToChange')
+          if (selectToChange) {
+            var addressList = this.data.addressList;
+            wx.removeStorageSync('selectToChange');
+            for (var index = 0; index < addressList.length; index++) {
+              if (addressList[index].consignee == selectToChange.consignee && addressList[index].mobile == selectToChange.mobile &&
+                addressList[index].region_name == selectToChange.region_name && addressList[index].detail_address == selectToChange.detail_address) {
+                addressList[index].selectActive = true
+              } else {
+                addressList[index].selectActive = false;
+              }
+            }
+            this.setData({
+              addressList: addressList
+            })
+          }
+        })
+      })
     }
   },
 

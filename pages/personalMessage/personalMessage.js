@@ -270,14 +270,11 @@ Page({
 
   //打开页面显示个人信息
   onShow: function (options) {
-    //每次进入前判断缓存是否有token，没有表示未登录，强制进入登录授权页面
-    if (!wx.getStorageSync('LocalToken')) {
-      wx.navigateTo({
-        url: '/pages/login/login',
-      })
-    } else {
       this.getMessage();
-    }
+  },
+
+  onLoad(){
+    
   },
 
   //关闭页面存储修改后的信息

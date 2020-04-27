@@ -339,7 +339,7 @@ Page({
 
   //跳转到可使用优惠卷页面
   toUseCoupon() {
-    if (this.data.cheap == "有可用优惠卷") {
+    if (this.data.cheap != "无可用优惠卷") {
       wx.navigateTo({
         url: '/pages/myCoupon/myCoupon?canUseCoupon=' + JSON.stringify(this.data.canUseCoupon),
       })

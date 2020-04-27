@@ -5,7 +5,7 @@
       <view class="line"></view>
       <view class="home" bindtap="headerHome"><image src="/images/personal_center/home.png" class="homeImg"></image></view>
     </view>
-    <view class="header-title">{{title}}</view>
+    <view class="header-title">{{title}}</view> 
   </view>
   <view class="loading-wrap"><image class="loading-gif" src="/images/personal_center/loading.gif"></image></view>
 </view>

@@ -68,8 +68,8 @@
 				<view class="borderLeft">优惠</view>
 				<view class="borderRight">
 					<view wx:if="{{!selectCoupon.name}}" class="borderRightContent" bindtap="toUseCoupon">{{cheap}}</view>
-					<view wx:else class="borderRightContent">满{{selectCoupon.money[0]}}元减{{selectCoupon.money[1]}}元</view>
-					<image src="/images/pay_order/right_arrow.png" mode="widthFix"></image>
+					<view wx:else class="borderRightContent" bindtap="toUseCoupon">满{{selectCoupon.money[0]}}元减{{selectCoupon.money[1]}}元</view>
+					<image src="/images/pay_order/right_arrow.png" mode="widthFix"></image> 
 				</view>
 			</view>
 			<!--配送方式框和留言框-->
