@@ -50,16 +50,16 @@
 							</view>
 						</view>
 						<view class="product_price">
-							<text class="price">¥ {{item.unitPrice}}</text>
+							<text class="price">¥{{item.unitPrice}}</text>
 							<text class="buyNumber">×{{item.buyNumber}}</text> 
 						</view>
 					</view>
 				</view>
-				<view class="second_bottom">
+				<!-- <view class="second_bottom">
 					<view class="total">
-						<text class="text_content">共{{item.buyNumber}}条  合计:<text class="priceText">¥ {{item.goodPrice}}</text></text>
+						<text class="text_content">共{{item.buyNumber}}条  合计:<text class="priceText">¥{{item.goodPrice}}</text></text>
 					</view>
-				</view>
+				</view> -->
 			</view>
 		</view>
 		<!--优惠框-->
@@ -79,8 +79,8 @@
 					<view class="borderRight">快递 ¥{{freight}}</view>
 				</view>
 				<view class="Border2_1">
-					<view class="borderLeft"> 满减包邮</view>
-					<view class="borderRight">满{{discount}}包邮</view>
+					<view class="borderLeft"> 促销</view>
+					<view class="borderRight">广东省内满¥{{discount}}包邮</view>
 				</view>
 				<view class="Border2_2">
 					<view class="borderLeft">买家留言</view>

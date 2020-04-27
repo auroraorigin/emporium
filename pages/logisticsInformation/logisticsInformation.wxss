@@ -95,22 +95,22 @@ page {
 
 .border2 .border2-bottom .border2-bottom-left .border-top {
   border-left: 5rpx solid #ccc;
-  height: 70rpx;
+  height: 160rpx;
 }
 
 .border2 .border2-bottom .border2-bottom-left .border-top1 {
   border-left: 5rpx solid white;
-  height: 70rpx;
+  height: 90rpx;
 }
 
 .border2 .border2-bottom .border2-bottom-left .border-bottom {
   border-left: 5rpx solid #ccc;
-  height: 70rpx;
+  height: 160rpx;
 }
 
 .border2 .border2-bottom .border2-bottom-left .border-bottom2 {
   border-left: 5rpx solid white;
-  height: 70rpx;
+  height: 90rpx;
 }
 
 .border2 .border2-bottom .border2-bottom-left image {
@@ -129,7 +129,7 @@ page {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
   font-size: 30rpx;
 }

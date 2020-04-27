@@ -19,7 +19,6 @@
 }
 
 .border1 .border1-top text {
-  color: #ccc;
   font-size: 30rpx;
   margin-left: 15rpx;
 }

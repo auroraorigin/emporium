@@ -110,13 +110,16 @@ page {
 }
 
 .product_top image{
-  width: 40rpx;
+  width: 50rpx;
+  height: auto;
 }
 
 .text1 {
   text-indent: 10rpx;
   color: black;
   font-weight: bold;
+  font-size: 30rpx;
+  line-height: 30rpx;
 }
 
 .text2 {
@@ -137,6 +140,7 @@ page {
   height: 150rpx;
   position: absolute;
   left: 20rpx;
+  border-radius: 10rpx;
 }
 
 .detail {
@@ -157,6 +161,7 @@ page {
   -webkit-box-orient: vertical;
   margin-left: 270rpx;
   margin-top: -65rpx;
+  font-weight: 300;
 }
 
 .standard {
@@ -200,6 +205,7 @@ page {
   flex-direction: column; 
   position: absolute;
   left: 580rpx;
+  color: #d56f27;
 }
 
 .price {
@@ -295,7 +301,7 @@ page {
 
 .Border2_1 .borderRight {
   font-size: 30rpx;
-  width: 25%;
+  width: 40%;
   margin-right: 25rpx;
   display: flex;
   flex-direction: row;
@@ -373,7 +379,6 @@ page {
 }
 
 .Border3_3 .borderRight {
-  color: #ccc;
   font-size: 36rpx;
   width: 30%;
   display: flex;
@@ -384,7 +389,7 @@ page {
 }
 
 .Border3_3 .borderRight .rightContent {
-  color: red;
+  color: #d56f27;
   font-size: 35rpx;
   font-weight:bold;
   margin-top: 6rpx;
@@ -427,7 +432,6 @@ page {
 }
 
 .L {
-  color: #ccc;
   font-size: 25rpx;
 }
 

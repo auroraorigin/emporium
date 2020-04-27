@@ -1,12 +1,12 @@
 <view class="allBoder"> 
   <view class="Border1">
     <view class="list">
-      <navigator class="list-item arrow">
+      <view class="list-item arrow">
         <text>关于我们</text>
-      </navigator>
-      <navigator class="list-item arrow">
+      </view>
+      <view class="list-item arrow">
         <text>版本更新</text>
-      </navigator>
+      </view>
     </view>
   </view>
   <view wx:if="{{token}}">

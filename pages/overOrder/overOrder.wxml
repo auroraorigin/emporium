@@ -4,7 +4,8 @@
 		<!-- 订单状态 -->
 		<view class="order_state">
 			<view class="state_left">
-				<image src="/images/personal_center/over_order.png" mode="widthFix"></image>
+				<image wx:if="{{state=='交易成功'}}" src="/images/personal_center/over_order1.png" mode="widthFix"></image>
+				<image wx:elif="{{state=='交易关闭'}}" src="/images/personal_center/over_order2.png" mode="widthFix"></image>
 			</view>
 			<view wx:if="{{state=='交易成功'}}" class="state_right">交易已完成
 				<view class="state_right1">订单关闭</view>
@@ -66,7 +67,7 @@
 		</view>
 		<view class="goods">
 			<view class="title">商品总价格：</view>
-			<view class="price1">{{total_money}}</view>
+			<view class="price1">¥{{total_money}}</view>
 		</view>
 		<view class="freight">
 			<view class="title">总运费：</view>

@@ -19,11 +19,11 @@
   top: 0;
   position: fixed;
   width: 100%;
-  background-color: #fff;
+  background-color: #2b4c7f;
   z-index: 99999;
 }
 .header .line {
-  border-left: 1rpx solid #D7D7D7;
+  border-left: 1rpx solid #5a7090;
   height: 36rpx;
 }
 .header .back .header .home {
@@ -40,22 +40,26 @@
   justify-content: space-around;
   width: 138rpx;
   height: 56rpx;
-  border: 1rpx solid #F1F1F1;
+  border: 1rpx solid #5a7090;
   border-radius: 32rpx;
   margin-left: 14rpx;
   padding: 0 14rpx;
+  background-color: #25416c;
+  /* opacity:0.5; */
 }
 
 .header .title-bar .backImg {
   width: 32rpx;
   height: 32rpx;
   background: transparent;
+  opacity:1;
 }
 
 .header .title-bar .homeImg {
   width: 32rpx;
   height: 32rpx;
   background: transparent;
+  opacity:1;
 }
 
 .header .header-title {
@@ -63,4 +67,5 @@
   left: 50%;
   font-size: 32rpx;
   transform: translateX(-50%);
+  color: white;
 }

@@ -11,10 +11,10 @@
 	</view>
 	<view class="border2">
 		<image src="/images/personal_center/appIcon.png" mode="widthFix"></image>
-		<text>黄家泉投资平台~海鲜商城</text>
+		<text>雷锋投资平台~海鲜商城</text>
 	</view>
 	<view class="border3">
   <button type="primary" open-type="getUserInfo" bindgetuserinfo="handleGetUserInfo">微信授权登录</button>
-  <text class="border3-bottom">huangshi黄家泉·战略投资</text>
+  <text class="border3-bottom">雷锋·战略投资</text>
   </view>
 </view>

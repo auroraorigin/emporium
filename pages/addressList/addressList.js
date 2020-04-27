@@ -94,7 +94,7 @@ Page({
     //显示是否删除该地址弹窗
     wx.showModal({
       title: '提示',
-      content: '您确定要退出登录吗？',
+      content: '您确定要删除该地址吗？',
       success: (result) => {
         if (result.confirm) {
           //获取列表中要删除项的下标

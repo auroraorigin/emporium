@@ -12,8 +12,8 @@ Page({
     detail_address: '', //详细地址
     consignee_name: '', //收货人
     mobile_number: '', //手机号码
-    tip:'',//判断是否从选择地址中跳转过来的标志
-    index:Number//选择地中传递过来数组下标
+    tip: '',//判断是否从选择地址中跳转过来的标志
+    index: Number//选择地中传递过来数组下标
   },
 
   //获取地区选择器
@@ -86,6 +86,20 @@ Page({
         if (flag == 1) {
           array.push(addressList);
           wx.setStorageSync('addressList', array);
+          wx.showToast({
+            title: '保存成功！',
+          })
+          setTimeout(function () {
+            wx.navigateBack({ //返回
+
+            })
+
+          }, 1000);
+        } else {
+          wx.showToast({
+            title: '已存在相同地址',
+            icon: "none"
+          })
           setTimeout(function () {
             wx.navigateBack({ //返回
 
@@ -95,11 +109,23 @@ Page({
         }
       } else { //编辑地址页面
         var addressList = wx.getStorageSync("addressList");
-        //将修改内容写入地址列表
-        addressList[changeAddress.id].consignee = e.detail.value.consignee;
-        addressList[changeAddress.id].detail_address = e.detail.value.detail_address;
-        addressList[changeAddress.id].mobile = e.detail.value.mobile;
-        addressList[changeAddress.id].region_name = this.data.region_all;
+        var flag1 = false;
+        var region_name = this.data.region_all;
+        addressList.forEach(function (v, i) {
+          if (v.consignee == e.detail.value.consignee && v.detail_address == e.detail.value.detail_address && v.mobile == e.detail.value.mobile && v.region_name == region_name && i != changeAddress.id) {
+            flag1 = true;
+          }
+        })
+        if (flag1 == false) {
+          //将修改内容写入地址列表
+          addressList[changeAddress.id].consignee = e.detail.value.consignee;
+          addressList[changeAddress.id].detail_address = e.detail.value.detail_address;
+          addressList[changeAddress.id].mobile = e.detail.value.mobile;
+          addressList[changeAddress.id].region_name = this.data.region_all;
+        } else if (flag1 == true) {
+          //如果地址列表中存在与修改后的地址相同的地址，则删除该地址
+          addressList.splice(changeAddress.id, 1);
+        }
         //将修改好的内容放进缓存
         wx.setStorageSync("addressList", addressList)
         //获取默认地址
@@ -114,13 +140,13 @@ Page({
         //将默认地址放进缓存
         wx.setStorageSync('defaultAddress', defaultAddress);
         //如果从选择地址跳转修改，则在返回前将修改后的地址放入缓存
-        if(this.data.tip){
-          var addressList=wx.getStorageSync('addressList')
-          wx.setStorageSync('selectToChange',addressList[this.data.index]);
+        if (this.data.tip) {
+          var addressList = wx.getStorageSync('addressList')
+          wx.setStorageSync('selectToChange', addressList[this.data.index]);
         }
         //延迟返回
         wx.showToast({
-          title: '保存成功！',
+          title: '修改成功！',
         })
         setTimeout(function () {
           wx.navigateBack({ //返回
@@ -267,13 +293,17 @@ Page({
     //页面刷新马上获取编辑缓存
     let changeAddress = wx.getStorageSync('changeAddress')
     //如果编辑缓存存在，更新编辑框显示内容
-    if (changeAddress) {
-      this.setData({
-        region_all: changeAddress.region_name,
-        consignee_name: changeAddress.consignee,
-        mobile_number: changeAddress.mobile,
-        detail_address: changeAddress.detail_address
-      })
+    if (changeAddress) {
+        this.setData({
+          region_all: changeAddress.region_name,
+          consignee_name: changeAddress.consignee,
+          mobile_number: changeAddress.mobile,
+        })
+        if(!this.data.detail_address){
+          this.setData({
+            detail_address:changeAddress.detail_address
+          })
+        }
       region_name = this.data.region_all;
     }
     //返回标志，放入缓存，若点击左上角返回，设置为true
@@ -287,11 +317,11 @@ Page({
     //3.获取页面标志参数tip
     var tip = currentPage.options.tip;
     //获取数组下标
-    var index=currentPage.options.index;
-    if(tip){
+    var index = currentPage.options.index;
+    if (tip) {
       this.setData({
-        tip:true,
-        index:index
+        tip: true,
+        index: index
       })
     }
   }
