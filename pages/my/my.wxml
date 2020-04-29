@@ -1,12 +1,12 @@
 <!--登录页面-->
-<view style="" bindtouchend="handletouchend" bindtouchstart="handletouchstart">
+<view style="">
 <view class="topBgc"></view>
 <!--登录获取头像和昵称-->
   <view class="myPage" style="position:relative;">
-    <view wx:if="{{!userinfo.avatarUrl}}" class="user_info">
+    <navigator wx:if="{{!userinfo.avatarUrl}}" class="user_info" url="/pages/login/login" hover-class="none">
       <image src="/images/personal_center/default_avatar.png"></image>
-      <navigator url="/pages/login/login" class="click-login" hover-class="none">点击登录账户 >></navigator>
-    </view>
+      <view class="click-login">点击登录账户 >></view>
+    </navigator>
     <view wx:else bindtap="toPersonalMessage" class="user_info1">
       <image src="{{userinfo.avatarUrl}}"></image>
       <view class="user_name">{{userinfo.nickName}}</view> 

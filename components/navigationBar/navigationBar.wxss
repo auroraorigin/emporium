@@ -15,31 +15,29 @@
 }
 .header {
   display: flex;
+  flex-direction: row;
   align-items: center;
   top: 0;
   position: fixed;
   width: 100%;
   background-color: #2b4c7f;
-  z-index: 99999;
 }
 .header .line {
   border-left: 1rpx solid #5a7090;
   height: 36rpx;
 }
 .header .back .header .home {
-  height: 32rpx;
+  height: auto;
   width: 40%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-top: 10rpx;
 }
 .header .title-bar {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-around;
   width: 138rpx;
-  height: 56rpx;
+  height: 60rpx;
   border: 1rpx solid #5a7090;
   border-radius: 32rpx;
   margin-left: 14rpx;
@@ -53,6 +51,7 @@
   height: 32rpx;
   background: transparent;
   opacity:1;
+  margin-top: 7rpx;
 }
 
 .header .title-bar .homeImg {
@@ -60,6 +59,7 @@
   height: 32rpx;
   background: transparent;
   opacity:1;
+  margin-top: 7rpx;
 }
 
 .header .header-title {

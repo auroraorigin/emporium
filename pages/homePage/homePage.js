@@ -310,10 +310,9 @@ Page({
   },
   // 分享商城
   onShareAppMessage: function () {
-    let goods = this.detail
     return {
-      title: goods.name,
-      desc: goods.desc,
+      title: '海鲜商城',
+      desc: '专做精品海鲜平台',
       path: `/page/homePage` // 路径，传递参数到指定页面。
     }
    },
