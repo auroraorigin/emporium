@@ -9,6 +9,7 @@ Page({
     sum: 0,
     select: 0,
     count: 0,
+    // lastX:0,
     hideSpecifiation: 1,
     currentIndex: 0,
     animationDataShadow: {},
@@ -376,5 +377,22 @@ Page({
   //item(index,pagePath,text)
   onTabItemTap: function (item) {
 
-  }
+  },
+  handletouchstart: function (event) {
+    // this.data.lastX = event.touches[0].pageX
+  },
+  handletouchend: function (event) {
+  //   if(this.data.lastX - event.changedTouches[0].pageX > 180)
+  //   {
+  //     wx.switchTab({
+  //       url: "../my/my"
+  //     })
+  //   }
+  //   else if(event.changedTouches[0].pageX -this.data.lastX > 180)
+  //   {
+  //     wx.switchTab({
+  //       url: "../categories/categories"
+  //     })
+  //   }
+   }
 });

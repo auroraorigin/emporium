@@ -90,7 +90,7 @@
          </text>待付款:<text class="R"> ¥{{total_money+freight}}</text>
 				</text>
 			</view>
-			<view class="border_right">
+			<view class="border_right" wx:if="{{timeLeft!='订单关闭'}}">
 				<view class="outside" bindtap="cancelOrder">
 					<text class="inside">取消订单</text>
 				</view>

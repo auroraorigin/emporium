@@ -13,7 +13,7 @@
     </view>
 </view>
 <!-- 商品列表 -->
-<block wx:if="{{cart.length!=0}}">
+<view wx:if="{{cart.length!=0}}" bindtouchend="handletouchend" bindtouchstart="handletouchstart">
     <scroll-view class="wrap" scroll-y>
         <view class="product" wx:for="{{cart}}" wx:key="index">
             <slider-left binddelete="delProduct" data-index="{{index}}">
@@ -51,7 +51,7 @@
             </slider-left>
         </view>
     </scroll-view>
-</block>
+</view>
 <!-- 购物车为空提示 -->
 <block wx:else>
     <view class="empty">

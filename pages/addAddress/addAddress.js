@@ -32,7 +32,7 @@ Page({
     var _this = this;
     wx.chooseLocation({
       success: function (res) {
-        var address = res.address
+        var address = res.address;
         _this.setData({
           detail_address: address
         })
@@ -66,11 +66,21 @@ Page({
       //如果通过新增收货地址点进来，执行if
       if (!changeAddress) {
         //新增地址页面内容赋值给addressList对象
-        let addressList = {
-          consignee: e.detail.value.consignee,
-          mobile: e.detail.value.mobile,
-          region_name: e.detail.value.region_name[0] + e.detail.value.region_name[1] + e.detail.value.region_name[2],
-          detail_address: e.detail.value.detail_address
+        if (!this.data.detail_address) {
+          var addressList = {
+            consignee: e.detail.value.consignee,
+            mobile: e.detail.value.mobile,
+            region_name: e.detail.value.region_name[0] + e.detail.value.region_name[1] + e.detail.value.region_name[2],
+            detail_address: e.detail.value.detail_address
+          }
+        } else {
+          var region_name1 = e.detail.value.detail_address.replace(this.data.detail_address,"")
+          var addressList = {
+            consignee: e.detail.value.consignee,
+            mobile: e.detail.value.mobile,
+            region_name: this.data.region_all,
+            detail_address: this.data.detail_address+region_name1
+          }
         }
         //获取缓存中的地址列表
         var array = wx.getStorageSync('addressList') || [];
@@ -293,18 +303,48 @@ Page({
     //页面刷新马上获取编辑缓存
     let changeAddress = wx.getStorageSync('changeAddress')
     //如果编辑缓存存在，更新编辑框显示内容
-    if (changeAddress) {
-        this.setData({
-          region_all: changeAddress.region_name,
-          consignee_name: changeAddress.consignee,
-          mobile_number: changeAddress.mobile,
-        })
-        if(!this.data.detail_address){
-          this.setData({
-            detail_address:changeAddress.detail_address
-          })
-        }
-      region_name = this.data.region_all;
+    if (changeAddress) {
+      this.setData({
+        region_all: changeAddress.region_name,
+        consignee_name: changeAddress.consignee,
+        mobile_number: changeAddress.mobile,
+      })
+      if (!this.data.detail_address) {
+        this.setData({
+          detail_address: changeAddress.detail_address,
+        })
+      } else {
+        var detail_address = this.data.detail_address;
+        var reg = /.+?(省|市|自治区|自治州|县|区)/g;
+        var region_name = detail_address.match(reg);
+        var region_all = "";
+        region_name.forEach(function (v, i) {
+          region_all = region_all + v
+        })
+        detail_address = detail_address.replace(region_all, "");
+        this.setData({
+          region_all: region_all,
+          detail_address: detail_address
+        })
+      }
+    } else {
+      var detail_address = this.data.detail_address;
+      if (detail_address) {
+        var reg = /.+?(省|市|自治区|自治州|县|区)/g;
+        var region_name = detail_address.match(reg);
+        var region_all = "";
+        if (region_name[0]) {
+          region_name.forEach(function (v, i) {
+            region_all = region_all + v
+          })
+        }
+        detail_address = detail_address.replace(region_all, "");
+        this.setData({
+          region_all: region_all,
+          detail_address: detail_address,
+          region:region_name
+        })
+      }
     }
     //返回标志，放入缓存，若点击左上角返回，设置为true
     wx.setStorageSync('aShow', true)

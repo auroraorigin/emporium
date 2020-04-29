@@ -97,7 +97,7 @@ page {
   font-size: 25rpx;
   color: white;
   position: absolute;
-  right: 25rpx;
+  right: 18rpx;
   top:8rpx
 }
 
@@ -113,6 +113,6 @@ page {
 .buttonType1 text {
   font-size: 25rpx;
   position: absolute;
-  right: 25rpx;
+  right: 18rpx;
   top:8rpx
 }

@@ -1,5 +1,5 @@
 <!--登录页面-->
-<view style="">
+<view style="" bindtouchend="handletouchend" bindtouchstart="handletouchstart">
 <view class="topBgc"></view>
 <!--登录获取头像和昵称-->
   <view class="myPage" style="position:relative;">

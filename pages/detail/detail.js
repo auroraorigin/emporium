@@ -441,7 +441,6 @@ Page({
     this.initialization()
   },
   onShow: function () {
-
   },
   onHide: function () {
 

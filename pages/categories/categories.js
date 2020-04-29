@@ -19,6 +19,7 @@ Page({
     animationData: {},
     animationFloatData:{},
     lastY: 0,
+    // lastX: 0,
     direction:1
   },
   getCates() {
@@ -70,11 +71,11 @@ Page({
           },function(){
             setTimeout(() => {    
               that.getHeight();
-            }, 250);
-            setTimeout(() => {
-              that.calc()
-              that.isHomepage();
-            }, 500);
+              setTimeout(() => {
+                that.calc()
+                that.isHomepage();
+              }, 500);
+            }, 300);
           })
         },fail() {}
         })
@@ -401,9 +402,22 @@ Page({
     })
   },
   handletouchstart: function (event) {
+    // this.data.lastX = event.touches[0].pageX
     this.data.lastY = event.touches[0].pageY
   },
   handletouchend: function (event) {
+    // if(this.data.lastX - event.changedTouches[0].pageX > 180)
+    // {
+    //   wx.switchTab({
+    //     url: "../shoppingCart/shoppingCart"
+    //   })
+    // }
+    // else if(event.changedTouches[0].pageX -this.data.lastX > 180)
+    // {
+    //   wx.switchTab({
+    //     url: "../homePage/homePage"
+    //   })
+    // }
     const ty = this.data.lastY - event.changedTouches[0].pageY
     const direction = this.data.direction
     //向上滑 方向向上
@@ -479,6 +493,7 @@ Page({
     let hideSpecifiation = this.data.hideSpecifiation;
     if(hideSpecifiation==0)
       this.closeSpecifiation()
+    this.distance=[]
   },
   onUnload: function () {
 

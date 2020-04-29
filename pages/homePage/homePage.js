@@ -22,6 +22,7 @@ Page({
     animationData:{},
     animationFloatData:{},
     lastY: 0,
+    // lastX:0,
     direction:1
   },
   //options(Object)
@@ -342,10 +343,19 @@ Page({
     })
   },
   handletouchstart: function (event) {
+    // this.data.lastX = event.touches[0].pageX
     this.data.lastY = event.touches[0].pageY
   },
   handletouchend: function (event) {
     const ty = this.data.lastY - event.changedTouches[0].pageY
+
+    // if(this.data.lastX - event.changedTouches[0].pageX > 80 && Math.abs(ty)<10)
+    // {
+    //   wx.switchTab({
+    //     url: "../categories/categories"
+    //   })
+    // }
+
     const direction = this.data.direction
     //向上滑 方向向上
     if(ty<0 && direction)

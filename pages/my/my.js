@@ -4,6 +4,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    // lastX:0
   },
 
   /*//获取微信信息
@@ -155,5 +156,17 @@ Page({
     this.setData({
       userinfo
     })
+  },
+
+  handletouchstart: function (event) {
+    // this.data.lastX = event.touches[0].pageX
+  },
+  handletouchend: function (event) {
+    // if(event.changedTouches[0].pageX -this.data.lastX > 180)
+    // {
+    //   wx.switchTab({
+    //     url: "../shoppingCart/shoppingCart"
+    //   })
+    // }
   }
 })
